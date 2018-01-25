@@ -1,0 +1,53 @@
+FICHA familia
+  nome responsável
+  sobrenome
+  cpf/cnpj
+
+FICHA cliente
+  matricula
+  nome
+  sobrenome
+  sexo
+  nascimento
+  conjude
+    - checkbox (nao importar lembrete)
+
+  data pamp
+  endereço
+  numero
+  bairro
+  email (checkbox se nao dispoe e input)
+  
+  categoria ( - de onde veio ENUM('unimed','particular',FUSEX,UNAFISCO,TRE,TRT,Funcionario,CASEMBRAPA,Yamada...) )
+  origem ( DE ONDE ELA VEIO, PAMP, medico, ....  )
+
+  - contato telefonico	
+    telefone residencial
+    telefone comercial
+    telefone de apoio
+
+  nome emissao de nota fiscal
+  doc (cpf da pessoa da nota fiscal)
+  impressão de lembrete das vacinas que estão programadas ou atrasadas.
+
+  observaçõess - oque o paciente vai fazer quando for chamado
+
+  BOTOES NA FICHA DO CLIENTE
+    - botao de enviar erros ( FUNCIONARIA NAO SABE PARA QUE SERVE )
+    - encaminhar encaminhar (encaminhar)
+    - VACINAS - planilha de vacinas (ficha)
+    - procurar ( verificar cadastro de cliente (uma busca) )
+    - fechar ( ir para o menu principal )
+
+  nao esquecer que tem campos obrigatórios
+  na listagem dos dependentes, mostra a idade, junto com o nome completo
+
+FICHA DE DEPENDENTE
+  - matricula parece automaticamente SEMPRE
+  - nome
+  - nascimento
+  - medico (um código(CRM) e o nome)
+  - email
+  - vacinador
+  - facebook
+  - twitter

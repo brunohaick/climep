@@ -1,0 +1,548 @@
+table tbody tr:nth-child(odd){
+	background-color: #D3D6FF;
+}
+
+table tbody tr:nth-child(even){
+	background-color: #FFFFFF;
+}
+
+
+
+/*===========================================================================*/
+/* MODAL CONTROLE PARA IMUNOTERAPIA
+/*===========================================================================*/
+a.mrg-center{margin-left: 22%;}
+.titulo{ margin-left:  1%; color: #808080;}
+ input , select, table, textarea , fieldset { width: 100%; padding-right: 0; padding-left: 0; }
+.arc-nome-text{font-size: 13px;}
+#tab-scroll-im-large-ctr{overflow-x: auto; overflow-y: auto;  width: 1050px; height: 310px;}
+#tab-scroll-im-ctr{overflow-x: auto; overflow-y: auto;  width: 330px; height: 200px;}
+
+#btn-bloc1 , #btn-bloc2 {padding-top: 7px;}
+#imunoterapia-rigth{margin-left: -5px; margin-top: -5px;}
+#imunoterapia-rigth-bloc{background-color: white; height: 300px; width: 220px;}
+.modal-ctr-imu.fade.in {
+  top: 38%;
+}
+.modal-ctr-imu {
+  position: fixed;
+  top: 38%;
+  left: 40%;
+  z-index: 1050;
+  margin: -250px 0 0 -430px;
+ width: 560px;
+
+}
+.modal-ctr-imu.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-ctr-imu.fade.in {
+  top: 38%;
+}
+
+.modal-body-ctr-imu {
+  max-height: 1800px;
+  padding: 15px;
+  width:1100px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+
+/*===========================================================================*/
+/* FIM MODAL CONTROLE PARA IMUNOTERAPIA
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* MODAL IMUNOTERAPIA
+/*===========================================================================*/
+.titulo{ margin-left:  1%; color: #808080;}
+.imunoterapia-nome-text{font-size: 13px;}
+#tab-scroll-im-large{overflow-x: auto; overflow-y: auto;  width: 730px; height: 310px; }
+#tab-scroll-im{overflow-x: auto; overflow-y: auto;  width: 235px; height: 200px;}
+.modal-imunoterapia.fade.in {
+  top: 38%;
+}
+.modal-imunoterapia {
+  position: fixed;
+  top: 38%;
+  left: 50%;
+  z-index: 1050;
+  margin: -250px 0 0 -530px;
+ width: 560px;
+
+}
+.modal-imunoterapia.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-imunoterapia.fade.in {
+  top: 38%;
+}
+
+.modal-body-imunoterapia {
+  max-height: 1800px;
+  padding: 15px;
+  width:1000px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+div#table-imunoterapia_0, div#table-imunoterapia_1{
+
+    width: 340px;
+    height: 400px;
+    overflow: auto;
+}
+
+/*===========================================================================*/
+/* FIM MODAL CONTROLE PARA IMUNOTERAPIA
+/*===========================================================================*/
+/*===========================================================================*/
+/* MODAL CERTIFICADO DE IMUNOTERAPIA
+/*===========================================================================*/
+.titulo{ margin-left:  1%; color: #808080;}
+.imunoterapia-nome-text{font-size: 13px;}
+#tab-scroll-im-large{overflow-x: auto; overflow-y: auto;  width: 730px; height: 310px;}
+#tab-scroll-im{overflow-x: auto; overflow-y: auto;  width: 235px; height: 200px;}
+.modal-certificado-imu {
+  margin: -250px 0 0 -420px;  width: 850px;  top: 40%;
+  left: 50%;
+}
+
+.modal-controle-imu {
+  margin: -250px 0 0 -420px;  width: 850px;  top: 40%;
+  left: 50%;
+}
+
+.modal-imunuterapia2 {
+  margin: -250px 0 0 -420px;  width: 1200px;  top: 40%;
+  left: 36%;
+}
+
+.modal-boletim_imunobiologico {
+  margin: -250px 0 0 -420px;
+  width: 1150px;
+  top: 40%;
+  left: 35%;
+}
+
+.modal-body-boletim_imunobiologico {
+  max-height: 1800px;
+  padding: 15px;
+  width:1200px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+.modal-body-imunuterapia2 {
+   width: 1150px;  max-height: 1800px;
+}
+.modal-body-certificado-imu {
+  max-height: 1800px;
+  padding: 15px;
+  width:800px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+
+/*===========================================================================*/
+/* FIM CERTIFICADO DE IMUNOTERAPIA
+/*===========================================================================*/
+
+
+/*===========================================================================*/
+/*  ENCAMINHAMENTO DE PROCEDIMENTOS
+/*===========================================================================*/
+header-enc{margin-top: -12px;}
+label{font-size: 12px;}
+fieldset #flst-enc{ height: 165px;}
+#cliente-bloc{ height: 35px;background-color: #eee;}
+#valores-bloc{ height: 125px;background-color: white; width: 215px;  margin-top: 4px;}
+fieldset.table-bordered-enc{  padding: 2px; width: 97%; margin-left: 1%;}
+input.btn-mini-enc{margin-left: -20px; width: 80px; height: 25px;}
+#group-btn-enc-footer{margin-left: -10px; margin-top: 10px;}
+#group-btn-enc-footer li{padding-top: 5px;}
+#btn-inserir-pro{color: blue; font-size: 14px; width: 140px; height: 30px; }
+/*===========================================================================*/
+/* FIM  ENCAMINHAMENTO DE PROCEDIMENTOS
+/*===========================================================================*/
+
+
+/*===========================================================================*/
+/*  ENCAMINHAMENTO DE PROCEDIMENTOS
+/*===========================================================================*/
+
+.modal-ins-pro.fade.in {
+  top: 38%;
+}
+.modal-ins-pro {
+  background-color: #ffffff;
+  position: fixed;
+  top: 38%;
+  left: 50%;
+  z-index: 1050;
+  margin: -250px 0 0 -410px;
+  width: 650px;
+}
+
+.modal-ins-pro.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-body-ins-pro {
+  background-color: #ffffff;
+  max-height: 1800px;
+  padding: 15px;
+  width:760px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL INSERIR NOVO PROCEDIMENTO
+/*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL GUIA TISS 
+/*===========================================================================*/
+
+.modal-guia-tiss.fade.in {
+  top: 38%;
+}
+
+.modal-guia-tiss {
+  background-color: #ffffff;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  z-index: 1050;
+  margin: -250px 0 0 -610px;
+  width:1200px;
+}
+
+.modal-guia-tiss.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-body-guia-tiss {
+  background-color: #ffffff;
+  max-height: 1800px;
+  padding: 15px;
+  width:1200px;
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM  MODAL GUIA TISS 
+/*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL ESTORNO
+/*===========================================================================*/
+
+
+.modal-estorno-guia-tiss.fade.in {
+  top: 38%;
+}
+.modal-estorno-guia-tiss {
+  background-color: #ffffff;
+  position: fixed;
+  top: 38%;
+  left: 50%;
+  z-index: 1050;
+  margin: -250px 0 0 -610px;
+ width:1200px;
+
+}
+
+.modal-estorno-guia-tiss.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-body-estorno-guia-tiss {
+  background-color: #ffffff;
+  max-height: 1800px;
+  padding: 15px;
+  width:1200px;
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM  MODAL ESTORNO 
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* MODAL FICHA DE DEPENDENTE
+/*===========================================================================*/
+
+.modal-dependente {
+  margin: -250px 0 0 -420px;  width: 850px;  top: 40%;
+  left: 50%;
+}
+.modal-body-dependente {
+  max-height: 1800px;
+  padding: 15px;
+  width:800px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* MODAL FICHA DE DEPENDENTE
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* MODAL FICHA VACINA
+/*===========================================================================*/
+
+.modal-vacina {
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  z-index: 1050;
+  width: 85%;
+}
+
+.modal-vacina.fade {
+    top: -25%;
+    -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+    transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-vacina.fade.in {
+    top: 35%;
+}
+
+.modal-body-vacina {
+    max-height: 1800px;
+    padding: 15px;
+    /*width:920px;*/ 
+    width:1220px; 
+    border:none 4px #000000;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright:3px;
+    -moz-border-radius-bottomleft:3px;
+    -moz-border-radius-bottomright:3px;
+    -webkit-border-top-left-radius:4px;
+    -webkit-border-top-right-radius:3px;
+    -webkit-border-bottom-left-radius:3px;
+    -webkit-border-bottom-right-radius:3px;
+    border-top-left-radius:4px;
+    border-top-right-radius:3px;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+}
+
+.fontuser-listuser{
+    font-size: 11px;
+}
+/*===========================================================================*/
+/* FIM  MODAL FICHA VACINA 
+/*===========================================================================*/
+
+.icone-left{
+    margin-left: -9px;margin-top: 14px; float: left; margin-bottom: 0;
+}
+.icone-right{
+    margin-top: 14px; float: right; margin-bottom: 0;
+}
+
+.line-table{
+    border-left: 1px solid #dddddd;
+}
+
+
+/*===========================================================================*/
+/* MODAL PROGRAMAÇÃO DE VACINAS
+/*===========================================================================*/
+#table-block1{overflow-x: auto; overflow-y: auto;  width: 1200px; height: 365px;}
+.titulo{ margin-left:  1%; color: #808080;}
+ input , select, table, textarea , fieldset { width: 100%; padding-rig5ht: 0; padding-left: 0; }
+ #table-block2{
+ overflow: auto; height: 170px;
+ }
+.modal-programacaovacinas.fade.in {
+  top: 38%;
+}
+.modal-programacaovacinas {
+  position: fixed;
+  top: 38%;
+  left: 35%;
+  z-index: 1050;
+  margin: -250px 0 0 -430px;
+ width: 600px;
+
+}
+.modal-programacaovacinas.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-programacaovacinas.fade.in {
+  top: 38%;
+}
+
+.modal-body-programacaovacinas {
+  max-height: 1800px;
+  padding: 15px;
+  width:1250px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+li.line-hover:hover{
+    background:#D3D6FF;
+}
+.block-area{
+    height: 100px; max-height: 100px;background-color: white; overflow: auto;
+    
+}
+.cell-color_1{
+	background-color: #FFE4B5;
+}
+.cell-color_2{
+	background-color: #3399FF;
+}
+.cell-color{
+	color: #0000FF;
+}
+
+.position-menu{
+	margin-left: -200px; margin-top: -240px;
+}
+/*===========================================================================*/
+/* FIM MODAL PROGRAMAÇÃO DE VACINAS
+/*===========================================================================*/

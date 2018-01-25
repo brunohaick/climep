@@ -1,0 +1,76 @@
+	<?php
+	$vac = listaVacinas();
+	//$historico = historicoVacina($clienteVacina['id'], $vac);
+	$historico = historicoVacinaImpressao($idCliente, $vac);
+	$vacinasProgramadas = vacinasPorClientePorStatus($idCliente, 2); //'Programado'
+	$titular = buscaTitularPorDependente($idCliente);
+	$cliente = dadosPessoaCliente($idCliente);
+
+	$clienteArr['nome'] = $cliente['nome']." ".$cliente['sobrenome'];
+	$clienteArr['matricula'] = $titular['matricula']."-".$cliente['membro'];
+	//$dadosCliente['nome'] = $cliente
+
+
+	//print_r($historico);
+	//exit;
+	$qtd_linhas = maiorLinhaMatriz($historico);
+	$num_linhas = VACINA_MIN_NUM_LINHAS;
+	if ($qtd_linhas > VACINA_MIN_NUM_LINHAS) {
+	    $num_linhas = $qtd_linhas;
+	}
+
+
+
+$html = "
+		<table width='710px' cellspacing='0' cellpadding='0' class='vaci-vacinas'>
+		    <thead>
+			<tr>
+			    <th>BCG<br>febre amarela</th>
+			    <th>hepatites</th>
+			    <th>difteria, tétano,<br>coqueluche</th>
+			    <th>pólio (VOP/VIP)</th>
+			    <th>hemófilos B</th>
+			    <th>pneumocócicas</th>
+			    <th>meningocócicas</th>
+			    <th>sarampo, rubéola<br>caxumba,<br> varicela</th>
+			    <th>influenza, rotavirus</th>
+			    <th>cont. e outras</th>
+			</tr>
+		    </thead>
+
+		    <tbody>";
+
+			for ($x = 0; $x < $num_linhas; $x++) {
+			    $html .= "<tr>";
+				$nome = $historico[3][0]['vacinaNome'];
+
+				for ($y = 0; $y < 10; $y++) {
+					$nomeVacina = "";
+					$nome = $historico[$y][$x]['vacinaNome'];
+					$cor = $historico[$y][$x]['cor_hex'];
+					$data_prev = $historico[$y][$x]['data_prevista'];
+					$data_prevista = traduzData($data_prev, $mes_ano);
+
+					$data_prev_conv = converteData($historico[$y][$x]['data_pre']);
+
+					$idCli = $clienteVacina['id'];
+					$idServico = $historico[$y][$x]['servicoId'];
+					$idHistorico = $historico[$y][$x]['historicoId'];
+
+					if (!empty($nome)) {
+						$nomeVacina = $nome;
+					}
+
+					$html .= "<td>
+						<div> $nomeVacina <br> $data_prevista <br>&nbsp;</div>
+						</td>";
+				}
+				$html .= "</tr>";
+			}
+			$html .="</tbody>
+			</table>
+";
+
+$_SESSION['fichavacina']['fichavacinahtml'] = $html;
+$_SESSION['fichavacina']['vacinasprogramadas'] = $vacinasProgramadas;
+$_SESSION['fichavacina']['cliente'] = $clienteArr;

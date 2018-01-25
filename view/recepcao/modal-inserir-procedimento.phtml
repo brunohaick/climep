@@ -1,0 +1,85 @@
+<div id="proc-tiss-boxes-ins-pro-result" class="modal-ins-pro">
+<link type="text/css"rel="stylesheet" href="view/recepcao/css/index.css" />
+<script async defer src="view/recepcao/js/insere-procedimento.js"></script>
+	<div id="dialog-acr-horario" class="modal-body-ins-pro" >
+		<div id="acr-horario"><a href="#" id="fechar" class="close"> Fechar X</a>
+			<h2 class="titulo"> Inserir novo Procedimento </h2>
+			<div class="row-fluid">
+				<div class="span6">
+					<label class="default-label">
+						<input type="checkbox" id="marcar_todos" onclick='marcaProcedimentosUnimed(1);' name="" class="default-checkbox">
+						<span id=""> TP Master (16 procedimentos - Guia Climep) </span>
+					</label>
+				</div>
+				<div class="span3">
+					<label class="default-label">
+						<input type="checkbox" id="marcar_orelinha" onclick='marcaProcedimentosUnimed(2);' name="" class="default-checkbox">
+						<span id=""> Marcar Orelinha </span>
+					</label>
+				</div>
+			</div><br>
+			<div style="height:500px; overflow: auto;">
+				<fieldset class=" table-bordered" id="flst-enc" >
+					<legend> Lista Procedimentos </legend>
+					<table align="center" class="table-modify table-bordered" id="" >
+						<thead>
+							<tr class="white">
+								<th align="center"> SEL</th>
+								<th align="center"> Cód Oficial </th>
+								<th align="center"> Descrição </th>
+								<th align="center"> Real </th>
+								<th align="center"> CH </th>
+							</tr>
+						</thead>
+						<tbody id="proc-tiss-lista-proc-tbody" >
+						<?php
+							foreach($listaProcedimentos as $lista) {
+								if(in_array($lista['codigo'], $ArrProcsUnimed)) {
+									$classProc = "class='procs_unimed'";
+								} else if(in_array($lista['codigo'], $ArrProcsUnimedOrel)) {
+									$classProc = "class='procs_unimed_orelinha'";
+								}
+						?>
+							<tr id="proc-tiss-lista-proc-tr" name="table-color" class='pointer-cursor'>
+								<th align="center"> <input type="checkbox" value="<?php echo $lista['id']; ?>" <?php echo $classProc; ?> name="proc-tiss-checkbox[]"/> </th>
+								<th name="proc-tiss-" style='text-align:left;'> <?php echo $lista['codigo']; ?> </th>
+								<th name="proc-tiss-" style='text-align:left;'> <?php echo $lista['descricao']; ?> </th>
+								<th name="proc-tiss-" style='text-align:right;'> <?php echo number_format($lista['real'], 2, ',', '.'); ?> </th>
+								<th name="proc-tiss-" style='text-align:right;'> <?php echo $lista['ch']; ?> </th>
+							</tr>
+						<?php
+							unset($classProc);
+							}
+						?>
+						</tbody>
+					</table>
+				</fieldset>
+			</div>
+
+			<div class="row-fluid">
+				<fieldset class=" table-bordered" id="flst-enc" >
+					<div class="span6" >
+						<textarea></textarea>
+					</div>
+
+					<div class="span2" >
+						<div class="span7" >
+							<label> Quantidade: </label>
+						</div>
+						<div class="span5" >
+							<input type="text" value="1" id="proc-tiss-qtd-proc" name="proc-tiss-qtd-proc" >
+						</div>
+					</div>
+
+					<div class="span2" >
+						<input type="button" class="btn btn-mini span12" name="" onclick="adicionarProcedimentos();" value="Adicionar"/>
+					</div>
+
+					<div class="span2" >
+						<input type="button" class="btn btn-mini span12" onclick="fechar_modal('proc-tiss-boxes-ins-pro');" name="" value="Fechar"/>
+					</div>
+				</fieldset >
+			</div>
+		</div>
+	</div>
+</div>

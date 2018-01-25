@@ -1,0 +1,781 @@
+<div id="ficha-vac">
+    <script src="view/estoque/js/filtroSelects.js"></script>
+    <script src="template/js/bootstrap-datepicker.js"></script>
+    <script src="template/js/maskedinput.js"></script>
+    <script type="text/javascript" src="view/recepcao/js/fichaVacina.js"></script>
+    <script type="text/javascript" src="view/recepcao/js/tabelafichavacina.js"></script>
+
+    <div id="dialog-vacina" class="modal-body-vacina " style=" background-image: url('template/img/body-bg.png');">
+        <div id="ficha-vacina-inner">
+            <a href="#" id="fechar" class="close">Fechar X</a>
+            <h2 class="titulo">Ficha de Vacina</h2>
+
+            <hr id="line-vacina">
+            <div id="vacina-result"></div>
+            <div class="vaci-superior row-fluid" >
+                <div class="span7">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="tabsul">
+                            <li class="active"><a href="#vaci1" data-toggle="tab">Dados Pessoais</a></li>
+                            <li><a href="#vaci2" data-toggle="tab">Imunidade</a></li>
+                            <li><a href="#vaci3" data-toggle="tab">História do Nascimento</a></li>
+                            <!--<li><a href="#vaci4" data-toggle="tab">Ficha Vacina</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="vaci1">
+                                <form class="vaci-dados" action="" method="post">
+                                    <div class="row-fluid">
+                                        <div class="span5">
+                                            <label class="vaci-nome" for="vaci-nome">Nome</label>
+                                            <input id="vaci-nome" name="vaci-nome" type="text" value="<?php echo $clienteVacina['nome'] . " " . $clienteVacina['sobrenome']; ?>" />
+                                        </div>
+
+                                        <div class="span2">
+                                            <label class="vaci-sexo" for="vaci-sexo">Sexo</label>
+                                            <input id="vaci-sexo" name="vaci-sexo" type="text" value="<?php echo $clienteVacina['sexo']; ?>" />
+                                        </div>
+
+                                        <div class="span3">
+                                            <label class="vaci-nasc" for="vaci-nasc">Nasc.</label>
+                                            <input id="vaci-nasc" name="vaci-nasc" type="text" value="<?php echo converteData($clienteVacina['data_nascimento']); ?>" />
+                                        </div>
+
+                                        <div class="span2">
+                                            <label class="vaci-idade"for="vaci-idade">Idade</label>
+                                            <input id="vaci-idade" name="vaci-idade" type="text" value="<?php echo $idade['ano'] . 'a ' . $idade['mes'] . 'm'; ?>" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row-fluid">
+                                        <div class="span5">
+                                            <label class="vaci-medico" for="vaci-medico">Médico</label>
+                                            <input id="vaci-medico" name="vaci-medico" type="text" value="<?php echo $medico['nome']; ?>"/>
+                                        </div>
+
+<!--                                        <div class="span4">
+                                            <label class="vaci-categoria" for="vaci-categoria">Categoria</label>
+                                            <input id="vaci-categoria" name="vaci-categoria" type="text" value="<?php //echo $categoria = categoriaById($clienteVacina['categoria_id']); ?>"/>
+                                        </div>-->
+										<div class="span2">
+											<label class="vaci-categoria" for="vaci-categoria">Categoria</label>
+										</div>
+										<div class="span2">
+											<select name="vaci_categoria_id" id="vaci_categoria_id">
+											<?php
+												foreach(buscaCategoria() as $categoria) {
+													if($categoria['id'] == $clienteVacina['categoria_id']) {
+											?>
+													<option  value="<?php echo $categoria['id']; ?>" selected="selected" > <?php echo $categoria['nome']; ?> </option>
+											<?php
+													} else {
+											?>
+													<option  value="<?php echo $categoria['id']; ?>"  > <?php echo $categoria['nome']; ?> </option>
+											<?php
+													}
+
+												}
+											?>
+											</select>
+										</div>
+                                        <div class="span3">
+                                            <label class="vaci-inscricao" for="vaci-inscricao">Inscrição</label>
+                                            <input id="vaci-inscricao" name="vaci-inscricao" type="text" value="<?php echo converteData($clienteVacina['inscricao']); ?>"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row-fluid">
+                                        <div class="span9">
+                                            <label class="vaci-obs" for="vaci-obs">OBS</label>
+                                            <textarea id="vaci-obs" name="vaci-obs" ><?php echo $clienteVacina['observacao']; ?></textarea>
+                                        </div>
+
+                                        <div class="span3">
+                                            <label class="vaci-obs" for="vaci-obs">Usuário:</label>
+                                            <div class="vaci-obs2">
+                                                <p id="usuario_hist_vac" class="texto-obs2"></p>
+                                            </div>
+<!--                                            <textarea ></textarea>-->
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="vaci2">
+                                <form class="vaci-imunidade" action="" method="post">
+                                    <div class="row-fluid">
+                                        <div class="span5">
+                                            <div class="row-fluid">
+												<?php
+												$checkImuno = '';
+												if ($clienteVacina['imunodeficiente'] == 1) {
+													$checkImuno = 'checked';
+												}
+												?>
+                                                <input id="vaci-imunodeficiente" <?php echo $checkImuno; ?> name="vaci-imunodeficiente" type="checkbox" />
+                                                <label class="vaci-imunodeficiente" for="vaci-imunodeficiente">Imunodeficiente</label>
+                                            </div>
+
+                                            <div class="row-fluid">
+                                                <label class="vaci-vivas" for="vaci-vivas">Excluir vacinas vivas até:</label>
+                                                <input id="vaci-vivas" name="vaci-vivas" type="text"/>
+                                            </div>
+
+                                            <div class="row-fluid">
+                                                <select>
+                                                    <option>(nada)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="span3">
+                                            <div class="row-fluid">
+                                                <label class="vaci-alergias" for="vaci-alergias">Alergias</label>
+                                                <div  class="alergias-default">
+                                                    <div class="alergias-default-skin">
+                                                        <ul class="alergias-default-multiselect">
+															<?php
+															foreach (buscaAlergias() as $alergias) {
+																$checkAlergias = "";
+																if (confereExistenciaClienteAlergias($clienteVacina['id'], $alergias['id'])) {
+																	$checkAlergias = "checked";
+																}
+																?>
+																<li class="alergias-default-multiselect">
+																	<label  class="alergias-default-label" >
+																		<input type="checkbox" name="vaci-alergias"  class="alergias-default-checkbox" <?php echo $checkAlergias; ?> value="<?php echo $alergias['id']; ?>" > <?php echo $alergias['nome']; ?>
+																	</label>
+																</li>
+																<?php
+															}
+															?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span4">
+                                            <div class="row-fluid">
+                                                <label class="vaci-antecedentes" for="vaci-antecedentes">Antecedentes Mórbidos</label>
+                                                <div  class="antecedentes-default">
+                                                    <div class="antecedentes-default-skin" >
+                                                        <ul class="antecedentes-default-multiselect">
+															<?php
+															foreach (buscaAntecedenteMorbido() as $antMorbido) {
+																$checkAntMorbido = "";
+																if (confereExistenciaClienteAntMorbido($clienteVacina['id'], $antMorbido['id'])) {
+																	$checkAntMorbido = "checked";
+																}
+																?>
+																<li class="antecedentes-default-multiselect">
+																	<label  class="antecedentes-default-label" >
+																		<input type="checkbox" name="vaci-antecedentes"  class="antecedentes-default-checkbox" <?php echo $checkAntMorbido; ?> value="<?php echo $antMorbido['id']; ?>"> <?php echo $antMorbido['nome']; ?>
+																	</label>
+																</li>
+																<?php
+															}
+															?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="vaci3">
+                                <form class="vaci-historia" action="" method="post">
+                                    <div class="row-fluid">
+                                        <div class="span5">
+                                            <div class="vaci-parto row-fluid">
+                                                <label class="vaci-parto" for="vaci-parto">Parto</label>
+                                                <select id="vaci-parto">
+													<?php
+													foreach (buscaParto() as $parto) {
+														$selected = "";
+														if ($clienteVacina['parto_id'] == $parto['id']) {
+															$selected = "SELECTED";
+														}
+														?>
+														<option <?php echo $selected; ?> value="<?php echo $parto['id']; ?>" >
+															<?php echo $parto['tipo']; ?>
+														</option>
+														<?php
+													}
+													?>
+                                                </select><br/>
+                                                <label class="vaci-gestacao" for="vaci-gestacao">Gestação</label>
+                                                <select id="vaci-gestacao">
+													<?php
+													foreach (buscaGestacao() as $gestacao) {
+														$selected = "";
+														if ($clienteVacina['gestacao_id'] == $gestacao['id']) {
+															$selected = "SELECTED";
+														}
+														?>
+														<option <?php echo $selected; ?> value="<?php echo $gestacao['id']; ?>" >
+															<?php echo $gestacao['tipo']; ?>
+														</option>
+														<?php
+													}
+													?>
+                                                </select><br/>
+                                                <label class="vaci-peso" for="vaci-peso">Peso (em g)</label>
+                                                <input id="vaci-peso" name="vaci-peso" type="text" value="<?php echo $clienteVacina['peso_nascimento']; ?>" />
+                                            </div>
+                                        </div>
+
+                                        <div class="span1"></div>
+
+                                        <div class="span5">
+                                            <fieldset class="vaci-nascimento table-bordered">
+                                                <legend>Condições de Nascimento</legend>
+												<?php
+												foreach (buscaCondicoesDeNascimento() as $cNascimento) {
+													$checkClienteCN = "";
+													if (confereExistenciaClienteCN($clienteVacina['id'], $cNascimento['id'])) {
+														$checkClienteCN = "checked";
+													}
+													?>
+													<div class="row-fluid">
+														<input id="vaci-Cnascimento" name="vaci-Cnascimento" type="checkbox" <?php echo $checkClienteCN ?> value="<?php echo $cNascimento['id']; ?>"/>
+														<label class="vaci-Cnascimento" for="vaci-Cnascimento"><?php echo $cNascimento['nome']; ?></label>
+													</div>
+													<?php
+												}
+												?>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane" id="vaci4">
+                                <!-- <form class="vaci-ficha" action="" method="post"> -->
+                                <div class="row-fluid">
+                                    <div class="span5">
+                                        <div class="vaci-nome row-fluid">
+                                            <label class="" for="vaci-nome">Nome:</label>
+                                            <select id="vaci-nome" name="ficha-vaci-nome">
+												<?php
+												foreach ($clientesControleImuno as $membro) {
+													?>
+													<option value="<?php echo $membro['id']; ?>">
+														<?php echo $membro['nome'] . " " . $membro['sobrenome']; ?>
+													</option>
+													<?php
+												}
+												?>
+                                            </select>
+                                            <label class="" for="vaci-vacina">Vacina:</label>
+                                            <!--<select id="vaci-vacina" name="ficha-vaci-vacinaNome" onChange="buscaLotesFichaVacina();">-->
+                                            <select id="vaci-vacina" name="ficha-vaci-vacinaNome">
+												<?php
+												foreach (buscaMaterial('vacina') as $material) {
+													?>
+													<option value="<?php echo $material['id']; ?>" ><?php echo $material['nome']; ?></option>
+													<?php
+												}
+												?>
+                                            </select>
+
+                                            <label class="" for="vaci-status">Status:</label>
+
+                                            <select id="vaci-status" name="ficha-vaci-status">
+												<?php
+												foreach (buscaStatus('vacina') as $statvac) {
+													?>
+													<option value="<?php echo $statvac['id']; ?>" ><?php echo $statvac['nome']; ?></option>
+													<?php
+												}
+												?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="span1"></div>
+                                    <div class="span4">
+                                        <div class="row-fluid">
+                                            <label> Data:</label>
+                                            <input type="text" id="ficha-vacina-data" value="<?php echo date("d/m/Y"); ?>" name=""/>
+                                        </div>
+                                        <div id="fv-lote" class="row-fluid">
+                                            <label> Lote:</label>
+                                            <!--<select id="fv-lotes" name="ficha-vacina-lote">
+                                                    <option>----</option>
+                                            </select>-->
+                                        </div>
+                                        <!--<fieldset class="vaci-nascimento table-bordered">
+                                                <legend>Atualizado Por:</legend>
+                                        </fieldset>-->
+                                        <div class="row-fluid">
+                                            <input class="span8" type="submit" id="btn-inserir-vacina" style="display: none" onclick="insere_vac_cliente()" value="Inserir"/>
+                                            <input class="span8" type="submit" id="btn-editar-vacina" style="display: none" onclick="edita_vac_cliente()" value="Editar"/>
+                                            <input id="hidden-idServico" type="hidden" value="" />
+                                            <input id="hidden-idHistorico" type="hidden" value="" />
+                                            <input id="hidden-idClienteAba" type="hidden" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--</form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="span1">
+					<fieldset class="vaci-botoes table-bordered">
+						<div class="row-fluid">
+							<input id="vaci-gravar" class="btn btn-mini span12" type="submit" name="vaci-gravar" value="Gravar"/>
+							<input id="hidden-id" type="hidden" value="<?php echo $clienteVacina['id']; ?>" />
+						</div>
+						<div class="row-fluid">
+							<!--<input id="vaci-editar" class="btn btn-mini span12" type="submit" name="vaci-editar" value="Editar" />-->
+							<div class="btn-group" style="position: relative;">
+								<button type="submit" id="vaci-tca" name="vaci-tca" class="btn btn-mini span12 dropdown-toggle" data-toggle="dropdown">TCA <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" onclick="insere_vac_cliente(<?php echo $clienteVacina['id']; ?>, 'TCA Fungos');">TCA Fungos</a></li>
+									<li><a href="#" onclick="insere_vac_cliente(<?php echo $clienteVacina['id']; ?>, 'TCA Insetos');">TCA Insetos</a></li>
+									<li><a href="#" onclick="insere_vac_cliente(<?php echo $clienteVacina['id']; ?>, 'TCA Látex');">TCA Látex</a></li>
+									<li><a href="#" onclick="insere_vac_cliente(<?php echo $clienteVacina['id']; ?>, 'TCA Controles + e -');">'TCA Controles + e -</a></li>
+									<li><a href="#" onclick="insere_vac_cliente(<?php echo $clienteVacina['id']; ?>, 'TCA Alimentos');">TCA Alimentos</a></li>
+									<li><a href="#" onclick="insere_vac_cliente(<?php echo $clienteVacina['id']; ?>, 'TCA Inalantes');">TCA Inalantes</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<!-- <input id="vaci-imprimir" class="btn btn-mini span12" type="submit" name="vaci-imprimir" value="Imprimir" />-->
+							<div class="btn-group" style="position: relative;">
+								<button type="submit" id="vaci-imprimir" name="vaci-imprimir" class="btn btn-mini span12 dropdown-toggle" data-toggle="dropdown">Imprimir <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" onclick="imprimirFichaVacina(<?php echo $clienteVacina['id']; ?>);">Carteira Vacinas</a></li>
+									<li class="divider"></li>
+									<li><a href="#" onclick="modalImprimirControleVacina(<?php echo $clienteVacina['id']; ?>);">Controle (novo)</a></li>
+									<li><a href="#" onclick="modalReimprimirControleVacina(<?php echo $clienteVacina['id']; ?>);">Reimprimir Controle</a></li>
+									<li class="divider"></li>
+									<li><a href="#" onclick="modalImprimirCertificadoVacina(<?php echo $clienteVacina['id']; ?>);">Certificado de Imunização</a></li>
+									<li><a href="#" onclick="modalImprimirDeclaracaoComparecimento(<?php echo $clienteVacina['id']; ?>,<?php echo $clienteVacina['membro']; ?>);">Declaração de Comparecimento</a></li>
+									<li class="divider"></li>
+									<li><a href="#" onclick="modalImprimirLaudoImunodeficiencia(<?php echo $clienteVacina['id']; ?>);">Imunodeficiência</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<a id="vaci-fechar" class="btn btn-mini span12 close" href="">Fechar</a>
+						</div>
+					</fieldset>
+				</div>
+
+				<div class="span4">
+					<fieldset class="vaci-servicos table-bordered">
+						<div class="row-fluid">
+							<div id="dt_example2">
+								<table id='tabelaDeItensDoModulo' class="table-modify">
+									<thead>
+										<tr>
+											<th>Serviços Prog.</th>
+											<th>Previsto</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<?php
+										$itensModulo = buscaItensModuloNaoFinalizadoCliente($clienteVacina['id'], 1);
+										foreach ($itensModulo as $itemMod) {
+											$dataItem = converteData($itemMod['data_item']);
+											$data = somaPosicaoData($dataItem, $itemMod['posicao_horizontal']);
+											?>
+											<tr itemId='<?php echo $itemMod['item_id'];?>' clienteID='<?php echo $itemMod['cliente_id']; ?>' comprimento='<?php echo sizeof($itensModulo); ?>' moduloId='<?php echo $itemMod['id']; ?>'>
+												<td id='itemModuloNomeMaterial' align="center"><?php echo $itemMod['nome_material']; ?></td>
+												<td id='itemModuloData' align="center">
+													<span id="data_item" posicao="<?php echo $itemMod['posicao_horizontal']; ?>" ><?php echo $data; ?></span>
+												</td>
+											</tr>
+											<?php
+										}
+										?>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<?php
+						if (sizeof($itensModulo) !== 0) {
+							?>
+							<input id='vaci-servicos-enviar' class="btn" type='button' value='enviar' style='float:right;'/>
+							<?php
+						}
+						?>
+					</fieldset>
+				</div>
+			</div>
+			<hr>
+			<div class="inferior row-fluid">
+				<div class="row-fluid">
+					<div class="span3" >
+						<div class="table-bordered" >
+							<ul class="nav nav-pills nav-stacked">
+								<?php
+								unset($_SESSION['agrupar']);
+								$atual = date('Y-m-d');
+
+								foreach ($clientesVacina as $clienteVac) {
+									$antiga = $clienteVac['data_nascimento'];
+									$diff = diferenca_data($antiga, $atual);
+									$class = 'class = "fontuser-listuser"';
+									if ($membro == 1) {
+										if ($clienteVac['membro'] == 1) {
+											$class = 'class = "active"';
+										}
+									} else if ($clienteVac['id'] == $clienteVacina['id']) {
+										$class = 'class = "active fontuser-listuser"';
+									}
+									?>
+
+									<li <?php echo $class; ?>>
+										<a href="#" onclick="abaVacina(<?php echo $clienteVac['id']; ?>, <?php echo $idTitular; ?>);" data-toggle="tab">
+											<?php echo $clienteVac['membro'] . " - " . $clienteVac['nome'] . " " . $clienteVac['sobrenome'] . ", " . $diff['ano'] . "a " . $diff['mes'] . "m"; ?>
+										</a>
+									</li>
+									<?php
+									$i++;
+								}
+								?>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <div>
+                            <input class="btn btn-mini" onclick="finaliza_agrupamento_vacinas(<?php echo $clienteVacina['id']; ?>, <?php echo $idTitular; ?>)" type="submit" name="vaci-agrupar" value="Finalizar Agrupamento"/>
+                            <input class="btn btn-mini" onclick="abaVacina(<?php echo $clienteVacina['id']; ?>, <?php echo $idTitular; ?>);" type="submit" name="vaci-agrupar-canc" value="Cancelar Agrupamento"/>
+                        </div>
+                    </div>
+					<?php
+					$vac = listaVacinas();
+					$historico = historicoVacina($clienteVacina['id'], $vac);
+
+//					print_r($vac[9]);exit;
+					//print_r($historico);
+					//exit;
+					$qtd_linhas = maiorLinhaMatriz($historico);
+					$num_linhas = VACINA_MIN_NUM_LINHAS;
+					if ($qtd_linhas > VACINA_MIN_NUM_LINHAS) {
+						$num_linhas = $qtd_linhas;
+					} else if ($qtd_linhas == VACINA_MIN_NUM_LINHAS) {
+						$num_linhas = VACINA_MIN_NUM_LINHAS + 1;
+					}
+					?>
+                    <div class="span8" >
+                        <div class="tab-pane active" id="vaci<?php echo $i; ?>" >
+                            <!--<div class="row-fluid" >-->
+                            <div class="row-fluid tabela-scr" id="tabela-scr"   >
+                                <table id="vaci_vacinas_tabela_id"class=" vaci-vacinas display">
+                                    <thead>
+                                        <tr>
+                                            <th>BCG<br>febre amarela</th>
+                                            <th>hepatites</th>
+                                            <th>difteria, tétano,<br>coqueluche</th>
+                                            <th>pólio (VOP/VIP)</th>
+                                            <th>hemófilos B</th>
+                                            <th>pneumocócicas</th>
+                                            <th>meningocócicas</th>
+                                            <th>sarampo, rubéola,<br>caxumba, varicela</th>
+                                            <th>influenza, rotavirus</th>
+                                            <th>cont. e outras</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody >
+										<?php
+										$idCli = $clienteVacina['id'];
+										for ($x = 0; $x < $num_linhas; $x++) {
+											?>
+											<tr>
+												<?php
+												$nome = $historico[3][0]['vacinaNome'];
+
+												for ($y = 0; $y < 10; $y++) {
+													$nomeVacina = "";
+													$nome = $historico[$y][$x]['vacinaNome'];
+													$cor = $historico[$y][$x]['cor_hex'];
+													$data_prev = $historico[$y][$x]['data_prevista'];
+													$data_prevista = traduzData($data_prev, $mes_ano);
+
+													$data_prev_conv = converteData($historico[$y][$x]['data_pre']);
+
+													$idServico = $historico[$y][$x]['servicoId'];
+													$idHistorico = $historico[$y][$x]['historicoId'];
+													$tipo = $historico[$y][$x]['tipo'];
+													$str = "";
+
+													if ($tipo == 'grupo') {
+
+														$grupo = grupoHistoricoPorIdHistorico($idHistorico);
+														$datalen = count($grupo);
+														$tmp = 0;
+
+														if ($datalen > 3) {
+															for ($d = 0; $d < count($grupo); $d++) {
+																$split = explode("/", $grupo[$d]['data_hist']);
+																$split1 = explode("/", $grupo[$d + 1]['data_hist']);
+																if ($split[1] == $split1[1] || $tmp == 1) {
+																	$ar[] = $grupo[$d]['data_hist'];
+																	$tmp = 1;
+																} else {
+																	$ar[] = $split[1];
+																	$tmp = 0;
+																}
+															}
+															$fontsize = "style='font-size: 8px; line-height:10px;'";
+															$data_prevista = implode(", ", $ar);
+														} else {
+															foreach ($grupo as $arr) {
+																$arrGrupo[] = $arr['data_hist'];
+															}
+															$data_prevista = implode(", ", $arrGrupo);
+														}
+													}
+
+													$idcelula1 = 'context_menu_2_' . $y . '_' . $x;
+													$idcelula2 = 'context_menu_3_' . $y . '_' . $x;
+													if (!empty($nome)) {
+
+														$nomeUsuario = buscaNomeLoginUsuarioPorServico($idServico);
+														$nomeVacina = $nome;
+														$strR = $nomeVacina . ", " . $data_prevista;
+														$reacoes = "onclick='modal_eventosAdversos($idCli, $idHistorico, \"$strR\");'";
+														$excluir = "onclick=\"exclui_vac_cliente($idCli, $idHistorico, $idServico);\"";
+														$agrupar = "onclick=\"agrupa_vac_cliente($idHistorico);\"";
+														$mouseenter = "onmouseenter=\"mostra_nome_usuario('$nomeUsuario');\"";
+														$idEventoAdverso = $historico[$y][$x]['eventos_adversos_id'];
+														$data_queixa = converteData($historico[$y][$x]['data_queixa']);
+														$data_pre = converteData($historico[$y][$x]['data_pre']);
+														$conduta = $historico[$y][$x]['conduta'];
+														$evolucao = $historico[$y][$x]['evolucao'];
+
+														if (!empty($idEventoAdverso))
+															$eventoAdv = "<a href='#' onclick='modal_eventosAdversosEditar($idCli, $idHistorico, $idEventoAdverso, \"$data_queixa\", \"$conduta\", \"$evolucao\", \"$strR\");'> <i class='icon-map-marker'></i></a>";
+
+														if (!isset($fontsize))
+															$iconeAddVacina = "
+							    <div onclick='modal_data_vacina($idCli, $idHistorico, \"$data_pre\");' class='btn-group icone-left' >
+								  <a class='dropdown-toggle' data-toggle=''><i class='icon-plus'></i></a>
+							    </div>
+							";
+													/*
+													 * O Array $ArrVacina é definido no arquivo config.php
+													 */
+														$item = 0;
+														if ($nome == $ArrVacina[9][17] || $nome == $ArrVacina[9][19]) { //mantoux leit e mitsuda
+															$op = 1; //numero
+															$unidade = 'mm';
+															$item = 1;
+															$result = buscaResutadoTestePorHistorico($idHistorico);
+															if (!empty($result))
+																$testeRes = $result[0]['valor'] . ' ' . $result[0]['unidade'];
+														} else if ($nome == $ArrVacina[9][3]) { //imunodeficiencia
+															$op = 2; //numero
+															$unidade = '';
+															$item = 1;
+															$result = buscaResutadoTestePorHistorico($idHistorico);
+															if (!empty($result)) {
+																$testeRes = $result[0]['valor'];
+																$hiddenImu = "<input name='hidden_idHistorico_imu' type='hidden' value='" . $idHistorico . "'/>";
+															}
+														} else if ($nome == $ArrVacina[9][0] || $nome == $ArrVacina[9][1] || $nome == $ArrVacina[9][2] || $nome == $ArrVacina[9][4]) { // T.Pesinho (master,plus,ampliado) e HIV I e II
+															$op = 3; //select
+															$unidade = '';
+															$item = 1;
+															$result = buscaResutadoTestePorHistorico($idHistorico);
+															if (!empty($result))
+																$testeRes = $result[0]['select'];
+														} else if ($nome == $ArrVacina[9][23]) { // TCA Imunidade
+															$nomeVacina = "TCA Imunidade";
+															$op = 4; //tca imunidade 4 campos de numero outro modal
+															$unidade = 'mm';
+															$item = 1;
+															$result = buscaResutadoTestePorHistorico($idHistorico);
+															if (!empty($result)) {
+																$testeRes = $result[0]['select'];
+																$tcaicone = "<a href='#' onclick='modal_ResultadoTcaEditar(\"$idHistorico\", \"$idCli\");'> <i class='icon-map-marker'></i></a>";
+															}
+														}
+
+
+														if ($item == 1) {
+															$itemMenu = "
+																<li>
+																	<a href='#' onclick='modalResultadosTestes(\"$op\",\"$unidade\", \"$idHistorico\", \"$nome\", \"$idCli\");'>
+																		<font color='black'>Resultados de teste</font>
+																	</a>
+																</li>
+															";
+
+															unset($op);
+															unset($unidade);
+															unset($item);
+														}
+													} else {
+														foreach ($ArrVacina[$y] AS $nomeMat) {
+															$str .= "<li><a href='#' onclick='insere_vac_cliente(\"$idCli\",\"$nomeMat\");'>$nomeMat</a></li>";
+
+															$iconeAddVacina = "
+																	<div class='btn-group icone-left' style='position: relative;' >
+																		<a class=' dropdown-toggle' onclick='reposicionaDropDown2(\"$idcelula1\",event)' data-toggle='dropdown'><i class='icon-plus'></i></a>
+																			<ul id='$idcelula1' class='dropdown-menu' >
+																			$str
+																			</ul>
+																		</div>
+																	";
+														}
+													}
+													unset($str);
+													?>
+
+													<?php echo $hiddenImu; ?>
+													<td <?php echo $mouseenter; ?> id="td_<?php echo $idHistorico; ?>">
+														<font color="<?php echo $cor; ?>">
+														<div> <?php echo $nomeVacina . "<br>" . "<span " . $fontsize . ">" . $data_prevista . "</span> <br>" . $testeRes; ?> 
+														</div>
+														</font>
+
+														<div class="row-fluid">
+															<div class="pull-left" style="margin-top: -13px;">
+								<!--                                                                <a href="#"  > <i class="icon-map-marker "></i></a>-->
+																<?php echo $eventoAdv; ?>
+																<?php echo $tcaicone; ?>
+																<!-- FIGURA VACINA AKI -->
+															</div>
+														</div>   
+														<div style="margin-top:12px;">
+															<?php echo $iconeAddVacina; ?>
+
+															<div class="btn-group icone-right" style="position: relative;">
+																<a onclick="reposicionaDropDown('<?php echo $idcelula2; ?>');" class="  dropdown-toggle" data-toggle="dropdown" ><i class="icon-step-forward"></i></a>
+									<!--																<a class=" dropdown-toggle" onclick="menuContexto('<?php // echo $idcelula2;                            ?>', '.area-3');" data-toggle="dropdown"><i class="icon-step-forward"></i></a>-->
+
+																<ul id="<?php echo $idcelula2; ?>" class=" dropdown-menu" >
+																																		<!--<ul id="<?php // echo $idcelula2;                            ?>" class="position-menu dropdown-menu">-->
+																	<li>
+																		<a href="#" onclick="edita_vac_cliente(<?php echo $idCli; ?>, <?php echo $idHistorico; ?>, 'A Realizar (Hoje)');">
+																			<font color="grey">A Realizar (Hoje)</font>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="#" onclick="edita_vac_cliente(<?php echo $idCli; ?>, <?php echo $idHistorico; ?>, 'Realizado');">
+																			<font color="black">Realizado</font>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="#" onclick="edita_vac_cliente(<?php echo $idCli; ?>, <?php echo $idHistorico; ?>, 'Programado');">
+																			<font color="red">Programado</font>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="#" onclick="edita_vac_cliente(<?php echo $idCli; ?>, <?php echo $idHistorico; ?>, 'Externo');">
+																			<font color="blue">Externo</font>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="#" onclick="edita_vac_cliente(<?php echo $idCli; ?>, <?php echo $idHistorico; ?>, 'Pagto Antecipado');">
+																			<font color="#6495ED">Pagto. Antecipado</font>
+																		</a>
+																	</li>
+																	<li class="divider"></li>
+																	<?php echo $itemMenu; ?> <!-- AKI ENTRA O MENU DE RESULTADO DE TESTES -->
+																	<li>
+																		<a href="#" <?php echo $reacoes; ?>>Reações Adversas</a>
+																	</li>
+																	<li style="background-color:#FFC0CB">
+																		<a href="#" <?php echo $excluir; ?>>Excluir</a>
+																	</li>
+																	<li class="divider"></li>
+																	<li style="background-color:#FFC0CB">
+																		<a href="#" <?php echo $agrupar; ?>>Agrupar</a>
+																	</li>
+																</ul>
+
+															</div>
+
+														</div>
+													</td>
+													<?php
+													unset($tcaicone);
+													unset($hiddenImu);
+													unset($idcelula1);
+													unset($idcelula2);
+													unset($data_prevista);
+													unset($testeRes);
+													unset($mouseenter);
+													unset($itemMenu);
+													unset($ar);
+													unset($arrGrupo);
+													unset($fontsize);
+													unset($reacoes);
+													unset($agrupar);
+													unset($excluir);
+													unset($eventoAdv);
+													unset($iconeAddVacina);
+												}
+												?>
+											</tr>
+											<?php
+										}
+//										echo $iconeAddVacina;
+										?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="teste-attas" class="modal hide fade" >
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h3>Lista de opções</h3>
+	</div>
+	<div class="modal-body">
+		<div class="row-fluid">
+
+			<ul class="thumbnail">
+																																																		<!--<ul id="<?php // echo $idcelula2;                            ?>" class="position-menu dropdown-menu">-->
+				<li class="thumbnails">
+					<a href="#" >
+						<font color="grey">A Realizar (Hoje)</font>
+					</a>
+				</li>
+				<li class="thumbnails">
+					<a href="#" >
+						<font color="black">Realizado</font>
+					</a>
+				</li>
+				<li class="thumbnails">
+					<a href="#" >
+						<font color="red">Programado</font>
+					</a>
+				</li>
+				<li class="thumbnails">
+					<a href="#" >
+						<font color="blue">Externo</font>
+					</a>
+				</li >
+				<li class="thumbnails">
+					<a href="#" >
+						<font color="#6495ED">Pagto. Antecipado</font>
+					</a>
+				</li>
+				<li class="thumbnails" class="divider"></li>
+				<!-- AKI ENTRA O MENU DE RESULTADO DE TESTES -->
+				<li class="thumbnails">
+					<a href="#" >Reações Adversas</a>
+				</li>
+				<li class="thumbnails" style="background-color:#FFC0CB">
+					<a href="#" >Excluir</a>
+				</li>
+				<li class="thumbnails" class="divider"></li>
+				<li class="thumbnails" style="background-color:#FFC0CB">
+					<a href="#" >Agrupar</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

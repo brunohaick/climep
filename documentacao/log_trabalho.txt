@@ -1,0 +1,17 @@
+19/06
+   Andrey (23h)
+	Commitou heindall
+	Atualizou documentacao/TODO
+	deu uns br/s na aba imunidade da ficha de vacina
+	
+20/06
+   Andrey (22:40)
+	Listagem dos medicos sendo listados agrupados por crm e apenas os ativos (excluir medicos que estao duplicados no banco)
+	alteração da listagem de procedimentos para descricao, e nao por nome
+	cadastro de antecedentes e alergias e outros na consulta nao estava funcionando - coloquei os if's emptys pois existem pessoas sem medico e dava erro
+	teste inicial em consultas
+	scroll na tabela de prescrição
+	scroll na tabela de hipoteses
+	importação dos atestados
+	tentativa de correção do onclick do atestado (função mostra uma descrição que tem enter e a função da erro - como tirar os enters?)
+	ajeitei atestados

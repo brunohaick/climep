@@ -1,0 +1,46 @@
+<?php
+if(isset($_POST['id_tabela'])) {
+	$filtroConvenio = filtraConvenioPorTabela($_POST['id_tabela']);
+	if(!empty($filtroConvenio)) {
+?>
+		<select id="proc-tiss-convenio_id" name='proc-tiss-convenio_id'>
+			<?php
+				foreach($filtroConvenio as $convenio) {
+			?>
+					<option value="<?php echo $convenio['id']; ?>" ><?php echo $convenio['nome']; ?></option>
+			<?php
+				}
+			?>
+		</select>
+<?php
+	} else {
+?>
+		<select>
+				<option>Sem Convenios Disponiveis</option>
+		</select>
+<?
+	}
+}
+
+if(isset($_POST['id_convenio'])) {
+	$filtroTabela = filtraTabelaPorConvenio($_POST['id_convenio']);
+	if(!empty($filtroTabela)) {
+?>
+		<select id="proc-tiss-tabela_id" name='proc-tiss-tabela_id'>
+			<?php
+				foreach($filtroTabela as $tabela) {
+			?>
+					<option value="<?php echo $tabela['id']; ?>" ><?php echo $tabela['nome']; ?></option>
+			<?php
+				}
+			?>
+		</select>
+<?php
+	} else {
+?>
+		<select>
+				<option>Sem Tabelas Disponiveis</option>
+		</select>
+<?
+	}
+}

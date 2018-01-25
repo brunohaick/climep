@@ -1,0 +1,47 @@
+/**
+ * Estilos CSS para a página inicial do sistema CLIMEP.
+ */
+@CHARSET "UTF-8";
+
+/*===========================================================================*/
+/* B O T Õ E S
+/*===========================================================================*/
+
+div#botoes div.row-fluid { margin: 10px 0; }
+div#botoes .botao { 
+        text-align: center;
+        padding-right: 1em;
+        display: table-cell;
+	vertical-align: top;
+	margin-top: 7px;
+}
+
+
+.botao img {
+
+	width: 90%;
+        min-width: 80%; 
+    	height: 100px;
+}
+
+a.nome_botao {
+    color: #0000CC !important;
+	
+}
+
+#side-bar #botoes .bloco_img{
+   /*margin-left: 8px;*/
+   margin-left: 2%;
+   margin-bottom: -5%;
+}
+.account-container {
+	display: table;
+        margin-left: 10px;
+}
+
+
+/*===========================================================================*/
+/* L O G O
+/*===========================================================================*/
+img#logo { display: block; margin: 6% auto; min-height: 232px; width: 450px;}
+

@@ -1,0 +1,93 @@
+<div id="xmlform">
+	<script async defer language="javascript" src="view/convenio/js/producaotiss.js"></script>
+    <div class="modal-body" style=" background-image: url('template/img/body-bg.png');">
+        <div class="row-fluid">
+            <h4 class="titulo">Envio de Produção Xml - Tiss</h4>
+        </div><br><br>
+		<fieldset class="table-bordered">
+			<legend>Preíodo de Apuração</legend> <br>
+			<div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Data Início:</label>
+					</div>
+					<div class="span2">
+						<input id="geraxml_data_inicio" data-mask="99/99/9999" type="text" name="geraxml-data_inicio"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Data Final:</label>
+					</div>
+					<div class="span2">
+						<input id="geraxml_data_fim" data-mask="99/99/9999" type="text" name="geraxml-data_fim"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Nº Lote:</label>
+					</div>
+					<div class="span2">
+						<input id="geraxml_numero_lote" type="text" name="geraxml-numero_lote"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>ANS:</label>
+					</div>
+					<div class="span2">
+						<input id="geraxml_ans" type="text" name="geraxml-ans"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Versão:</label>
+					</div>
+					<div class="span1">
+						<select id="geraxml_versao" name="geraxml-versao">
+							<option> 2.01.02 </option>
+							<option> 2.01.03 </option>
+							<option> 2.02.01 </option>
+							<option> 2.02.02 </option>
+                                                        <option selected="true"> 2.02.03 </option>
+						</select>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Cod Op.:</label>
+					</div>
+					<div class="span2">
+						<input id="geraxml_cod_op" type="text" name="geraxml-cod_op"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Convenio.:</label>
+					</div>
+					<div class="span3">
+						<select id="geraxml_convenio" name="geraxml-convenio">
+							<?php
+							$usuarios = buscaTodosConvenios(1); // Busca todos os convenios ativos = 1
+							foreach ($usuarios as $usuario) {
+								?>
+								<option value="<?php echo $usuario['id']; ?>"> <?php echo $usuario['nome']; ?> </option>
+								<?php
+							}
+							?>
+						</select>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">						
+							<input type="radio" name="geraxml-radio" value="1" /> Consultas
+							<input type="radio" name="geraxml-radio" value="2" /> Procedimentos						
+					</div>
+				</div>
+			</div>
+	</fieldset>
+	<div class="offset5">
+		<button class="btn"><i class="icon-remove "></i> Fechar </button>
+		<button class="btn" onclick="geraXml();" class="btn"><i class="icon-ok"></i> Processar </button>
+	</div>
+</div>

@@ -1,0 +1,152 @@
+<script async defer src="template/js/bootstrap-datepicker.js"></script>
+<script async defer src="view/estoque/js/index.js"></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+
+<h2 class="titulo"> Detalhamento do Lote </h2>
+<div class="row-fluid">
+    <fieldset class="table-bordered-enc">
+        <div class="span8" >
+         <fieldset class="table-bordered">
+             <legend>Lotes</legend>
+             <div id="lotes">
+               <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" >
+                    <thead>
+                        <tr class="white">
+                            <th align="center">ID</th>
+                            <th align="center"> Nota Fiscal </th>
+                            <th align="center"> Descrição</th>
+                            <th align="center"> Lote</th>
+                            <th align="center"> Qtd </th>
+                            <th align="center"> Validade </th>
+                            <th align="center"> Entrada </th>
+                        </tr>
+                    </thead>
+                    <tbody >
+					<?php 
+							foreach($materialPorLote as $materialLote) {
+					?>
+						<tr  name="table-color" class='dayhead ' onclick="detalhamentoDeLote(<?php echo $materialLote['materialId']; ?>,<?php echo $materialLote['loteId']; ?>);" >
+                                <th align="center"><?php echo $materialLote['nota_fiscalId']; ?></th>
+                                <th align="center"><?php echo $materialLote['nota_fiscal']; ?></th>
+                                <th align="center"><?php echo $materialLote['materialNome']; ?></th>
+                                <th align="center"><?php echo $materialLote['loteNome']; ?></th>
+                                <th align="center"><?php echo $materialLote['qtd']; ?></th>
+                                <th align="center"><?php echo converteData($materialLote['validade']); ?></th>
+                                <th align="center"><?php echo converteData($materialLote['data_entrada']); ?></th>
+                            </tr>
+					<?php
+							}
+					?>
+                     
+                    </tbody>
+
+                </table>
+                </div> 
+         </fieldset>
+        </div>
+        <div class="span4" >
+            <fieldset class="table-bordered">
+                 <legend>Histórico do Lote</legend>
+                 <div id="historico-lote"> 
+                 <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" >
+                    <thead>
+                        <tr class="white">
+                            <th align="center">Movimentação</th>
+                            <th align="center">Total</th>
+
+                        </tr>
+                    </thead>
+                    <tbody >
+
+                        <tr  name="table-color" class='dayhead '>
+                            <th align="center">Saldo Atual</th>
+                            <th align="center"> <?php echo estoqueMaterialPorLote($idMaterial,$idLote,$dataInicio,$dataFim,'total'); ?> </th>
+                                
+                        </tr>
+                        <tr  name="table-color" class='dayhead '>
+                            <th align="center">Total de Clientes</th>
+                            <th align="center"> <?php echo count(consumidoresMaterialPorLote($idMaterial,$idLote)); ?> </th>
+                                
+                        </tr>
+                        <tr  name="table-color" class='dayhead '>
+                            <th align="center">Consumo do Mês</th>
+							<th align="center"> <?php  echo $consumoLote['str']; ?> </th>
+                                
+                        </tr>
+                        <tr  name="table-color" class='dayhead '>
+                            <th align="center">Média do Mês</th>
+                            <th align="center"> <?php echo frascosML($consumoLote['qtd_doses'],$consumoLote['qtd_ml'],($consumoLote['qtd']/$num_dias_mes)); ?> </th>
+                                
+                        </tr>
+                       
+                     
+                    </tbody>
+
+                </table>
+                </div>     
+            </fieldset>
+        </div>
+    </fieldset>
+</div>
+<div class="row-fluid">
+   <fieldset class="table-bordered-enc">
+        <div class="span8" >
+         <fieldset class="table-bordered">
+             <legend>Lista  de Clientes Por Lotes</legend>
+             <div id="clientes-lote">
+             <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" >
+                    <thead>
+                        <tr class="white">
+                            <th align="center">Matrícula</th>
+                            <th align="center">Nome</th>
+                            <th align="center">Idade</th>
+                            <th align="center"> Atendimento </th>
+
+                        </tr>
+                    </thead>
+                    <tbody >
+<?php
+					foreach(consumidoresMaterialPorLote($idMaterial,$idLote) as $consumo) {
+						$clienteLote = buscaClienteById($consumo['usuario_id']);
+						$idade = diferenca_data($clienteLote['data_nascimento'],date("Y-m-d")); 
+?>
+                        <tr  name="table-color" class='dayhead '>
+							<th align="center"><?php echo $clienteLote['id']; ?></th>
+							<th align="center"><?php echo $clienteLote['nome']." ".$clienteLote['sobrenome']; ?></th>
+							<th align="center"><?php echo $idade['ano'].'a '.$idade['mes'].'m'; ?></th>
+							<th align="center"><?php echo converteData($consumo['data']); ?></th>
+                        </tr>
+<?php
+					}
+?>
+                    </tbody>
+
+                </table>
+                 </div>
+         </fieldset>
+        </div>
+        <div class="span4" >
+            <fieldset class="table-bordered">
+                 <legend>Pesquisa</legend>
+                 <div class="row-fluid">
+                     <div class="span5">
+                         <label>Início :</label>
+                         <input type="text" name="" class="" id="dl-dataInicio" value="<?php echo converteData($dataInicio); ?>" />
+                     </div>
+                     <div class="span1"></div>
+                     <div class="span5">
+                         <label>Término :</label>
+						 <input type="text" name="" class="" id="dl-dataFim" value="<?php echo converteData($dataFim); ?>" />
+                     </div>
+                 </div>
+            </fieldset><br>
+            
+                 <div class="row-fluid" onclick="detalhamentoLote();" style="margin-bottom: 200px;"> 
+                     <a class="btn pull-right"> Processar <i class=" icon-arrow-right"></i></a>
+                 </div> <br><br>
+                 <div class="row-fluid" >
+                     <a class="btn pull-right" onclick="document.location.href='index.php'" > Fechar <i class="icon-remove"></i></a>
+                 </div> 
+        </div>
+    </fieldset>
+</div><br/>

@@ -1,0 +1,59 @@
+/**
+ * Estilos CSS para o formulário de cadastro do sistema CLIMEP.
+ */
+@CHARSET "UTF-8";
+/*
+.cadastro [class*="span"] { border: 1px solid red;}
+.cadastro [class*="row"] { border: 1px solid blue;}
+*/
+/*===========================================================================*/
+/* G E R A L
+/*===========================================================================*/
+.titulo{ margin-left:  1%; color: #808080;}
+.cadastro [class*="span"] { margin-left: 10px; }
+.cadastro input, .cadastro select { width: 100%; padding-right: 0; padding-left: 0; }
+.cadastro { color: #FFF;  }
+
+form.cadastro .row-fluid [class*="span"] { min-height: 0; }
+
+
+
+/*===========================================================================*/
+/* ESTILOS ESPECÍFICOS (largura total do conteúdo = 580px )
+/*===========================================================================*/
+
+form.cadastro #cad-cadastrar { font-size: x-small; margin-top: 20px; } 
+form.cadastro fieldset.menu-botoes input.btn { margin-bottom: 15px; }
+form.cadastro-busca fieldset.menu-tipo input.btn { margin-bottom: 4px; }
+form  label.nome-blue {  font-size: 13px; }
+
+/*form.cadastro fieldset.contatos label { display: inline-block;  }*/
+
+form.cadastro .ddd { width: 40%; }
+form.cadastro .fone { width: 40%; }
+form.cadastro .fone2 { width: 40%; }
+form.cadastro .dono-fone { width: 30%; }
+
+
+form.cadastro .atualizado, form.cadastro .indicacao { height: 38px; width: 96%; ;width:200px }
+ form.cadastro .indicacao { height: 38px; width: 96%; margin-left: 29px;width:200px }
+#contatos-telefonicos{margin-left: 10px; }
+form.cadastro .cad-lembrete {margin-top: 20px;}
+form.cadastro fieldset.emissao-nf label { display: inline-block; width: 7%; }
+form.cadastro fieldset.emissao-nf label.doc-nf { display: inline-block; width: 5%; }
+form.cadastro fieldset.emissao-nf input#nome-nf .nome-nfla{  margin-top: 10px; margin-left: 10px;} 
+form.cadastro fieldset.emissao-nf .nome-inp{margin-left: -10px;}
+form.cadastro fieldset.emissao-nf input#doc-nf { margin-bottom: 2px; }
+form.cadastro fieldset.emissao-nf .doc-lab{margin-left: 25px;}
+form.cadastro fieldset.emissao-nf .doc-inp{margin-left: -10px;}
+form.cadastro fieldset.emissao-nf label.doc-nf { margin-left: 20px; }
+
+form.cadastro fieldset.observacoes  {margin-left: 2%; padding-bottom: 10px;}
+form.cadastro fieldset.observacoes textarea { width: 98%; height: 112px; overflow: scroll; }
+/*form.cadastro div.dependentes { height: 132px; }*/
+
+
+
+
+
+/*===========================================================================*/

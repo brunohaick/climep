@@ -1,0 +1,91 @@
+<!--================================  MODAL CONSULTA TRANSFERENCIA DE ESTOQUE=================================
+============================================================================================================== -->
+
+    <div id="boxes-consulta-estoque" class="modal-consulta-estoque hide fade">
+     <div id="dialog-consulta-estoque" class=" modal-body-consulta-estoque"  style=" background-image:  url('template/img/body-bg.png');">
+         <div id=""><a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo">Consulta Transferência de Estoque</h2>
+             <hr style="margin-top: -4px;"/>
+             <fieldset class="table-bordered">
+                 <legend>Transferência Consulta e Entrada</legend>
+                 <div class="row-fluid">
+                     <div class="span10">
+                        <label>Local :
+                        <select>
+						<?php
+								foreach(buscaLocal() as $local) {
+						?>
+									<option value="<?php echo $local['id']; ?>" ><?php echo $local['nome']; ?></option>
+						<?php
+								}
+						?>
+                        </select>  
+                         </label>
+                     
+                 </div>    
+                 </div>    
+                 <div class="row-fluid">
+                       <div class="span10">
+                     <label>Motivo :
+                        <select>
+						<?php
+								foreach(buscaMotivo() as $motivo) {
+						?>
+									<option value="<?php echo $motivo['id']; ?>" ><?php echo $motivo['nome']; ?></option>
+						<?php
+								}
+						?>
+                        </select>
+                     
+                     </label>
+                 </div>    
+                 </div>    
+                 <div class="row-fluid">
+                     <div class="span3">
+                     <label>Início :
+                         <input type="text" class=""  name="" />
+                     
+                     </label>
+                 </div>    
+                 </div>    
+                 <div class="row-fluid">
+                     <div class="span3">
+                     <label>Fim :
+                         <input type="text" class=""  name="" />
+                     
+                     </label>
+                 </div>    
+                 </div>    
+                 <div class="row-fluid">
+                       <div class="span10">
+                     <label>Ordem :
+                         <select>
+                             <option></option>
+                             <option></option>
+                             <option></option>
+                             <option></option>
+                         </select>
+                     
+                     </label>
+                 </div>    
+                 </div>   <br/>
+                 
+                 <div class="row-fluid">
+                     <div class="span3">
+                         <button class="btn btn-mini span10"> <i class=" icon-plus-sign"></i> Nova</button>
+                     </div>
+                     <div class="span3">
+                     <button class="btn btn-mini span10"><i class=" icon-search"></i> Consultar</button>
+                     </div>
+                     <div class="span3">
+                         <button class="btn btn-mini span10"><i class=" icon-remove"> </i>Fechar</button>
+                     </div>
+                 </div>
+              
+             </fieldset>
+            
+         </div>
+     </div>   
+    </div>
+<!--================================  FIM MODAL CONSULTA TRANSFERENCIA DE ESTOQUE=============================
+=

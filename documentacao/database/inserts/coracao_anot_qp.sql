@@ -1,0 +1,1 @@
+INSERT INTO `climep`.`coracao_anot_qp` (`id`, `nome`) VALUES (NULL, 'sem queixas clínicas'), (NULL, 'cansaço às mamadas'), (NULL, 'cianose'), (NULL, 'convulsão'), (NULL, 'lipotímia'), (NULL, 'infecção pulmonar');

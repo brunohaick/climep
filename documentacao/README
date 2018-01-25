@@ -1,0 +1,25 @@
+### Performance ###
+
+ * Utilizar as Tags 'async' e 'defer' em tags '<script>'
+
+por Exemplo:
+	<script async defer src='exemplo.js'> </script>
+
+ * comprimir arquivos:
+
+	Esta tarefa deve ser realizada em 2 passos:
+
+	1 - Configurar o apache para permitir a criação de arquivo .htaccess
+
+		Utiliza-se a diretiva AllowOverride com valor All --> 'AllowOverride None'
+
+	2 - Criar um arquivo .htaccess com configurações para comprimir os arquivos com extensões desejadas (.php, .js, .css, .phtml, .html)
+
+	Exemplo:
+
+	<Files *.css>
+		SetOutputFilter DEFLATE
+	</Files>
+
+	O arquivo htaccess deste projeto se encontra neste mesmo diretório (documentacao), deve-se mv o mesmo para a pasta raíz com o nome '.htaccess'.
+

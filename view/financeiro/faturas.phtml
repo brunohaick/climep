@@ -1,0 +1,608 @@
+<link type="text/css" rel="stylesheet" href="view/financeiro/css/index.css" />
+<link type="text/css" rel="stylesheet" href="view/financeiro/css/bootstrap-editable.css" />
+<script  src="view/financeiro/js/bootstrap-editable.min.js" ></script>
+<div id="faturaconsultarduplicatas" class="row-fluid">
+    <script async defer language="javascript" src="view/financeiro/js/fatura.js"></script>
+    <div class="row-fluid">
+        <h2 class="titulo">CTREC - Consulta Fatura </h2>
+        <hr style="margin-top: -5px;">
+        <p style="margin-left: 15px;">
+            Preencha os campos abaixo e clique em<b> 'Localizar'</b> para iniciar a pesquisa na base de dados. Clique em <b>'Novo'</b> para inclusão.
+        </p>
+    </div>
+    <div class="row-fluid">
+        <fieldset class="table-bordered">
+<!--            <div class="row-fluid">
+                <div class="span2">
+                    <label>Tipo de Cliente:</label>
+                </div>
+                <div class="span4">
+                    <select name="fatura-dup-tipo_cliente">
+						<option value="00"> TODOS </option>
+						<?php
+						$clientes = buscaNomeTipoClientesCnpj();
+						foreach ($clientes as $cliente) {
+							?>
+							<option value="<?php echo $cliente['id']; ?>"> <?php echo $cliente['nome']; ?> </option>
+							<?php
+						}
+						?>
+                    </select>
+                </div>
+            </div>-->
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Cliente:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('cliente','consulta_fatura');" name="fatura-dup-cod_cliente" />
+                </div>
+                <div class="span5">
+                    <input type="text" name="fatura-dup-cliente" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Empresa:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('empresa','consulta_fatura');" name="fatura-dup-cod_empresa" />
+                </div>
+                <div class="span5">
+                    <input type="text" name="fatura-dup-empresa" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>TipoDoc:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('tipoDoc','consulta_fatura');" name="fatura-dup-cod_tipoDoc"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="fatura-dup-tipoDoc" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Moeda:</label>
+                </div>
+                <div class="span3">
+                    <select name="fatura-dup-moeda">
+                        <option value="0" > TODAS </option>
+                        <?php
+                        $moedas = buscaTodasMoedas();
+                        foreach ($moedas as $moeda) {
+                            ?>
+                            <option value="<?php echo $moeda['id']; ?>"> <?php echo $moeda['nome']; ?> </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Status:</label>
+                </div>
+                <div class="span3">
+                    <select name="fatura-dup-status">
+                        <option value="0" > TODOS </option>
+                        <?php
+                        $statusConsultaDup = buscaTodosStatusDuplicata();
+                        foreach ($statusConsultaDup as $statusConsulta) {
+                            ?>
+                            <option value="<?php echo $statusConsulta['id']; ?>"> <?php echo $statusConsulta['nome']; ?> </option>
+                            <?php
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Selecionado Por:</label>
+                </div>
+                <div class="span3">
+                    <select name="fatura-dup-selecionado_por">
+                        <option value="1" > DATA DE LANCAMENTO</option>
+                        <option value="2" > DATA DE EMISSAO </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>De:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" name="fatura-dup-data_inicio"/>
+                </div>
+                <div class="span1">
+                    <label>Até:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" name="fatura-dup-data_fim"/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Ordenado Por:</label>
+                </div>
+                <div class="span3">
+                    <select name="fatura-dup-ordenado_por">
+                        <option value="1" > NOME CLIENTE </option>
+                        <option value="2" > LOJA </option>
+                        <option value="3" > TIPO DOCUMENTO </option>
+                        <option value="4" > DATA DE LANCAMENTO </option>
+                        <option value="5" > DATA DE EMISSAO </option>
+                        <option value="6" > MOEDA </option>
+                        <option value="7" > BANCO </option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row-fluid">
+                <div class="span4">
+                    <label>
+<!--                        <input type="checkbox" name="" />
+                        Somente Parcelas de Duplicatas sem Notas-->
+                    </label>
+                </div>
+                <div class="offset4">
+                    <a href="#" class="btn" onclick="cleanFormConsultaFaturas();"> Limpar </a>
+                    <a href="#" class="btn" onclick="novaFatura();"><i class="icon-plus-sign"></i> Novo (F.S.N) </a>
+                    <a href="#" class="btn" onclick="criaListaConsultaFaturas();" ><i class="icon-search"></i> Localizar </a>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<!-- CTREC - Lançamento de Fatura Sem Nota -->
+<div class="row-fluid" id="faturasemnota" style="display: none;">
+    <div class="row-fluid">
+        <h2 class="titulo">CTREC - Lançamento de Fatura Sem Nota </h2>
+        <hr style="margin-top: -5px;">
+        <p style="margin-left: 15px;">
+            Preencha todos os campos corretamente e clique em <b>'Avançar'</b> para incluir um novo registro.
+        </p>
+    </div>
+    <div class="row-fluid">
+        <fieldset class="table-bordered">
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Número da Fatura:</label>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-num_fatura" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Tipo de Cliente:</label>
+                </div>
+                <div class="span4">
+                    <select name="insere-fatura-tipo_cliente">
+						<?php
+						$clientes = buscaNomeTipoClientesCnpj();
+						foreach ($clientes as $cliente) {
+							?>
+							<option value="<?php echo $cliente['id']; ?>"> <?php echo $cliente['nome']; ?> </option>
+							<?php
+						}
+						?>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Cliente:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('cliente','insere_fatura');" name="insere-fatura-cod_cliente"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-cliente" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Empresa:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('empresa','insere_fatura');" name="insere-fatura-cod_empresa"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-empresa" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Tipo documento:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('tipoDoc','insere_fatura');" name="insere-fatura-cod_tipoDoc"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-tipoDoc" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Banco:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('banco','insere_fatura');" name="insere-fatura-cod_banco"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-banco" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Moeda:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('moeda','insere_fatura');" name="insere-fatura-cod_moeda" value="1"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-moeda" value="REAL"/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Plano de Contas:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" onchange="buscaFaturaPorCodigo('plano_contas','insere_fatura');" name="insere-fatura-cod_plano_contas"/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="insere-fatura-plano_contas" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Valor:</label>
+                </div>
+                <div class="span2">
+                    <input type="text" onKeyPress="return(MascaraMoeda(this,'.',',',event))" name="insere-fatura-valor"/>
+                </div>
+                <div class="span2">
+                    <label>Data Emissão:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" name="insere-fatura-data_emissao"/>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Nº Parcelas:</label>
+                </div>
+                <div class="span2">
+                    <input type="text" name="insere-fatura-num_parcelas"/>
+                </div>
+                <div class="span2">
+                    <label>Intervalo Parcelas:</label>
+                </div>
+                <div class="span2">
+                    <input type="text" name="insere-fatura-intervalo_parcelas">
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Vencimento :</label>
+                </div>
+                <div class="span2">
+                    <input type="text" data-mask="99/99/9999" name="insere-fatura-data_vencimento" />
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Observação :</label>
+                </div>
+                <div class="span6">
+                    <textarea name="insere-fatura-obs"> </textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row-fluid">
+				<div class="offset6">
+					<a href="#" class="btn" onclick="cleanFormInsereFaturas();"> Limpar </a>
+					<a href="#" class="btn" onclick="novaFaturaVolta();"><i class="icon-circle-arrow-left"></i> Voltar </a>
+					<a href="#" class="btn" onclick="criaListaFaturas();" > Avançar <i class="icon-circle-arrow-right"></i> </a>
+				</div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="row-fluid" id="filtromovimentofinc" style="display: none;">
+    <div class="row-fluid">
+        <h2 class="titulo">Filtro de Movimento Financeiro </h2>
+        <hr style="margin-top: -5px;">
+
+    </div>
+    <div class="row-fluid">
+        <fieldset class="table-bordered">
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Conta Corrente:</label>
+                </div>
+                <div class="span5">
+                    <select>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>De:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" name=""/>
+                </div>
+                <div class="span1">
+                    <label>Até:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" name=""/>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row-fluid">
+                <div class="span4">
+                    <label>
+                        <input type="checkbox">
+                        Somente laçamento do usuário
+
+                    </label>
+                </div>
+
+                <div class="offset6">
+                    <a href="#" class="btn" onclick=""><i class="icon-remove-circle"></i> Fechar </a>
+                    <a href="#" class="btn" > Avançar <i class="icon-circle-arrow-right"></i> </a>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <span>
+                    <b>
+                        Montando visualização
+                    </b>
+                </span>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+
+<div class="row-fluid" id="lancarfatura" style="display: none;" >
+    <div class="row-fluid">
+        <h2 class="titulo">FLCX - Lançamentos  </h2>
+        <hr style="margin-top: -5px;">
+        <p style="margin-left: 15px;">
+            Preencha todos os campos abaixo informando que Conta Corrente será usada para efetuar a operação, e clique em  <b>'Avançar'</b> para incluir um novo registro.
+        </p>
+    </div>
+    <div class="row-fluid">
+        <fieldset class="table-bordered">
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Data Operação:</label>
+                </div>
+                <div class="span5">
+                    <input type="text"  data-mask="99/99/9999" name="" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Conta Corrente:</label>
+                </div>
+                <div class="span2">
+                    <input type="text" name=""/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="" />
+                </div>
+            </div>
+
+
+            <div class="row-fluid">
+                <fieldset class="table-bordered">
+                    <legend>Dados adicionais</legend>
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <label>Banco / Agência:</label>
+                        </div>
+                        <div class="span4">
+                            <span><b><i>CLIMEP / CLIMEP</i></b></span>
+                        </div>
+
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <label>Saldo Disponível/ Indisp:</label>
+                        </div>
+                        <div class="span4">
+                            <span><b><i>R$ 1.078.195.41 / R$ 0,00</i></b></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <br>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Tipo de Operação:</label>
+                </div>
+                <div class="span2">
+                    <input type="text" name=""/>
+                </div>
+                <div class="span5">
+                    <input type="text" name="" />
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>N. Documento:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" name=""/>
+                </div>
+                <div class="span2">
+                    <label> Compensação:</label>
+                </div>
+                <div class="span4">
+                    <span><b><i>21 / 02 / 2013</i></b></span>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Valor:</label>
+                </div>
+                <div class="span2">
+                    <input type="text" name=""/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label> Observação:</label>
+                </div>
+                <div class="span8">
+                    <input type="text" name=""/>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row-fluid">
+
+                <div class="offset6">
+                    <a href="#" class="btn" onclick="voltarconsultaFatura();"><i class="icon-circle-arrow-left"></i> Voltar </a>
+                    <a href="#" class="btn" > Avançar <i class="icon-circle-arrow-right"></i> </a>
+                </div>
+            </div>
+    </div>
+</fieldset>
+</div>
+
+<div class="row-fluid" id="tabelafaturas" style="display: none;">
+    <div class="row-fluid">
+        <h2 class="titulo">CTREC - Lançamento de Fatura Sem Nota </h2>
+        <hr style="margin-top: -5px;">
+    </div>
+	<div class="row-fluid">
+		<fieldset class="table-bordered">
+			<legend>
+				<b>Vencimentos</b>
+			</legend>
+			<div id="tabelafaturasscroll" >
+				<table class="table table-condensed table-bordered table-striped">
+					<thead>
+						<tr>
+							<th> Parcela</th>
+							<th> Vencimento</th>
+							<th> Moeda</th>
+							<th> Valor</th>
+							<th> Status</th>
+						</tr>
+					</thead>
+
+					<tbody id="insere-fatura-lista_parcelas" style="width: 200px;" > </tbody>
+				</table>
+			</div>
+		</fieldset>
+	</div>
+    <br>
+	<div class="offset7">
+		<a href="#" onclick="voltaInsereFatura();" class="btn"><i class="icon-circle-arrow-left"></i> Voltar</a>
+		<a href="#" onclick="insereFaturas();" class="btn"><i class="icon-ok"></i> Concluir</a>
+	</div>
+</div>
+
+<!-- ================= FIM ==================-->
+<div id="localizarfatura" class="row-fluid" style="display: none">
+    <div class="row-fluid">
+        <h2 class="titulo">CTREC - Consulta Fatura </h2>
+        <hr style="margin-top: -5px;">
+    </div>
+    <div class="row-fluid">
+        <div class=" span3" style="margin-left: 10px;">
+            <a href="#" onclick="voltarConsultaFatura()" class="btn"><i class="icon-circle-arrow-left"></i> Voltar</a>
+            <a href="#" onclick="imprimeFatura()" class="btn"><i class="icon-print"></i> Imprimir</a>
+        </div>
+        <fieldset class="table-bordered">
+            <div class="row-fluid" id="tabelaconsultafatura">
+                <table class="tablebigfinanceiro table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th> STATUS </th>
+                            <th> TIPO </th>
+                            <th> FATURA </th>
+                            <th> CLIENTE </th>
+                            <th> EMPRESA </th>
+                            <th> LANCAMENTO </th>
+                            <th> EMISSÃO </th>
+                            <th> VALOR </th>
+                            <th> MOEDA </th>
+                            <th> BANCO </th>
+                            <th> TIPO DOCUMENTO </th>
+                            <th> PLANO CONTAS </th>
+                            <th> DATA U. BAIXA </th>
+                            <th> USUÁRIO </th>
+                            <th> DATA ALT. </th>
+                            <th> USUARIO ALT. </th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="fatura-dup-lista_parcelas" > </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+
+    function editacampoblur(field) {
+
+        var text = field.val();
+        var id = field.attr('id');
+
+        if(text == ""){
+            alert("Campo em branco");
+        } else {
+            field.parent().html('<span id='+id+'  onclick="editacampo($(this))">'+text+'</span>');
+
+            var datastring = "Texto="+text;
+            alert("Campo Alterado");
+//            $.ajax({
+//                type: "POST",
+//                url: "A URL para atualizar o projeto",
+//                data: datastring,
+//                dataType: "json",
+//                success: function(json){
+//
+//                }
+//            });
+        }
+    }
+
+    function editacampo(field) {
+        var text = $.trim(field.text());
+        var id = field.attr('id');
+        var inputbox = "<input id='"+id+"' style='width: 150px;' type='text' onblur='editacampoblur($(this))' value=\""+text+"\"/>";
+        field.parent().html(inputbox);
+        $("input#"+id).focus();
+    }
+
+</script>

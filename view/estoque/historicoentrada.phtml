@@ -1,0 +1,186 @@
+<script async defer src="view/estoque/js/index.js"></script> 
+<script async defer src="template/js/bootstrap-datepicker.js"></script>
+<script async defer src="template/js/maskedinput.js" ></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+<div >
+    <h2 class="titulo">ENFC - Consulta Nota Fiscal Cadastrada</h2>
+    <fieldset class="table-bordered">
+        <div class="row-fluid">
+
+            <div class="row-fluid">
+                <fieldset class=" table-bordered">
+                    <legend> Dados para Pesquisa</legend>
+                    <div class="row-fluid">
+                        <div class="span1">
+                            <label>
+                                Fornecedor:
+                            </label>
+                        </div>
+                        <div class="span2" style="padding-left: 10px;">
+                            <input type="text" name="" id="hist-entrada-fornecedor" placeholder="CÓDIGO" onchange="buscaFornecedor2()" />
+                        </div>
+
+						<input type='hidden' id = 'hiddenRowId' value = '0' >
+                        <div class="span6" style="padding-left: 10px;">
+                            <select id="hist-entrada-fornecedor-select" name="hist-entrada-fornecedor-select" onchange="buscaCodFornecedor2()" >
+                                <option></option>
+                                <option value="0">TODOS</option>
+                                <?php
+                                foreach (buscaFornecedores() as $fornecedor) {
+                                    ?>
+                                    <option value="<?php echo $fornecedor['id']; ?>" >
+                                        <?php echo $fornecedor['nome']; ?>
+                                    </option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="row-fluid">
+                         <div class="span1">
+                             <label>
+                                 Empresa
+                             </label>
+                         </div>
+                         <div class="span4" style="padding-left: 10px;">
+                             <input type="text" name="" />
+                         </div>
+
+                         <div class="span6" style="padding-left: 10px;">
+                             <input type="text" name="" />
+                         </div>
+                     </div>-->
+                    <div class="row-fluid">
+                        <div class="span3" >
+                            <label>
+                                Ordenado Por :
+                            </label>
+                            <select id="hist-entrada-ordenado-select" name="hist-entrada-ordenado-select">
+                                <option value="1">ENTRADA</option>
+                                <option value="2">EMISSÃO, FORNECEDOR</option>
+                                <option value="3">FORNECEDOR, NOTA FISCAL</option>
+                                <option value="4">NOTA FISCAL, ENTRADA</option>
+                            </select>
+                        </div>
+                        <div class="span3" >
+                            <label>
+                                Inicial :
+                            </label>
+                            <input type="text" name="hist-entrada-data-inicio" id="hist-entrada-data-inicio" />
+                        </div>
+                        <div class="span3" >
+                            <label>
+                                Fim :
+                            </label>
+                            <input type="text" name="hist-entrada-data-fim" id = "hist-entrada-data-fim" />
+                        </div>
+                    </div><br>
+                    <!--        <div class="row-fluid">
+
+                                <div class="span5" >
+                                    <label>
+                                        Ordenado Por:
+                                    </label>
+                                    <select>
+                                        <option></option>
+                                        <option></option>
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                            </div>      -->
+                </fieldset><br>
+                <div class="row-fluid">
+                    <fieldset class="table-bordered-enc"> 
+                        <div class="span4"></div>
+                        <div class="span4 pull-right">
+                            <a href="#" class="btn " onclick='histEntradaNF()' ><i class=" icon-search"></i> Consultar</a>
+
+                            <a href="#" class="btn"><i class=" icon-remove"></i> Fechar</a>
+                        </div>
+                    </fieldset> 
+                </div>
+            </div>
+    </fieldset><br><br>
+    <div id="teste">
+    </div>
+    <div id="boxes-historicoentrada" class="modal hide fade" style="margin: -250px 0 0 -420px; width: 1000px; top: 40%; left: 45%; top: 40%;">
+        <div id="dialog-certificado-imu" class="modal-body " style=" width:950px; max-height: 1800px;"  >
+            <div id=""><a href="#" id="fechar" class="close" />Fechar X</a>
+                <h2 class="titulo">Resultados</h2>
+                <hr style="margin-top: -4px;"/>
+                <h4>Notas Fiscais Digitadas: </h4>
+                <!--<fieldset class=" table-bordered">-->
+                <div class="row-fluid">
+                    <div class="span12"> 
+						<div style="height:140px;overflow:auto" id="" class="row-fluid">
+							<table cellspacing='5' align="center" class="table-striped table-modfy" id="">
+								<thead>
+									<tr class="white">
+										<th align="center">Excluir</th>
+										<th align="center">Nota Fiscal</th>
+										<th align="center">Fornecedor</th>
+										<th align="center">Valor</th>
+										<th align="center">Emissão</th>
+										<th align="center">Entrada</th>
+										<th align="center">Local</th>
+									</tr>
+								</thead>
+								<tbody id="notas-fiscais-digitadas">
+								</tbody>
+							</table>
+						</div>
+                    </div>
+                </div>
+                <!--</fieldset>-->
+                <hr>
+                <h4> Itens da Nota Fiscal: </h4>
+
+                <div class="row-fluid">
+                    <div class="span9">
+						<div style="height:140px;overflow:auto" id="" class="row-fluid">
+							<table align="center" class="table-striped table-modfy" id="" >
+								<thead>
+									<tr class="white">
+										<th align="center">Item</th>
+										<th align="center">Qtd</th>
+										<th align="center">Validade</th>
+										<th align="center">Lote</th>
+										<th align="center">Valor</th>
+										<th align="center">Valor da Compra</th>
+									</tr>
+								</thead>
+								<tbody id="itens-nota-fiscal" >
+								</tbody>
+							</table>
+						</div>
+                    </div>
+                    <div class="span3">
+                        <table  align="center" class="table-modfy table-striped" id="" >
+                            <thead>
+                                <tr class="white">
+                                    <th align="center">Operação</th>
+                                    <th align="center">Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr>
+                                    <th>Saldo Atual</th> 
+                                    <th align="center" id="item-saldo-atual"> </th> 
+                                </tr>
+                                <tr>
+                                    <th>Consumo até Hoje</th> 
+                                    <th align="center" id="item-consumo"> </th> 
+                                </tr>
+                                <tr>
+                                    <th>Média do Mês</th> 
+                                    <th align="center" id="item-media-mes"> </th> 
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

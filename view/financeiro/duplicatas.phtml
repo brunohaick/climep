@@ -1,0 +1,428 @@
+<link type="text/css" rel="stylesheet" href="view/financeiro/css/index.css"/>
+<!-- Tela CTPG - Consultar Duplicata-->
+<div class="row-fluid">
+    <div id="consultarduplicatas" >
+        <script async defer language="javascript" src="view/financeiro/js/duplicatas.js"></script>
+		<script async defer src="view/js/utils.js"></script>
+        <div class="row-fluid">
+            <h2 class="titulo">CTPG - Consulta Duplicata </h2>
+            <hr style="margin-top: -5px;">
+            <p style="margin-left: 15px;">
+                Preencha os campos abaixo e clique em<b> 'Localizar'</b> para iniciar a pesquisa na base de dados. Clique em <b>'Novo'</b> para inclusão.
+            </p>
+        </div>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Fornecedor:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('fornecedor', 'consulta');" name="consulta-dup-cod_fornecedor" />
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="consulta-dup-fornecedor" />
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Empresa:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('empresa', 'consulta');" name="consulta-dup-cod_empresa" />
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="consulta-dup-empresa" />
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>TipoDoc:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('tipoDoc', 'consulta');" name="consulta-dup-cod_tipoDoc"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="consulta-dup-tipoDoc" />
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Moeda:</label>
+                    </div>
+                    <div class="span3">
+                        <select name="consulta-dup-moeda">
+                            <option value="0" > TODOS </option>
+							<?php
+							$moedas = buscaTodasMoedas();
+							foreach ($moedas as $moeda) {
+								?>
+								<option value="<?php echo $moeda['id']; ?>"> <?php echo $moeda['nome']; ?> </option>
+								<?php
+							}
+							?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Status:</label>
+                    </div>
+                    <div class="span3">
+                        <select name="consulta-dup-status">
+                            <option value="0" > TODOS </option>
+							<?php
+							$statusConsultaDup = buscaTodosStatusDuplicata();
+							foreach ($statusConsultaDup as $statusConsulta) {
+								?>
+								<option value="<?php echo $statusConsulta['id']; ?>"> <?php echo $statusConsulta['nome']; ?> </option>
+								<?php
+							}
+							?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Selecionado Por:</label>
+                    </div>
+                    <div class="span3">
+                        <select name="consulta-dup-selecionado_por">
+                            <option value="1" > DATA DE LANCAMENTO</option>
+                            <option value="2" > DATA DE EMISSAO </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>De:</label>
+                    </div>
+                    <div class="span2">
+                        <input data-mask="99/99/9999" type="text" name="consulta-dup-data_inicio"/>
+                    </div>
+                    <div class="span1">
+                        <label>Até:</label>
+                    </div>
+                    <div class="span2">
+                        <input data-mask="99/99/9999" type="text" name="consulta-dup-data_fim"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Ordenado Por:</label>
+                    </div>
+                    <div class="span3">
+                        <select name="consulta-dup-ordenado_por">
+                            <option value="1" > FORNECEDOR </option>
+                            <option value="2" > LOJA </option>
+                            <option value="3" > DATA DE LANCAMENTO </option>
+                            <option value="4" > DATA DE EMISSAO </option>
+                            <option value="5" > MOEDA </option>
+                            <option value="6" > BANCO </option>
+                            <option value="7" > DATA DA ULTIMA BAIXA </option>
+                            <option value="8" > STATUS </option>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <!-- <label>
+                            <input type="checkbox" name="" />
+                            Somente Duplicatas sem Notas
+                        </label>-->
+                    </div>
+                    <div class="offset5">
+                        <a href="#" class="btn" onclick="cleanFormConsultaDuplicatas();"> Limpar </a>
+                        <a href="#" class="btn" onclick="novoDuplicataAvancar();"><i class="icon-plus-sign"></i> Novo (D.S.N) </a>
+                        <a href="#" class="btn" onclick="criaListaConsultaDuplicatas();"><i class="icon-search"></i> Localizar </a>
+                    </div>
+                </div>
+            </fieldset>
+        </div><br>
+    </div>
+    <!-- =================== Fim ============================-->
+
+    <!-- Tela CTPG - Lançamento de Duplicatas sem Nota-->
+    <div id="lacamentoduplicata" style="display: none">
+        <div class="row-fluid">
+            <h2 class="titulo">CTPG - Lançamento de Duplicatas sem Nota </h2>
+            <hr style="margin-top: -5px;">
+            <p style="margin-left: 15px;">
+                Preencha os campos abaixo e clique em<b> 'Avançar'</b> Para inserir os dados na base de dados.
+            </p>
+        </div>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Duplicata/Nota Fis:</label>
+                    </div>
+                    <div class="span3">
+                        <input type="text" name="insere-dup-numero_dup"/>
+                    </div>
+                    <div class="span3">
+                        <input type="text" name="insere-dup-numero_nota"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Fornecedor:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigoFornecedor();" name="insere-dup-cod_fornecedor"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" onblur="buscaPlanoContas();" id="insere-dup-fornecedor" name="insere-dup-fornecedor"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Empresa:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('empresa', 'insere');" name="insere-dup-cod_empresa"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="insere-dup-empresa"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>TipoDoc:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('tipoDoc', 'insere');" name="insere-dup-cod_tipoDoc"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="insere-dup-tipoDoc"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Banco:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('banco', 'insere');" name="insere-dup-cod_banco"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="insere-dup-banco"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Moeda:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('moeda', 'insere');" name="insere-dup-cod_moeda" value="1"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="insere-dup-moeda" value="REAL"/>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Plano de Contas:</label>
+                    </div>
+                    <div class="span1">
+                        <input type="text" onchange="buscaPorCodigo('plano_contas', 'insere');" name="insere-dup-cod_plano_contas"/>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="insere-dup-plano_contas" >
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Código de Barras:</label>
+                    </div>
+                    <div class="span5">
+                        <input type="text" name="insere-dup-cod_barras"/>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Valor:</label>
+                    </div>
+                    <div class="span2">
+                        <input type="text" onKeyPress="return(MascaraMoeda(this, '.', ',', event))" name="insere-dup-valor"/>
+                    </div>
+                    <div class="span2">
+                        <label>Data Emissão:</label>
+                    </div>
+                    <div class="span2">
+                        <input type="text" data-mask="99/99/9999" name="insere-dup-data_emissao"/>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Nº Parcelas:</label>
+                    </div>
+                    <div class="span2">
+                        <input type="text" name="insere-dup-num_parcelas"/>
+                    </div>
+                    <div class="span2">
+                        <label>Intervalo Parcelas:</label>
+                    </div>
+                    <div class="span2">
+                        <input type="text" name="insere-dup-intervalo_parcelas"/>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Vencimento:</label>
+                    </div>
+                    <div class="span2">
+                        <input type="text" data-mask="99/99/9999" name="insere-dup-data_vencimento"/>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Observação: </label>
+                    </div>
+                    <div class="span6">
+                        <textarea name="insere-dup-obs"> </textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="row-fluid">
+                    <div class="offset5">
+                        <a href="#" class="btn" onclick="cleanFormInsereDuplicatas();"> Limpar </a>
+                        <a href="#" class="btn" onclick="novoDuplicataVoltar();"><i class="icon-circle-arrow-left"></i> Voltar </a>
+                        <a href="#" class="btn" onclick="criaListaDuplicatas();"> Avançar <i class="icon-circle-arrow-right"></i></a>
+                    </div>
+                </div>
+            </fieldset>
+        </div><br>
+    </div>
+    <!-- ================= FIM ==================-->
+    <!-- CTPG - Lançamento de Duplicatas sem Nota -->
+    <div id="lacamentosemnota" style="display: none;" >
+        <div class="row-fluid">
+            <h2 class="titulo">CTPG - Lançamento de Duplicatas sem Nota </h2>
+            <hr  style="margin-top: -5px;">
+        </div>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <div class="row-fluid"> </div>
+                <hr><br>
+                <div class="row-fluid">
+                    <div class="row-fluid">
+                        <fieldset class="table-bordered">
+                            <legend>
+                                <b>Vencimentos</b>
+                            </legend>
+                            <div class="row-fluid" id="tabelalacamentosemnota">
+                                <table class="table table-condensed table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th> Parcela</th>
+                                            <th> Vencimento</th>
+                                            <th> Moeda</th>
+                                            <th> Valor</th>
+                                            <th> Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="insere-dup-lista_parcelas" > </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </div><hr>
+
+                    <div class="offset7">
+                        <a href="#" onclick="voltarInsereDuplicata();" class="btn"><i class="icon-circle-arrow-left"></i> Voltar</a>
+                        <a href="#" onclick="insereDuplicatas();" class="btn"><i class="icon-ok"></i> Concluir</a>
+                    </div>
+                </div>
+            </fieldset>
+        </div><br>
+    </div>
+</div>
+
+<!-- ================= FIM ==================-->
+<div id="duplicataslocalizar" class="row-fluid" style="display: none">
+    <div class="row-fluid">
+        <h2 class="titulo">CTPG - Consulta Duplicata </h2>
+        <hr style="margin-top: -5px;">
+    </div>
+    <div class="row-fluid">
+        <div class=" span3" style="margin-left: 10px;">
+            <a href="#" onclick="voltarConsultaDuplicata()" class="btn"><i class="icon-circle-arrow-left"></i> Voltar</a>
+            <a href="#" onclick="imprimirDuplicatas()" class="btn"><i class="icon-print"></i> Imprimir</a>
+        </div>
+        <fieldset class="table-bordered">
+            <div class="row-fluid" id="tabelaconsultaduplicata">
+                <table class="">
+                    <thead>
+                        <tr>
+                            <th> STATUS </th>
+                            <th> TIPO </th>
+                            <th> DUPLICATA </th>
+                            <th> FORNECEDOR </th>
+                            <th> EMPRESA </th>
+                            <th> LANCAMENTO </th>
+                            <th> EMISSÃO </th>
+                            <th> VALOR </th>
+                            <th> (%) </th>
+                            <th> MOEDA </th>
+                            <th> BANCO </th>
+                            <th> TIPO DOCUMENTO </th>
+                            <th> PLANO CONTAS </th>
+                            <th> USUÁRIO </th>
+                            <th> DATA U. BAIXA </th>
+                            <th> USUARIO ALT. </th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="consulta-dup-lista_parcelas"> </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="pesquisar_duplicata" class="modal-pesduplicata hide fade">
+    <div id="dialog-pesduplicata" class=" modal-body-pesduplicata" style=" background-image: url('template/img/body-bg.png');">
+        <div id=""><a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo">Pesquisar Duplicata</h2>
+            <hr style="margin-top: -4px;"/>
+            <div class="row-fluid">
+                <fieldset class="table-bordered">
+                    <!-- <legend style="font-size: 10px;">1 Registro(s) para pesquisa</legend> -->
+                    <div class="row-fluid" id="tabelapesquisar_duplicata">
+                        <table class="table table-condensed table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th> PARCELA </th>
+                                    <th> VENCIMENTO </th>
+                                    <th> VALOR </th>
+                                    <th> MULTA </th>
+                                    <th> JUROS </th>
+                                    <th> DESCONTO </th>
+                                    <th> VALOR_PAGO </th>
+                                    <th> TOTAL_PAGAR </th>
+                                    <th> STATUS </th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="consulta-dup-lista_parcelas_modal"> </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+                <br>
+                <div class="offset11">
+                    <ul class="thumbnails">
+                        <li>
+                            <a href="#" class="btn span12" onclick="fechar_modal('pesquisar_duplicata');" id="pesduplicata-consulta-gravar" ><i class="icon-remove"></i> Fechar </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+
+/*.table-modify tbody tr:nth-child(odd){color: #808087; background-color: #D3D6FF;}.table-modify tbody tr:nth-child(even){color: #808087;	background-color: #FFFFFF}  .pagination a { color:#0088CF !important;}*/
+.well-fichaespera{
+	
+ min-height: 20px;
+    
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+
+.table-th{
+ width:30px !important; max-width: 30px !important;word-wrap: break-word !important;
+}
+.table-th-usuario{
+	 width:20px !important; max-width: 30px !important;word-wrap: break-word !important;
+}
+.table-th-paciente{
+max-width: 190px !important;word-wrap: break-word !important;	
+width: 20px !important;
+}
+
+.red{
+    color: rgb(255,0,0);
+}

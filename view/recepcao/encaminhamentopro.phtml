@@ -1,0 +1,547 @@
+<link type="text/css"rel="stylesheet" href="view/recepcao/css/index.css" />
+<!--<script async defer src="view/recepcao/js/index.js"></script>-->
+<script async defer src="view/recepcao/js/filtroSelects.js"></script>
+<script async defer src="view/recepcao/js/pesquisaCliente-procedimento.js"></script>
+<script async defer src="view/recepcao/js/insere-procedimento.js"></script>
+<script async defer src="view/recepcao/js/guia-tiss.js"></script>
+
+<div class="row-fluid">
+	<div class="span7">
+		<h2 class="titulo">Encaminhamento de Procedimentos</h2>
+	</div><br/>
+	<div class="span5">
+		<a class="btn btn-mini" id="btn-inserir-pro" type="button" name="gravar" onclick="Pesquisa(function(resultado){$('input#proc-matricula').val(resultado['matricula']);buscaMembros();}, true);" /><b>Procurar <br/> Cliente</b></a>
+		<a class="btn btn-mini" id="btn-inserir-pro" type="button" name="gravar" onclick="listaProcedimentos();" /><b>Inserir Procedimento</b></a>
+	</div>
+</div>
+
+<div class="row-fluid" id="header-enc" >
+	<fieldset class="table-bordered-enc">
+		<div class="span4">
+			<fieldset class=" table-bordered" id="" >
+				<legend>Seleção do Médico</legend>
+				<div class="row-fluid">
+					<div class="span4">
+						<label>Médico :</label>
+					</div>
+					<div class="span8">
+						<select id="proc-tiss-medico_id" name="proc-tiss-medico_id" >
+							<?php foreach(buscaTodosMedicos() as $medico) { ?>
+								<option value="<?php echo $medico['medico_id']; ?>"><?php echo $medico['nome']; ?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<label>Matricula :</label>
+					</div>
+					<div class="span7">
+						<input type="text" class="" value="1" id="proc-matricula" name="proc-tiss-matricula_id" >
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<label> Convênio :</label>
+					</div>
+					<div id="convenio" class="span8">
+						<select id="proc-tiss-convenio_id" name='proc-tiss-convenio_id' onchange="filtraTabela();">
+							<?php 
+							$lista_conv_tiss = buscaConvenio();
+							if(!empty($lista_conv_tiss)) {
+								foreach($lista_conv_tiss as $convenio) { 
+								?>
+									<option value="<?php echo $convenio['id']; ?>"><?php echo $convenio['nome']; ?></option>
+								<?php
+								}
+							}
+							?>
+						</select>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<label> Tabela :</label>
+					</div>
+					<div id="tabela" class="span8">
+						<select id="proc-tiss-tabela_id" name='proc-tiss-tabela_id' onchange="filtraConvenio();">
+							<?php foreach(buscaTabela() as $tabela) { ?>
+								<option value="<?php echo $tabela['id']; ?>"><?php echo $tabela['nome']; ?></option>
+							<?php } ?>
+						</select>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4">
+						<label> Tipo de Procedimento:</label>
+					</div>
+
+					<div class="span4">
+						<input type="radio" value="Consulta" name="proc-tiss-tipo">
+						Consulta
+					</div>
+
+					<div class="span4">
+						<input type="radio" value="Exame" name="proc-tiss-tipo" checked="checked">
+						Exame
+					</div>
+				</div>
+			</fieldset>
+		</div>
+		<div class="span8">
+			<fieldset class="table-bordered" id="flst-enc">
+				<legend>Listagem de Membros da família </legend>
+				<div class="row-fluid" style="height:150px; overflow: auto;">
+					<table class="table-modify table-bordered" >
+						<thead>
+							<tr class="white">
+								<th align="center"> Sel </th>
+								<th align="center"> Membro</th>
+								<th align="center"> Nome </th>
+								<th align="center"> Idade </th>
+							</tr>
+						</thead>
+						<tbody id="tabela-membros">
+						</tbody>
+					</table>
+				</div>
+			</fieldset>
+		</div>
+	</fieldset>
+</div><br>
+
+<div style="height:300px;">
+	<fieldset class="table-bordered" style="height:290px;">
+		<legend>Listagem de Procedimentos</legend>
+		<div style="height:270px; overflow: auto;">
+			<table class="table table-bordered">
+				<thead>
+					<tr class="white">
+						<th align="center"> Cód. Oficial</th>
+						<th align="center"> Procedimento </th>
+						<th align="center"> Qtd </th>
+						<th align="center"> Valor </th>
+						<th align="center"> Remover</th>
+					</tr>
+				</thead>
+				<input type="hidden" value="0" id="hiddenRowId">
+				<tbody id="proc-tiss-table-proc-append" >
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+</div>
+<!--
+<fieldset class="table-bordered" id="cliente-bloc" >
+    <legend>Cliente Selecionado</legend>
+    <div class="row-fluid">
+        <div ></div>
+    </div>
+</fieldset>
+<div id="tabs" class="tabbable">
+	<ul style="margin-left: 12px;"id="tabsul" class="nav nav-tabs">
+		<li class="active"><a href="#tab1" data-toggle="tab" ><h4 class="active-titulo" style="color: #0088CC;">Listagem de Procedimentos</h4></a></li>
+		<li><a href="#tab2" data-toggle="tab" id="cf"><h4 style="color: #0088CC;">Listagem dos últimos Procedimentos</h4></a></li>
+		<li><a href="#tab3" data-toggle="tab" id="cf"><h4 style="color: #0088CC;">Listagem das últimas Consultas</h4></a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="tab1" style="margin-left: 5px;">
+			<div style="height:230px; overflow: auto;">
+				<fieldset class=" table-bordered" id="flst-enc" >
+					<table class="table-modify table-bordered">
+						<thead>
+							<tr class="white">
+								<th align="center"> Cód. Oficial</th>
+								<th align="center"> Procedimento </th>
+								<th align="center"> Qtd </th>
+								<th align="center"> Valor </th>
+								<th align="center"> Remover</th>
+							</tr>
+						</thead>
+						<input type="hidden" value="0" id="hiddenRowId">
+						<tbody id="proc-tiss-table-proc-append" >
+						</tbody>
+					</table>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="tab-pane" id="tab2" style="margin-left: 5px;">
+			<fieldset class=" table-bordered" id="flst-enc" >
+				<table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" id="" >
+					<thead>
+						<tr class="white">
+							<th align="center"> Cód. Oficial</th>
+							<th align="center"> Procedimento </th>
+							<th align="center"> Qtd </th>
+							<th align="center"> Valor </th>
+						</tr>
+					</thead>
+					<tbody >
+						<?php
+						//foreach(buscaUltimosProcedimentos() as $ultimosProcs) {
+						?>
+							<tr name="table-color" class='dayhead '>
+								<th align="center"><?php //echo $ultimosProcs['codigo']; ?></th>
+								<th align="center"><?php //echo $ultimosProcs['nome']; ?></th>
+								<th align="center"><?php //echo $ultimosProcs['qtd']; ?></th>
+								<th align="center"><?php //echo $ultimosProcs['valor']; ?></th>
+							</tr>
+						<?php
+						//}
+						?>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+		<div class="tab-pane" id="tab3" style="margin-left: 5px;">
+			<fieldset class=" table-bordered" id="flst-enc" >
+				<table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" id="" >
+					<thead>
+						<tr class="white">
+							<th align="center"> Data </th>
+							<th align="center"> Descrição </th>
+						</tr>
+					</thead>
+
+					<tbody >
+						<?php
+						//foreach(buscaUltimasConsultas() as $ultimosProcs) {
+						?>
+							<tr name="table-color" class='dayhead '>
+								<th align="center"><?php //echo converteData($ultimosProcs['data']); ?></th>
+								<th align="center"><?php //echo encurtar($ultimosProcs['texto'],100); ?></th>
+							</tr>
+						<?php
+						//}
+						?>
+					</tbody>
+				</table>
+			</fieldset>
+		</div>
+	</div>
+</div>-->
+
+<div class="row-fluid">
+	<div class="span8">
+		<div class="row-fluid">
+			<div class="span3">
+				<label>Moeda : </label>
+				<select name="moeda-pagamento-procedimento">
+					<?php foreach(listar('forma_pagamento','*') as $forma) { 
+						if($forma['id'] == 7) {
+					?>
+						<option value="<?php echo $forma['id'] ?>" SELECTED><?php echo $forma['nome'] ?></option>
+					<?php 
+						} else { ?>
+						<option value="<?php echo $forma['id'] ?>" ><?php echo $forma['nome'] ?></option>
+				<?php
+						}
+					} ?>
+				</select>
+			</div>
+		<!--
+			<div class="span2">
+				<label>Cpf : </label>
+				<input type="text" data-mask="999-999-999-99" id="proc-cpf" />
+			</div>
+		-->
+			<div class="span3">
+				<label>Valor R$:</label>
+				<input type="text" class="" onKeyPress="return(MascaraMoeda(this, '', '.', event));" id="valor-total-procedimento" name="valor-total-procedimento1" value="0"/>
+			</div>
+			<div class="span3">
+				<label>Nº Guia :</label>
+				<input type="text" class="" id="num_guia-procedimento"/>
+			</div>
+		</div> <br>
+		<div class="row-fluid">
+			<div class="span2">
+				<input class="btn btn-mini span12" onclick="grava_historico_procedimentos();" style="margin-left: 2px;" type="button" name="gravar-proc" value="Gravar" />
+				<input class="btn btn-mini span12" onclick="novo_historico_procedimentos();" style="display: none; margin-left: 2px;" type="button" name="novo-proc" value="Novo" />
+			</div>
+			<div class="span2">
+				<input class="btn btn-mini span12" onclick="modalGuiaTiss();" type="button" name="" value="Guia TISS" />
+			</div>
+
+			<div class="span2">
+				<input class="btn btn-mini span12" onclick="modalEstornoGuiaTiss();" type="button" name="" value="Estorno" />
+			</div>
+
+			<div class="span2">
+				<input class="btn btn-mini span12" onclick="botaoFechar();" type="button" name="" value="Fechar" />
+			</div>
+
+			<div class="span2">
+				<input class="btn btn-mini span12" onclick="encaminha_fila_espera();" type="button" name="" value="Encaminhar" />
+			</div>
+			<div class="span2">
+				<a class="btn btn-mini span12" onclick="abrir_modal('boxe_salaespera');"  >Sala Espera</a>
+			</div>
+		</div>
+	</div>
+	<div class="span4">
+		<div class="row-fluid">
+			<div class="span5">
+				<label>Nº Carteira Unimed:</label>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span5">
+				<input type="text" class="" maxlength=7 id="guia-valida-unimed_879" name="guia-valida-unimed_879"/>
+			</div>
+			<div class="span1">
+			</div>
+			<div class="span3">
+				<input class="btn btn-mini span12" onclick="validaCarteiraUnimed879();" type="button" name="" value="Validar" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--
+<div class="row-fluid">
+	<fieldset class="table-bordered-enc">
+		<div class="span10">
+			<fieldset class="table-bordered">
+				<legend>Forma de Pagamento</legend>
+				<div class="span3">
+					<fieldset class="table-bordered-enc">
+						<div id="valores-bloc">
+						</div>
+					</fieldset>
+				</div>
+
+				<div class="span8">
+					<fieldset class="table-bordered" style="margin-left: 40px;">
+						<legend>Moeda do pagamento</legend>
+						<div class="span9" >
+							<div class="row-fluid">
+								<div class="span4">
+									<label>Moeda : </label>
+									<select name="moeda-pagamento-procedimento">
+										<?php //foreach(listar('forma_pagamento','*') as $forma) { 
+											//if($forma['id'] == 7) {
+										?>
+											<option value="<?php //echo $forma['id'] ?>" SELECTED><?php// echo $forma['nome'] ?></option>
+										<?php 
+											//} else { ?>
+											<option value="<?php //echo $forma['id'] ?>" ><?php// echo $forma['nome'] ?></option>
+									<?php
+											//}
+										//} ?>
+									</select>
+								</div>
+
+								<div class="span4">
+									<label>Cpf : </label>
+									<input type="text" id="proc-cpf" />
+								</div>
+							</div>
+
+							<div class="row-fluid">
+								<div class="span3">
+									<label>Valor R$:</label>
+									<input type="text" class="" id="valor-total-procedimento" name="valor-total-procedimento" value="0"/>
+								</div>
+
+								<div class="span4" style="padding-left: 4px;">
+									<label>Parcela :</label>
+									<input type="text" class="" name="parcelas-pagamento-procedimento" />
+								</div>
+
+								<div class="span4" style="padding-left: 4px;">
+									<label>Nº Guia :</label>
+									<input type="text" class="" id="num_guia-procedimento"/>
+								</div>
+
+							</div>
+							<div class="row-fluid">
+								<div class="span6">
+									<label>
+										<input type="checkbox" class="" name=""/>
+										Usar impressora Térmica
+									</label>
+								</div>
+
+								<div class="span6">
+									<label>
+										<input type="checkbox" class="" name=""/>
+										Nota fiscal Detalhada ?
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="span2" >
+							<fieldset class="table-bordered-enc">
+								<ul class="">
+									<li class="span12 ">
+										<input class="btn btn-mini  btn-mini-enc" id="" type="button" name="gravar-nota" value="Nota Fiscal" />
+									</li>
+
+									<li class="span12 " style="padding-top: 5px;">
+										<input class="btn btn-mini btn-mini-enc" id="" type="button" name="" value="Desconto" />
+									</li>
+								</ul>
+							</fieldset>
+						</div>
+					</fieldset>
+				</div>
+			</fieldset>
+		</div>
+		<div class="span2" id="group-btn-enc-footer" >
+			<ul class="">
+				<li class="span12 ">
+					<input class="btn btn-mini span12" onclick="encaminha_fila_espera(); grava_historico_procedimentos();" style="margin-left: 2px;" type="button" name="gravar-proc" value="Gravar" />
+					<input class="btn btn-mini span12" onclick="novo_historico_procedimentos();" style="display: none; margin-left: 2px;" type="button" name="novo-proc" value="Novo" />
+				</li>
+
+				<li class="span12 ">
+					<input class="btn btn-mini span12" onclick="modalGuiaTiss();" type="button" name="" value="Guia TISS" />
+				</li>
+
+				<li class="span12 ">
+					<input class="btn btn-mini span12" onclick="modalEstornoGuiaTiss();" type="button" name="" value="Estorno" />
+				</li>
+
+				<li class="span12 ">
+					<input class="btn btn-mini span12" onclick="botaoFechar();" type="button" name="" value="Fechar" />
+				</li>
+			</ul>
+		</div>
+	</fieldset>
+</div>
+
+-->
+<!--=================================MODAL INSERIR NOVO PROCEDIMENTO===========================================-->
+
+<div class="modal-ins-pro hide fade" id="proc-tiss-boxes-ins-pro">
+	<div id="proc-tiss-boxes-ins-pro-result">
+	</div>
+</div>
+
+<!--================================  MODAL GUIA TISS====================================================
+==============================================================================================================--> 
+
+<div class="modal-guia-tiss hide fade" id="boxes-guia-tiss" >
+	<div id="boxes-guia-tiss-result">
+	</div>
+</div>
+
+<!--================================  FIM MODAL GUIA TISS ====================================================
+==============================================================================================================--> 
+
+<!--================================  MODAL ESTORNO GUIA TISS====================================================
+==============================================================================================================--> 
+
+<div class="modal-estorno-guia-tiss hide fade" id="boxes-estorno-guia-tiss" >
+	<div id="boxes-estorno-guia-tiss-result">
+	</div>
+</div>
+
+<!--================================  FIM MODAL ESTORNO GUIA TISS ====================================================
+==============================================================================================================--> 
+
+
+<!--================================ MODAL PROCURAR CLIENTE===================================================================
+  ============================================================================================================================ -->
+<?php
+require_once('view/recepcao/modal-procurar.phtml');
+?>
+<!--================================ FIM MODAL PROCURAR CLIENTE ==================================================
+    ============================================================================================================== -->
+
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+<script async defer src="view/estoque/js/index.js"></script>
+<script async defer src="view/recepcao/js/salaEspera.js"></script>
+
+<div id="boxe_salaespera" class="modal modal-sala-espera hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Sala de Espera</h3>
+  </div>
+	<div class="modal-body-sala-espera" >
+	  <div id="form-data-atendimento" >
+	<div class="row-fluid">	
+		<div class="span5" id="estoque-left" >
+			<div class="row-fluid" id="estoque-data">
+				<fieldset class="estoque-data table-bordered" id="flst-estoque-data">
+					<legend>Data</legend>
+					<div class="row-fluid" id="estoque-body">
+						<div class="span5">
+							<label class="nome-text" >Data de Atendimento:
+							</label>
+						</div>
+						<div class="span4">
+							<input id="data-estoque" name="data-atendimento" onChange="carregaData();" type="text" value="<?php echo converteData($data); ?>" />
+							<input id="medico" type="hidden" value="<?php echo $medicoID; ?>" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="row-fluid" id="tabela-estoque-medicos">
+				<fieldset class="flst-estoque table-bordered" id="flst-estoque" >
+					<legend> Médicos</legend>
+					<div class="row-fluid" style="width: 370px;height:450px; overflow: auto; ">
+						<table class="table-modify table-bordered" id="" >
+							<thead>
+								<tr class="white">
+									<th align="center"> CRM </th>
+									<th align="center"> Nome </th>
+									<th align="center"> Consutório </th>
+								</tr>
+							</thead>
+							<tbody >
+								<?php
+									foreach (buscatodosMedicosComConsultorio() as $medico) {
+								?>
+										<tr name="table-color" medicoId="<?php echo $medico['medico_id']; ?>"  ondblclick="carregaHorariosDoMedico($(this));" class='dayhead pointer-cursor'>
+											<th align="center"> <?php echo $medico['crm']; ?> </th>
+											<th align="center"> <?php echo $medico['nome'].' '.$medico['sobrenome']; ?> </th>
+											<th align="center"> <?php echo $medico['consultorio']; ?> </th>
+										</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="span7">
+			<div class="row-fluid">
+				<fieldset class="table-bordered">
+					<legend> Dia da semana</legend>
+					<h3 class="titulo" ><?php echo $dia_semana[$SDMA[0]] . " , " . $SemanaDiaMesAno[2] . " de " . $mes_ano[$SDMA[1]] . " de " . $SemanaDiaMesAno[0]; ?></h3>
+				</fieldset >
+			</div><br>
+			<div class="row-fluid" style="overflow-y: auto;">
+				<fieldset class="table-bordered" style="height:450px;">
+					<legend> Relação de Paciente</legend>
+					<div class="row-fluid" id="">
+						<table class="table-modify table-bordered" >
+							<thead>
+								<tr class="white">
+									<th align="center" width="10%"> ST </th>
+									<th align="center"> Ord </th>
+									<th align="center"> Chegada </th>
+									<th align="center"> Atendimento </th>
+									<th align="center"> Matrícula </th>
+									<th align="center"> Paciente </th>
+									<th align="center"> Remetente </th>
+								</tr>
+							</thead>
+							<tbody id="salaEsperaHorarios">
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+			</div><br/>
+		</div>
+	</div>
+</div>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn ">Botão</a>	
+  </div>
+</div>

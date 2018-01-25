@@ -1,0 +1,188 @@
+<script src="view/recepcao/js/formDependente.js"></script>
+<div id="form-dependente-modal" class="modal modal-dependente hide fade" style="top: 40%;">
+	<div id="form-dependente-result" class="modal-body modal-body-dependente">
+		<div ><a href="#" id="fechar" class="close" />Fechar X</a>
+			<h2 class="titulo"></h2>
+			<hr style="margin-top: -4px;"/>
+			<div class="row-fluid "  >
+				<!--<div class="row-fluid " style=" border: 2px solid #E3E3E3; " >-->
+				<div class="span1">
+					<label class="nome-text">Matricula</label>
+				</div>
+				<div class="span2">
+					<input id="dep-mat" name="dep-mat" type="text" disabled />
+					<input id="dep-matricula" name="dep-matricula" value="" type="hidden" disabled />
+				</div>
+				<div class="span1">
+					<label class="nome-text" >Membro</label>
+				</div>
+				<div class="span2">
+					<input id="dep-membro" name="dep-membro" type="text" disabled />
+				</div>
+				<div class="span3" >
+					<div class="row-fluid ">
+						<div class="checkbox-option">
+							<label>
+								<input id="nao_imprimir" name="nao-imprimir" value="1" type="checkbox" />
+								Não imprimir Lembrete
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="span3" >
+					<div class="row-fluid " >
+						<div class="span10 checkbox-option"  >
+							<label>
+								<input id="vacina_em_casa" name="vacina-name" value="1" type="checkbox" />
+								Vacina em casa
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span1">
+					<label class="nome-text" autofocus>Nome</label>
+				</div>
+				<div class="span3">
+					<input id="dep-nome" name="dep-nome" type="text">
+				</div>
+
+				<div class="span1">
+					<label class="nome-text">Sobrenome</label>
+				</div>
+				<div class="span1"></div>
+				<div class="span3">
+					<input id="dep-sobrenome" name="dep-sobrenome" type="text"/>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span1">
+				<label class="nome-text" >D.Nasc</label>
+			</div>
+			<div class="span2">
+				<input  id="dep-nascimento" name="dep-nascimento" type="text"/>
+			</div>
+		</div>
+		<div class="row-fluid" style="margin-bottom: 5px;">
+			<div class="span1">
+				<label for="sexo">Sexo:</label>
+			</div>
+			<div class="span3">
+				<select  id="dep-sexo" name="dep-sexo" class="span8">
+					<option value="M">M</option>
+					<option value="F">F</option>
+				</select>
+			</div>
+
+		</div>
+		<div class="row-fluid" >
+			<div class="span1"  >
+				<label class="nome-text">Médico:</label>
+			</div>
+			<div class="span2" id="div-medico-crm" >
+				<input id="medico-crm" onchange="buscaMedicoPorCrm('crm', '<?php echo $prefixo; ?>');" name="<?php echo $prefixo; ?>medico-crm" type="text" value="<?php echo $crmMedico['crm'] ?>" />
+			</div>
+			<div class="span4" id="div-dep-medico">
+				<select id="dep-medico" name="dep-medico" onchange="buscaMedicoPorCrm('medico');">
+					<option value="0"></option>
+					<?php
+					foreach (buscaTodosMedicosInd() as $medico) {
+						?>
+						<option value="<?php echo $medico['id']; ?>">
+							<?php echo $medico['nome'] . " " . $medico['sobrenome']; ?>
+						</option>
+						<?php
+					}
+					?>
+				</select>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span1">
+				<label class="nome-text">E-mail:</label>
+			</div>
+			<div class="span6">
+				<input id="dep-email" name="dep-email" type="text"/>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span1">
+				<label class="nome-text">Vacinador:</label>
+			</div>
+			<div class="span6">
+				<select id="dep-vacinador" name="<?php echo $prefixo; ?>dep-vacinador">
+					<option></option>
+					<?php
+					foreach (buscaTodosVacinadores() as $vacinador) {
+						$selected = "";
+						if ($dependente['fk_enfermeiro_id'] == $vacinador['id']) {
+							$selected = "selected = selected";
+						}
+						?>
+						<option <?php echo $selected; ?> value="<?php echo $vacinador['id']; ?>">
+							<?php echo strtoupper($vacinador['nome'] . " " . $vacinador['sobrenome']); ?>
+						</option>
+						<?php
+					}
+					?>
+				</select>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
+				<div class="span3">
+					<label class="nome-text">Nº Cartão:</label>
+				</div>
+				<div class="span8">
+					<input id="dep-num_carteira" maxlength=16 name="dep-num_carteira" type="text"/>
+				</div>
+			</div>
+			<div class="span5">
+				<div class="span4">
+					<label class="nome-text">Val. Carteira:</label>
+				</div>
+				<div class="span6">
+					<input id="dep-validade_carteira" data-mask="99/99/9999" name="dep-validade_carteira" type="text"/>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span1">
+				<label class="nome-text">Facebook:</label>
+			</div>
+			<div class="span6">
+				<input id="dep-facebook" name="dep-facebook" type="text"/>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span1">
+				<label class="nome-text">Twitter:</label>
+			</div>
+			<div class="span6">
+				<input id="dep-twitter" name="dep-twitter" type="text"/>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="row-fluid" id="btn-ok" >
+				<div id="dep_botao_div" class="span3">
+<!--							<input id="dep-idTitularHidden" type="hidden" name="dep-idTitularHidden" value="" />-->
+				</div>
+				<div class="span3">
+					<button type="button" name="cancelar" id="button-option" class="btn btn-large span12" onclick="fechar_modal('form-dependente-modal');" >
+						<i class="icon-remove"></i> Cancelar
+					</button>
+				</div>
+				<div class="span3">
+					<button type="button" name="cancelar" id="dep-buttom_clean" class="btn btn-large span12" onclick="limpaFichaDependente();" >
+						<i class="icon-remove"></i> Limpar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

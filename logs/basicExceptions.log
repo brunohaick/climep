@@ -1,0 +1,1320 @@
+{
+    "Log_0": {
+        "Data": "22/09/2013 23:10:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `equipamentos_teste`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1181,
+                    "function": "listar",
+                    "args": [
+                        "equipamentos_teste",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_1": {
+        "Data": "22/09/2013 23:10:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `orelhinha2_resultado_cocleo`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1219,
+                    "function": "listar",
+                    "args": [
+                        "orelhinha2_resultado_cocleo",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_2": {
+        "Data": "22/09/2013 23:10:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `cid10`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1410,
+                    "function": "listar",
+                    "args": [
+                        "cid10",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_3": {
+        "Data": "22/09/2013 23:10:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `testes`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1689,
+                    "function": "listar",
+                    "args": [
+                        "testes",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_4": {
+        "Data": "22/09/2013 23:10:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `prestador`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10834,
+                    "function": "listar",
+                    "args": [
+                        "prestador",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1802,
+                    "function": "buscaPrestador",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_5": {
+        "Data": "22/09/2013 23:10:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `requisicao_servico`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10841,
+                    "function": "listar",
+                    "args": [
+                        "requisicao_servico",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1823,
+                    "function": "buscaRequisicaoServico",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_6": {
+        "Data": "22/09/2013 23:15:39",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 267,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `equipamentos_teste`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1181,
+                    "function": "listar",
+                    "args": [
+                        "equipamentos_teste",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_7": {
+        "Data": "22/09/2013 23:15:39",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 267,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `orelhinha2_resultado_cocleo`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1219,
+                    "function": "listar",
+                    "args": [
+                        "orelhinha2_resultado_cocleo",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_8": {
+        "Data": "22/09/2013 23:15:39",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 267,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `cid10`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1410,
+                    "function": "listar",
+                    "args": [
+                        "cid10",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_9": {
+        "Data": "22/09/2013 23:15:39",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 267,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `testes`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1689,
+                    "function": "listar",
+                    "args": [
+                        "testes",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_10": {
+        "Data": "22/09/2013 23:15:39",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 267,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `prestador`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10834,
+                    "function": "listar",
+                    "args": [
+                        "prestador",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1802,
+                    "function": "buscaPrestador",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_11": {
+        "Data": "22/09/2013 23:15:39",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 267,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `requisicao_servico`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10841,
+                    "function": "listar",
+                    "args": [
+                        "requisicao_servico",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1823,
+                    "function": "buscaRequisicaoServico",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_12": {
+        "Data": "22/09/2013 23:23:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `equipamentos_teste`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1181,
+                    "function": "listar",
+                    "args": [
+                        "equipamentos_teste",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_13": {
+        "Data": "22/09/2013 23:23:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `orelhinha2_resultado_cocleo`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1219,
+                    "function": "listar",
+                    "args": [
+                        "orelhinha2_resultado_cocleo",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_14": {
+        "Data": "22/09/2013 23:23:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `testes`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1689,
+                    "function": "listar",
+                    "args": [
+                        "testes",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_15": {
+        "Data": "22/09/2013 23:23:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `prestador`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10834,
+                    "function": "listar",
+                    "args": [
+                        "prestador",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1802,
+                    "function": "buscaPrestador",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_16": {
+        "Data": "22/09/2013 23:23:00",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `requisicao_servico`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10841,
+                    "function": "listar",
+                    "args": [
+                        "requisicao_servico",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1823,
+                    "function": "buscaRequisicaoServico",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_17": {
+        "Data": "22/09/2013 23:23:30",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `equipamentos_teste`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1181,
+                    "function": "listar",
+                    "args": [
+                        "equipamentos_teste",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_18": {
+        "Data": "22/09/2013 23:23:30",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `orelhinha2_resultado_cocleo`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1219,
+                    "function": "listar",
+                    "args": [
+                        "orelhinha2_resultado_cocleo",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_19": {
+        "Data": "22/09/2013 23:23:30",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `testes`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1689,
+                    "function": "listar",
+                    "args": [
+                        "testes",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_20": {
+        "Data": "22/09/2013 23:23:30",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `prestador`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10834,
+                    "function": "listar",
+                    "args": [
+                        "prestador",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1802,
+                    "function": "buscaPrestador",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    },
+    "Log_21": {
+        "Data": "22/09/2013 23:23:30",
+        "Log": {
+            "Code": 4,
+            "Message": "FaltamRegistros",
+            "Fatal": false,
+            "File": "/var/www/climep2/climep/trunk/helpers/database/database.class.php",
+            "Line": 114,
+            "Type": "MenssageException",
+            "PreviousError": "No Errors Founded",
+            "Trace": [
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 12293,
+                    "function": "fetchAll",
+                    "class": "Database",
+                    "type": "::",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/banco.php",
+                    "line": 266,
+                    "function": "pesquisaOOP",
+                    "args": [
+                        "SELECT * FROM `requisicao_servico`"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/model/funcGerais.php",
+                    "line": 10841,
+                    "function": "listar",
+                    "args": [
+                        "requisicao_servico",
+                        "*"
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml",
+                    "line": 1823,
+                    "function": "buscaRequisicaoServico",
+                    "args": [
+
+                    ]
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/template/header.phtml",
+                    "line": 441,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/view/consultas/consultas.phtml"
+                    ],
+                    "function": "include"
+                },
+                {
+                    "file": "/var/www/climep2/climep/trunk/index.php",
+                    "line": 22,
+                    "args": [
+                        "/var/www/climep2/climep/trunk/template/header.phtml"
+                    ],
+                    "function": "include"
+                }
+            ]
+        }
+    }
+}

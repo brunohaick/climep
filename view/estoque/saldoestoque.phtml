@@ -1,0 +1,98 @@
+<script async defer src="view/estoque/js/index.js"></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+
+<h2 class="titulo">Saldo do Estoque</h2>
+<hr>
+<div class="row-fluid">
+    <div class="span6" id="tab1-saldo">
+        <fieldset class="table-bordered">
+            <legend> Relação de Vacinas</legend>
+            <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" >
+                <thead>
+                    <tr class="white">
+                        <th align="center"> Código</th>
+                        <th align="center"> Descrição </th>
+                        <th align="center"> Estoque </th>
+                        <th align="center"> Tipo </th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <?php
+                    foreach (buscaMaterial('') as $material) {
+                        if ($material['nome'] == "") {
+                            continue;
+                        }
+                        ?>
+
+                        <tr  name="table-color" class='dayhead ' onclick="detalhamentoEstoque(<?php echo $material['id']; ?>);">
+                            <th align="center"> <span ><?php echo $material['id']; ?> </span></th>
+                            <th align="center"><span > <?php echo $material['nome']; ?></span> </th>
+                            <th align="center"><span> <?php echo estoqueMaterial($material['id']); ?> </span></th>
+                            <th align="center"><span> <?php echo tipoMaterialById($material['tipo_material_id']); ?> </span> </th>
+                        </tr>
+<?php } ?>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>          
+    <div class="span6">  
+        <div class="span12"  id="tab2-saldo" >
+            <fieldset class="table-bordered">
+                <legend> Detalhamento do Estoque</legend>
+                <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" >
+                    <thead>
+                        <tr class="white">
+                            <th align="center"> Local</th>
+                            <th align="center"> Lote </th>
+                            <th align="center"> Saldo </th>
+                            <th align="center"> Validade </th>
+                            <th align="center"> Uso</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+
+                        <?php
+                        $tmp = confereMovimentacaoMaterial($idMaterial);
+                        $location = buscaLocalArmazenamento();
+                        if (empty($tmp)) {
+                            foreach ($location as $local) {
+                                ?>
+                                <tr  name="table-color" class='dayhead '>
+                                    <th align="center"><?php echo $local['nome']; ?> </th>
+                                    <th align="center"></th>
+                                    <th align="center"> 0 </th>
+                                    <th align="center"></th>
+                                    <th align="center"></th>
+                                </tr>
+
+                                <?php
+                            }
+                        } else {
+                            foreach (buscaLoteByMaterialId($idMaterial) as $estoque) {
+                                foreach ($location as $local) {
+                                    ?>
+                                    <tr  name="table-color" class='dayhead '>
+                                        <th align="center"><?php echo $local['nome']; ?> </th>
+                                        <th align="center"><?php echo $estoque['nome']; ?></th>
+                                        <th align="center"><?php echo quantidadeMaterialByLocalId($idMaterial, $local['id'], $estoque['id']); ?></th>
+                                        <th align="center"><?php echo converteData($estoque['validade']); ?></th>
+                                        <th align="center"><?php echo usoById($estoque['uso_id']); ?></th>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </fieldset>
+
+        </div>
+        <div class="span11 " id="conf-btn"  >
+            <input class="btn btn-mini nf-n span4" style="float: right; " type="button" name="fechar" value="Fechar" />
+        </div>
+    </div>          
+</div><br>
+
+
+

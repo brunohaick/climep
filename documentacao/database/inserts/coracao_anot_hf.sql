@@ -1,0 +1,1 @@
+INSERT INTO `climep`.`coracao_anot_hf` (`id`, `nome`) VALUES (NULL, 'infecção materna (rubéola ou outras)'), (NULL, 'exposição materna à radiações'), (NULL, 'NDN'), (NULL, 'uso materno de medicações como tranquilizantes, antialérgicos ou anticonvulsantes'), (NULL, 'cardiopatia congênita na família'), (NULL, 'síndromes genéticas na família'), (NULL, 'diabete materno');

@@ -1,0 +1,453 @@
+<link type="text/css" rel="stylesheet" href="view/financeiro/css/index.css" />
+<script async defer language="javascript" src="view/financeiro/js/baixacp.js"></script>
+<div id="baixaconsultarduplicatas" style="display: block;">
+    <div class="row-fluid">
+        <h2 class="titulo"> CTPG - Consulta Duplicata Para Baixa </h2>
+        <hr style="margin-top: -5px;">
+        <p style="margin-left: 15px;">
+            Preencha os campos abaixo e clique em <b> 'Localizar' </b> para iniciar a pesquisa na base de dados.
+        </p>
+    </div>
+    <div class="row-fluid">
+        <fieldset class="table-bordered">
+            <div class="row-fluid">
+                <div class="control-group" id="control-group-fornecedor" >
+                    <div class="span2"><label class="control-label "  for="nome">Fornecedor</label></div>
+                    <div id="controls" class="controls error">
+                        <div class="span1">
+                            <input type="text" class="fornecedor" onchange="buscaPorCodigoCP('fornecedor','baixa');" name="baixa-dup-cod_fornecedor" />
+                        </div>
+                        <div class="span5">
+                            <input type="text" class="fornecedor2" name="baixa-dup-fornecedor" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group" id="control-group-empresa" >
+                    <div class="span2"><label class="control-label">Empresa:</label></div>
+                    <div id="controls" class="controls error">
+                        <div class="span1">
+                            <input type="text" class="empresa" onchange="buscaPorCodigoCP('empresa','baixa');" name="baixa-dup-cod_empresa" />
+                        </div>
+                        <div class="span5">
+                            <input type="text" class="empresa2" name="baixa-dup-empresa" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="control-group" id="control-group-tipoDoc" >
+                    <div class="span2"><label class="control-label">TipoDoc:</label></div>
+                    <div id="controls" class="controls error">
+                        <div class="span1">
+                            <input type="text" onchange="buscaPorCodigoCP('tipoDoc','baixa');" name="baixa-dup-cod_tipoDoc"/>
+                        </div>
+                        <div class="span5">
+                            <input type="text" name="baixa-dup-tipoDoc" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="control-group"  id="control-group-moeda" >
+                    <div class="span2"><label class="control-label">Moeda:</label></div>
+                    <div id="controls" class="controls error">
+                        <div class="span3">
+                            <select name="baixa-dup-moeda" class="moeda">
+                                <option value="0" > TODAS </option>
+                                <?php
+                                $moedas = buscaTodasMoedas();
+                                foreach ($moedas as $moeda) {
+                                    ?>
+                                    <option value="<?php echo $moeda['id']; ?>"> <?php echo $moeda['nome']; ?> </option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <span class="help-inline" id="spanerromoeda"  ></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <div class="control-group"  id="control-group-status" >
+                    <div class="span2"><label class="control-label">Status:</label></div>
+                    <div id="controls" class="controls error">
+                        <div class="span3">
+                            <select name="baixa-dup-status">
+                                <option value="0" > TODOS </option>
+                                <?php
+                                $statusConsultaDup = buscaTodosStatusDuplicata();
+                                foreach ($statusConsultaDup as $statusConsulta) {
+                                    ?>
+                                    <option value="<?php echo $statusConsulta['id']; ?>"> <?php echo $statusConsulta['nome']; ?> </option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <span class="help-inline" id="spanerrobaixa-dup-status"  ></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="control-group" id="control-group-baixa-dup" >
+
+                    <div class="span2"><label class="control-label">Selecionado Por:</label></div>
+                    <div id="controls" class="controls error">
+
+                        <div class="span3">
+                            <select name="baixa-dup-selecionado_por">
+                                <option value="1" > DATA DE LANCAMENTO</option>
+                                <option value="2" > DATA DE VENCIMENTO </option>
+                                <option value="3" > DATA DE EMISSAO </option>
+                                <option value="4" > DATA DE BAIXA </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <span class="help-inline" id="spanerrobaixa-dup-selecionado_por"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+				<div class="span2">
+					<label class="control-label">De:</label>
+				</div>
+				<div id="controls" class="controls error">
+					<div class="span2">
+						<input data-mask="99/99/9999" type="text" name="baixa-dup-data_inicio"/>
+					</div>
+				</div>
+				<div class="span1">
+					<label class="control-label">Até:</label>
+				</div>
+				<div id="controls" class="controls error">
+					<div class="span2">
+						<input data-mask="99/99/9999" type="text" name="baixa-dup-data_fim"/>
+					</div>
+				</div>
+            </div>
+            <div class="row-fluid">
+                <div class="control-group" id="control-group-ordenadopor" >
+                    <div class="span2">
+                        <label class="control-label">Ordenado Por:</label>
+                    </div>
+                    <div id="controls" class="controls error">
+                        <div class="span3">
+                            <select name="baixa-dup-ordenado_por">
+                                <option value="1" > DUPLICATA </option>
+                                <option value="2" > FORNECEDOR </option>
+                                <option value="3" > LOJA </option>
+                                <option value="4" > DATA DE EMISSAO </option>
+                                <option value="5" > DATA DE VENCIMENTO </option>
+                                <option value="6" > DATA DA ULTIMA BAIXA </option>
+                                <option value="7" > MOEDA </option>
+                                <option value="8" > BANCO </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row-fluid">
+                <!-- <div class="span5">
+                    <label>
+                        <input type="checkbox" name="" />
+                        Somente Parcelas de Duplicatas sem Notas
+                    </label>
+				</div> -->
+                <div class="offset5">
+                    <a href="#" class="btn" onclick="cleanFormConsultaBaixaCp();"> Limpar </a>
+                    <a href="#" class="btn" onclick="criaListaBaixaDuplicatas();" ><i class="icon-search"></i> Localizar </a>
+                    <!--<a href="#" class="btn" onclick="enviardados();" ><i class="icon-search"></i> Enviar </a>-->
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="baixaduplicata" style="display: none;">
+    <div id="dialog-baixaduplicata" >
+        <div class="row-fluid">
+            <div class="row-fluid">
+                <h2 id="baixacp-dup-modal-titulo" class="titulo"></h2>
+                <hr style="margin-top: -5px;">
+                <p style="margin-left: 15px;">
+                    Preencha os campos abaixo informando que Conta Corrente será usada para fazer o pagamento.
+                </p>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <div class="row-fluid">
+                    <div class="span2">
+                        <label>Data Operação:</label>
+                        <input data-mask="99/99/9999" type="text" name="baixa-dup-modal-data_operacao" />
+                    </div>
+                    <div class="span5">
+                        <label>Conta Corrente:</label>
+                        <input type="text" name="baixa-dup-modal-conta_corrente" />
+                    </div>
+                    <div class="span2">
+                        <label>Valor:</label>
+                        <input type="text" name="baixa-dup-modal-valor" />
+                    </div>
+                </div><br>
+			<!--
+				<div class="row-fluid">
+                    <fieldset class="table-bordered">
+                        <legend>Dados adicionais</legend>
+                        <div class="row-fluid">
+                            <div class="span3">
+                                <label>Banco/Agência:</label>
+                            </div>
+                            <div class="span7">
+                                <input type="text" name="baixa-dup-modal-banco_agencia" value="CLIMEP / CLIMEP"  disabled/>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span3">
+                                <label>Saldo Disponível/Indisponível:</label>
+                            </div>
+
+                            <div class="span7">
+                                <input type="text" name="baixa-dup-modal-disponivel_indisponivel" value="R$ 1.031.213.01/ R$ 0,00" disabled />
+                            </div>
+                        </div>
+                    </fieldset>
+				</div><br>
+			-->
+                <div class="row-fluid">
+                    <fieldset class="table-bordered">
+                        <div class="row-fluid">
+                            <div class="span2">
+                                <label>Tipo de Operação:</label>
+                            </div>
+                            <div class="span1">
+                                <input type="text" onchange="buscaPorCodigoCP('tipo_operacao','baixa-modal');" class="" name="baixa-dup-modal-cod_tipo_operacao" value="">
+                            </div>
+                            <div class="span5">
+                                <input type="text" name="baixa-dup-modal-tipo_operacao">
+                            </div>
+							<div class="span1">
+								<button class="btn" onclick="abrir_modal('duplicata-tipo_operacao_modal')"><i class="icon-search"></i></button>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span2">
+								<label>N.Documento:</label>
+							</div>
+							<div class="span3">
+								<input type="text" class="" name="baixa-dup-modal-numero_documento">
+							</div>
+							<!-- <div class="span2">
+								<label>Compensação:</label>
+							</div>
+							<div class="span2">
+								<input type="text" data-mask="99/99/9999" class="" name="baixa-dup-modal-compensacao" disabled value="99/99/9999">
+							</div> -->
+						</div>
+						<div class="row-fluid">
+							<div class="span2">
+								<label>Data Baixa:</label>
+							</div>
+							<div class="span3">
+								<input data-mask="99/99/9999" type="text" name="baixa-dup-modal-data_baixa" />
+							</div>
+							<div class="span2">
+								<label>N. Cheque:</label>
+							</div>
+							<div class="span2">
+								<input type="text" name="baixa-dup-modal-numero_cheque" />
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span2">
+								<label>Nominal a:</label>
+							</div>
+							<div class="span5">
+								<input type="text" name="baixa-dup-modal-nominal" />
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span2">
+								<label>Histórico:</label>
+							</div>
+							<div class="span7">
+								<textarea name="baixa-dup-modal-historico" class=""> </textarea>
+							</div>
+						</div>
+                    </fieldset>
+                    <fieldset class="table-bordered">
+                        <div id="tabela2baixaduplicata">
+                            <table class="table table-condensed table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th> Nº Doc</th>
+                                        <th> Fornecedor</th>
+                                        <th> Loja</th>
+                                        <th> Vencimento</th>
+                                        <th> Valor</th>
+                                        <th> Tot. Pagar</th>
+                                    </tr>
+                                </thead>
+                                <tbody name="baixa-dup-modal-tbody_lista_parcelas">
+                                </tbody>
+                            </table>
+                        </div >
+                    </fieldset><br>
+                    <div class="offset6">
+                        <input type="hidden" name="baixa-dup-modal-hidden_parcela_id" value="">
+                        <a href="#" class="btn" onclick="cleanFormConsultaBaixaCpModal();voltarListaBaixaCp();"><i class="icon-circle-arrow-left"></i> Voltar</a>
+                        <a href="#" style="display:none" class="btn" onclick="baixaDuplicataParcela();" id="baixa-dup-modal-baixa" > Avançar <i class="icon-circle-arrow-right"></i></a>
+                        <a href="#" style="display:none" class="btn" onclick="estornoParcelaDuplicata();" id="baixa-dup-modal-estorno" > Estornar <i class="icon-circle-arrow-right"></i></a>
+                        <a href="#" style="display:none" class="btn" onclick="imprimeComprovante();" id="baixa-dup-modal-comprovante" > <i class="icon-adjust"></i> Comprovante </a>
+
+                    </div>
+                </div>
+        </div><br>
+    </div>
+</div>
+
+<div id="baixaduplicataslocalizar" class="row-fluid" style="display: none;">
+    <div class="row-fluid">
+        <h2 class="titulo">CTPG - Baixa de Duplicata </h2>
+        <hr style="margin-top: -5px;">
+    </div>
+    <div class="row-fluid">
+        <div class=" span3" style="margin-left: 10px; margin-bottom: 10px;">
+            <a href="#" onclick="voltarConsultaduplicata();" class="btn"><i class="icon-circle-arrow-left"></i> Voltar</a>
+            <a href="#" onclick="imprimirBaixacp()" class="btn"><i class="icon-print"></i> Imprimir</a>
+            <br>
+        </div>
+        <fieldset class="table-bordered">
+            <div class="row-fluid" id="tabelabaixaduplicata" >
+                <table class="tablebigfinanceiro table-condensed table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th> STATUS </th>
+                            <th > NOTA FISCAL </th>
+                            <th> PARCELA </th>
+                            <th> P. CONTABIL </th>
+                            <th> FORNECEDOR </th>
+                            <th> EMPRESA </th>
+                            <th> EMISSÃO </th>
+                            <th> VENCIMENTO </th>
+                            <th> VALOR </th>
+                            <th> DESCONTO </th>
+                            <th> MULTA </th>
+                            <th> JUROS (DIA) </th>
+                            <th> VALOR PAGO </th>
+                            <th> TOTAL A PAGAR </th>
+                            <th> MOEDA </th>
+                            <th> BANCO </th>
+                            <th> CODIGO BARRAS </th>
+                            <th> TIPO DOCUMENTO </th>
+                            <th> PLANO CONTAS </th>
+                            <th> DATA BAIXA </th>
+                            <th> USUÁRIO </th>
+                            <th> OBS </th>
+                            <th> DIAS ATRASO </th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="baixa-dup-lista_parcelas" > </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div id="duplicata-tipo_operacao_modal" class="modal hide fade" >
+	<div class="modal-body" style=" background-image: url('template/img/body-bg.png');">
+		<div id="">
+			<div class="row-fluid"><br>
+				<table class="table table-bordered table-condensed">
+					<thead>
+						<tr >
+							<th> COD OPERACAO </th>
+							<th> OPERACAO </th>
+							<th> E_S </th>
+							<th> COMPENSACAO </th>
+						</tr>
+					</thead>
+
+					<tbody id="lancamentos-lista_tipo_operacoes" >
+					<?php
+						$tipos = buscaTodosTipoOperacoes('S');
+						foreach ($tipos as $tipo) {
+					?>
+							<tr id="teste" ondblclick="escolherOperacaoDup('<?php echo $tipo['nome'];?>');">
+								<th> <?php echo $tipo['codigo'];?> </th>
+								<th> <?php echo $tipo['nome'];?> </th>
+								<th> <?php echo $tipo['e_s'];?> </th>
+								<th> <?php echo $tipo['compensacao'];?> </th>
+							</tr>
+					<?php
+						}
+					?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" onclick="fechar_modal('duplicata-tipo_operacao_modal');"><i class="icon-remove"></i> Fechar </button>
+		</div>
+	</div>
+</div>
+
+<script>
+
+function enviardados(){
+
+	var fornecedor  = $("input[name=baixa-dup-fornecedor]").val();
+	var empresa = $("input[name=baixa-dup-empresa]").val();
+	var tipoDoc = $("input[name=baixa-dup-tipoDoc]").val();
+
+	if (fornecedor.replace(/ /g, "") == "") {
+		$("#spanerrofornecedor").html("Campo Obrigatório.");
+		$("#control-group-fornecedor").removeClass("success");
+		$("#control-group-fornecedor").addClass("error");
+		$("#spanerrofornecedor").focus();
+		return false;
+	}
+
+	if (empresa.replace(/ /g, "") == "") {
+		$("#spanerroempresa").html("Campo Obrigatório.");
+		$("#control-group-empresa").removeClass("success");
+		$("#control-group-empresa").addClass("error");
+		$("#spanerroempresa").focus();
+		return false;
+	}
+
+	if (tipoDoc.replace(/ /g, "") == "") {
+		$("#spanerrotipoDoc").html("Campo Obrigatório.");
+		$("#control-group-tipoDoc").removeClass("success");
+		$("#control-group-tipoDoc").addClass("error");
+		$("#spanerrotipoDoc").focus();
+		return false;
+	}
+}
+
+function removeerro(field){
+
+	var campo = field.val();
+	if (!campo.replace(/ /g, "") == "") {
+		$("#control-group-fornecedor").removeClass("error");
+		$("#control-group-fornecedor").addClass("success");
+		$("#spanerrofornecedor").html("");
+	}else{
+		$("#control-group-fornecedor").removeClass("error");
+		$("#control-group-fornecedor").removeClass("success");
+		$("#spanerrofornecedor").html("");
+	}
+}
+</script>

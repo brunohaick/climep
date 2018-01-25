@@ -1,0 +1,2273 @@
+<?php
+$listabairros = mostraBairros();
+
+$clientes['tel_residencial'] = preg_replace("/[^0-9\s]/", "", $clientes['tel_residencial']);
+$clientes['tel_comercial'] = preg_replace("/[^0-9\s]/", "", $clientes['tel_comercial']);
+$clientes['tel_apoio'] = preg_replace("/[^0-9\s]/", "", $clientes['tel_apoio']);
+
+
+if (strlen($clientes['tel_residencial']) == 10)
+	$clientes['tel_residencial'] = "(" . substr($clientes['tel_residencial'], 0, 2) . ")" . substr($clientes['tel_residencial'], 2, 4) . "-" . substr($clientes['tel_residencial'], 6, 4);
+else if (strlen($clientes['tel_residencial']) == 8)
+	$clientes['tel_residencial'] = "(91)" . substr($clientes['tel_residencial'], 0, 4) . "-" . substr($clientes['tel_residencial'], 4, 4);
+else if (strlen($clientes['tel_residencial']) == 7)
+	$clientes['tel_residencial'] = "(91)3" . substr($clientes['tel_residencial'], 0, 3) . "-" . substr($clientes['tel_residencial'], 3, 4);
+
+if (strlen($clientes['tel_comercial']) == 10)
+	$clientes['tel_comercial'] = "(" . substr($clientes['tel_comercial'], 0, 2) . ")" . substr($clientes['tel_comercial'], 2, 4) . "-" . substr($clientes['tel_comercial'], 6, 4);
+else if (strlen($clientes['tel_comercial']) == 8)
+	$clientes['tel_comercial'] = "(91)" . substr($clientes['tel_comercial'], 0, 4) . "-" . substr($clientes['tel_comercial'], 4, 4);
+else if (strlen($clientes['tel_comercial']) == 7)
+	$clientes['tel_comercial'] = "(91)3" . substr($clientes['tel_comercial'], 0, 3) . "-" . substr($clientes['tel_comercial'], 3, 4);
+
+if (strlen($clientes['tel_apoio']) == 10)
+	$clientes['tel_apoio'] = "(" . substr($clientes['tel_apoio'], 0, 2) . ")" . substr($clientes['tel_apoio'], 2, 4) . "-" . substr($clientes['tel_apoio'], 6, 4);
+else if (strlen($clientes['tel_apoio']) == 8)
+	$clientes['tel_apoio'] = "(91)" . substr($clientes['tel_apoio'], 0, 4) . "-" . substr($clientes['tel_apoio'], 4, 4);
+else if (strlen($clientes['tel_apoio']) == 7)
+	$clientes['tel_apoio'] = "(91)3" . substr($clientes['tel_apoio'], 0, 3) . "-" . substr($clientes['tel_apoio'], 3, 4);
+?>
+<script async defer src="view/recepcao/js/cadastro.js"></script>
+<script src="view/recepcao/js/testes.js"></script>
+<link type="text/css" rel="stylesheet" href="view/recepcao/css/index.css" />
+<link type="text/css" rel="stylesheet" href="view/caixa/css/style-tab-ui.css" />
+<script src="view/recepcao/js/TabelaModulosDinamica.js"></script>
+<script src="view/recepcao/js/TabelaTrocaFamilia.js	"></script>
+<!--================================ FORMULAŔIO DE CADASTRO ============================================================
+  ======================================================================================================================= -->
+<h2 class="titulo"><?php echo $tituloPessoa; ?></h2>
+
+<form class="cadastro" action="" method="post" onSubmit="return validateForm();" >
+    <fieldset class="cadastro table-bordered">
+        <div class="row-fluid">
+            <div class="span1">
+                <label for="cad-matricula">Matrícula</label>
+                <input id="cad-mat" name="cad-mat" type="text" onchange="verificaTitular();" value="<?php echo $clientes['matricula']; ?>"/>
+                <input id="cad-matricula" name="cad-matricula" type="hidden" value="<?php echo $clientes['cliente_id']; ?>" disabled />
+            </div>
+
+            <div class="span4">
+                <label for="cad-nome">Nome / Titular</label>
+                <input id="cad-nome" name="cad-nome" type="text" placeholder="Informe o seu nome" value="<?php echo $clientes['nome']; ?>"/>
+            </div>
+
+            <div class="span4">
+                <label for="cad-sobrenome">Sobrenome</label>
+                <input id="cad-sobrenome" name="cad-sobrenome" type="text"  placeholder="Informe o seu sobrenome" value="<?php echo $clientes['sobrenome']; ?>" />
+            </div>
+            <div class="span2" class="input-append date">
+                <label for="cad-nascimento">D. Nascimento</label>
+                <input id="cad-nascimento" name="cad-nascimento"  onblur="dateComplete($(this));" type="text" placeholder="99/99/9999" value="<?php echo converteData($clientes['data_nascimento']); ?>"/>
+
+            </div>
+            <div class="span1">
+                <label for="cad-sexo">Sexo</label>
+                <select id="cad-sexo" name="cad-sexo" >
+
+					<?php
+					if ($clientes['sexo'] == "F") {
+						$f = "SELECTED";
+					} else if ($clientes['sexo'] == "M") {
+						$m = "SELECTED";
+					}
+					?>
+                    <option <?php echo $m; ?> value="M" >M</option>
+                    <option <?php echo $f; ?> value="F">F</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-fluid">	
+            <div class="span10">
+                <div class="row-fluid">
+                    <div class="span7">
+                        <label for="cad-conjuge">Cônjuge</label>
+                        <input id="cad-conjuge" name="cad-conjuge" type="text" placeholder="Informe o nome do Cônjuge" value="<?php echo $clientes['conjuge']; ?>"/>
+                    </div>
+
+                    <div class="span3 cad-lembrete" >
+                        <label for="cad-lembrete">Não imprimir lembrete
+							<?php
+							if ($clientes['imprimir_lembrete'] == '0') {
+								$checklembrete = "checked";
+							} else {
+								$checklembrete = "";
+							}
+							?>
+                            <input <?php echo $checklembrete; ?> id="cad-lembrete" name="cad-lembrete" type="checkbox" />
+                        </label>
+                    </div>
+
+                    <div   class="span2">
+                        <label for="cad-pamp">Data PAMP</label>
+                        <input id="cad-pamp" name="cad-pamp" onblur="dateComplete($(this));" type="text" placeholder="99/99/9999" value="<?php echo converteData($clientes['data_pamp']); ?>"/>
+                    </div>
+                </div>
+
+                <div class="row-fluid">	
+                    <div class="span6">
+                        <label for="cad-endereco">Endereço (Rua ou Conjunto e Rua)</label>
+                        <input id="cad-endereco" name="cad-endereco" type="text" placeholder="Informe o endereço" value="<?php echo $clientes['endereco']; ?>"/>
+                    </div>
+                    <div class="span1">
+                        <label for="cad-numero">Número</label>
+                        <input id="cad-numero" name="cad-numero" type="text" placeholder="Nº 00" value="<?php echo $clientes['numero']; ?>"/>
+                    </div>
+                    <div class="span3">
+                        <label for="cad-bairro">Bairro</label>
+                        <input type="text" name="cad-bairro" id="cad-bairro" data-provide="typeahead" data-items="4" data-source='<?php echo $listabairros; ?>' placeholder="Informe o bairro" value="<?php echo $clientes['bairro']; ?>"/>
+                    </div>
+                    <div class="span2">
+                        <label for="cad-cep">CEP</label>
+                        <input id="cad-cep" name="cad-cep" type="text" placeholder="cep EX: XXXXX-XX" value="<?php echo $clientes['cep']; ?>"  onChange="getAddress($(this).val())"/>
+                    </div>
+                </div>
+
+                <div class="row-fluid">	
+                    <div class="span4">
+                        <label for="cad-complemento">Complemento 1 (AP/Bloco/Quadra)</label>
+                        <input id="cad-complemento" name="cad-complemento" type="text" placeholder="AP/Bloco/Quadra" value="<?php echo $clientes['complemento']; ?>" />
+                    </div>
+                    <div class="span4">
+                        <label for="cad-complemento2">Complemento 2 (Ed/Cond/Ref)</label>
+                        <input id="cad-complemento2" name="cad-complemento2" type="text" placeholder="Edifício / Condomínio / Referência" value="<?php echo $clientes['complemento2']; ?>" />
+                    </div>
+                    <div class="span1">
+                        <label for="cad-estado">Estado</label>
+                        <input type="text" name="cad-estado" id="cad-estado" data-provide="typeahead" data-items="4" data-source='<?php echo $listabairros; ?>' placeholder="Estado" value="<?php echo $clientes['estado']; ?>"/>
+                    </div>
+                    <div class="span3">
+                        <label for="cad-cidade">Cidade</label>
+                        <input type="text" name="cad-cidade" id="cad-cidade" data-provide="typeahead" data-items="4" data-source='<?php echo $listabairros; ?>' placeholder="Informe a cidade" value="<?php echo $clientes['cidade']; ?>"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="span2">
+                <fieldset class="menu-botoes table-bordered">
+                    <legend>Menu</legend>
+                    <div class="row-fluid">
+                        <input id="cad-encaminhar" class="btn btn-mini span12" type="button" name="cad-encaminhar" value="Encaminhar" onclick="encaminhaTitular('<?php echo $clientes['id'] ?>', '<?php echo $_GET['matricula'] ?>')" />
+                    </div>
+                    <div class="row-fluid">
+                        <input id="cad-vacinas" class="btn btn-mini span12" type="button" name="cad-vacinas" value="Vacinas" onclick="telaVacina();" />
+                    </div>
+                    <div class="row-fluid">
+                        <input id="cad-procurar" class="btn btn-mini span12" type="button" name="cad-procurar" value="Procurar" onclick="Pesquisa(function(T) {
+//							console.log(T);
+			redirecionar('index.php?module=editar&matricula=' + T['cliente_id']);
+		})/*abrir_modal('boxes-busca')*/" />
+                    </div>
+                    <div class="row-fluid">
+                        <a id="cad-fechar" class="btn btn-mini span12" href="index.php">Fechar</a>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+		<div class="row-fluid">
+			<div class="span4">
+				<label for="cad-email">Email</label>
+				<input id="cad-email" name="cad-email" type="text" placeholder="Informe o email" value="<?php echo $clientes['email']; ?>"/>
+			</div>
+			<div class="span2">
+				<label for="cad-categoria">Categoria</label>
+				<select id="cad-categoria" name="cad-categoria" >
+					<option value="<?php echo $clientes['categoria_id']; ?>" ><?php echo categoriaById($clientes['categoria_id']); ?></option>
+					<?php
+					$categorias = buscaCategoria();
+					if(!empty($categorias)) {
+						foreach ($categorias as $categoria) {
+							$selected = "";
+							$categoriaCliente = categoriaById($clientes['categoria_id']);
+							if ($categoriaCliente == $categoria['nome']) {
+								$selected = "selected = selected";
+							}
+							?>
+							<option <?php echo $selected; ?> value="<?php echo $categoria['id']; ?>" >
+								<?php echo $categoria['nome']; ?>
+							</option>
+							<?php
+						}
+					}
+					?>
+				</select>
+			</div>
+
+			<div class="span2">
+				<label for="cad-origem">Origem</label>
+				<select id="cad-origem" onchange='mostraDesdobramentoSelect();' name="cad-origem" >
+					<option></option>
+					<?php
+					$origens = buscaOrigem();
+					if(!empty($origens)) {
+						foreach ($origens as $origem) {
+							$selected = "";
+							$origemCliente = origemById($clientes['origem_id']);
+							if($clientes['origem_id'] == 8) { //Ação Climep
+								$display = 'block';
+							} else {
+								$display = 'none';
+							}
+							if ($origemCliente == $origem['origem_nome']) {
+								$selected = "selected = selected";
+							}
+							?>
+							<option <?php echo $selected; ?> value="<?php echo $origem['id_origem']; ?>">
+								<?php echo $origem['origem_nome']; ?>
+							</option>
+							<?php
+						}
+					}
+					?>
+				</select>
+			</div>
+			<div class="span2" id="cad_desdobramento" style="display: <?php echo $display; ?>">
+				<label for="cad-desdobramento">Desdobramento</label>
+				<select id="cad-desdobramento" name="cad-desdobramento" >
+					<option></option>
+					<?php
+					$arrdesdob[0]['id'] = 1;
+					$arrdesdob[0]['nome'] = 'Telefone não confere';
+					$arrdesdob[1]['id'] = 2;
+					$arrdesdob[1]['nome'] = 'Falha no contato';
+					$arrdesdob[2]['id'] = 3;
+					$arrdesdob[2]['nome'] = 'Pedido de orçamento';
+					$arrdesdob[3]['id'] = 4;
+					$arrdesdob[3]['nome'] = 'Não tem interesse';
+					$arrdesdob[4]['id'] = 5;
+					$arrdesdob[4]['nome'] = 'Mudou de endereço';
+					$arrdesdob[5]['id'] = 6;
+					$arrdesdob[5]['nome'] = 'Já realizou todas as vacinas';
+
+					foreach ($arrdesdob as $arrdesd) {
+						$selected = "";
+						if ($clientes['desdobramento'] == $arrdesd['id']) {
+							$selected = "selected = selected";
+						}
+						?>
+						<option <?php echo $selected; ?> value="<?php echo $arrdesd['id']; ?>">
+							<?php echo $arrdesd['nome']; ?>
+						</option>
+						<?php
+					}
+
+					?>
+				</select>
+			</div>
+			<div class="span2" >
+				<input class="btn btn-mini" id="cad-cadastrar" type="submit" name="dadosUsuarios" value="<?php echo $tituloPessoa; ?>" />
+				<input id="cad-cliente-hidden" type="hidden" name="idClienteHidden" value="<?php echo $id; ?>" />
+			</div>
+		</div>
+    </fieldset>
+    <div  class="row-fluid">
+        <div class="span6">
+            <fieldset class="table-bordered" id="contatos-telefonicos" >
+                <legend align="center">Contatos Telefônicos</legend>
+                <div class="row-fluid">
+                    <label class="span3" for="ddd-residencial" >Residencial</label>
+
+                    <input class="fone" id="fone-residencial" name="tel-residencial" type="text" placeholder="(91) 9999-9999" value="<?php echo $clientes['tel_residencial']; ?>"/>
+                    <input class="dono-fone" id="dono-residencial" name="dono-residencial" type="text" placeholder="Responsável" value="<?php echo $clientes['resp_residencial']; ?>"/>
+
+                </div>
+
+                <div class="row-fluid">
+                    <label class="span3" for="ddd-comercial" >Comercial</label>
+
+                    <input class="fone" id="fone-comercial" name="tel-comercial" type="text" placeholder="(91) 9999-9999" value="<?php echo $clientes['tel_comercial']; ?>"/>
+                    <input class="dono-fone" id="dono-comercial" name="dono-comercial" type="text" placeholder="Responsável" value="<?php echo $clientes['resp_comercial']; ?>"/>
+
+                </div>
+
+                <div class="row-fluid">
+                    <label class="span3" for="ddd-apoio">Apoio</label>
+
+                    <input class="fone" id="fone-apoio" name="tel-apoio" type="text" placeholder="(91) 9999-9999" value="<?php echo $clientes['tel_apoio']; ?>"/>
+                    <input class="dono-fone" id="dono-apoio" name="dono-apoio" type="text" placeholder="Responsável" value="<?php echo $clientes['resp_apoio']; ?>"/>
+
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="span5">
+            <div class="span6">
+                <fieldset class="atualizado table-bordered" >
+                    <legend>Atualizado</legend>
+                    <div style="color:gray;">
+						<?php
+						$FulanoDeTal = buscaUsuarioPorId($clientes['pessoa_modificou']);
+						if (!empty($FulanoDeTal)) {
+							?>
+							<?php echo "em " . $clientes['ultima_modificacao'] . " por " . $FulanoDeTal; ?>
+							<?php
+						}
+						?>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="span5">
+                <fieldset  class="indicacao table-bordered" >
+                    <legend>Indicação</legend>
+                </fieldset>
+            </div>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <label for="cad-medico">Médico</label>
+                    <select id="cad-selc-medico" name="cad-selc-medico" >
+                        <option></option>
+						<?php
+						$todos_medicos_ind = buscaTodosMedicosInd();
+						if(!empty($todos_medicos_ind)) {
+							foreach ($todos_medicos_ind as $medico) {
+								$selected = "";
+								if ($clientes['medico_id'] == $medico['id']) {
+									$selected = "SELECTED";
+								}
+								?>
+								<option <?php echo $selected; ?> value="<?php echo $medico['id']; ?>" >
+									<?php echo $medico['medico_nome']; ?>
+								</option>
+								<?php
+							}
+						}
+						?>
+                    </select>
+                </div>
+
+                <div class="span5">
+                    <label for="cad-vacinador">Vacinador</label>
+                    <select id="cad-selc-vacinador" name="cad-selc-vacinador">
+                        <option></option>
+						<?php
+						$todos_vacinadores = buscaTodosVacinadores();
+						if(!empty($todos_vacinadores)) {
+							foreach($todos_vacinadores as $vacinador) {
+								$selected = "";
+								if ($clientes['fk_enfermeiro_id'] == $vacinador['id']) {
+									$selected = "SELECTED";
+								}
+								?>
+								<option <?php echo $selected; ?> value="<?php echo $vacinador['id']; ?>">
+									<?php echo strtoupper($vacinador['nome'] . " " . $vacinador['sobrenome']); ?>
+								</option>
+								<?php
+							}
+						}
+						?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <fieldset class="emissao-nf table-bordered">
+                <legend>Emissão de Nota Fiscal</legend>
+                <div class="row-fluid">
+                    <div class="span1 nome-nfla"  >
+                        <label for="nome-nf" >Nome:</label>
+                    </div>
+
+                    <div class="span6 nome-inp" >
+                        <input id="nome-nf" name="nome-nf" type="text" placeholder="Informe o nome" value="<?php echo $clientes['nome_nf']; ?>"/>
+                    </div>
+
+                    <div class="span1 doc-lab"  >
+                        <label for="doc-nf">Doc:</label>
+                    </div>   
+                    <div class="span4 doc-inp"  >
+                        <input id="doc-nf" name="doc-nf" type="text" placeholder="Informe o documento" value="<?php echo $clientes['doc_nf']; ?>"/>
+                    </div>
+                </div>
+            </fieldset>
+        </div>        
+
+        <div id="bloco-dep-obs" class="row-fluid" >
+            <div class="span7">
+                <fieldset class="observacoes table-bordered">
+                    <legend>Observações</legend>
+                    <div class="row-fluid">
+                        <textarea name="observacoes" placeholder="Informe uma observação"><?php echo $clientes['observacao']; ?></textarea>
+                    </div>
+                </fieldset>
+            </div>
+            <div id="dependentes" class="span5" >
+                <fieldset class="table-bordered">
+                    <legend >Dependentes</legend>
+                    <div class="row-fluid">
+                        <div id="context-menu" class="dependente-default">
+                            <div class="dependente-default-skin" >
+                                <ul class="dependente-default-multiselect">
+									<?php
+									//die("[id] = " . $id);
+									$dependentesPorTitular = buscaDependentesPorTitular($id);
+									//print_r($dependentesPorTitular);die();
+									foreach ($dependentesPorTitular as $dependentes) {
+										if ($dependentes['membro'] == 0)
+											continue;
+										?>
+										<li class="dependente-default-multiselect" ondblclick="$(this).children().children().attr('checked', false);">
+											<label class="default-label" value="0" >
+												<input type="radio" class="default-checkbox" id="opcao" name="opcao" value="<?php echo $dependentes['id']; ?>" >
+												<span id="opcao-dependente-<?php echo $dependentes['id']; ?>">
+													<?php echo $dependentes['nome'] . " " . $dependentes['sobrenome']; ?> 
+												</span>
+											</label>
+										</li>
+										<?php
+									}
+									?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+				<?php if ($module != "cadastro") { ?>
+					<!--=================================== MENU DE CONTEXTO BOTAO DIREITO ============================================
+						=============================================================================================================== -->
+					<div id="menu-click-rigth">
+						<ul id="menu-context"  class="dropdown-menu contextmenu" role="menu" aria-labelledby="dropdownMenu">
+							<li><a tabindex="-1" id="link_cadastro_dependente" href="#" onclick="modalCadastrarDependente();">Acrescentar Novo</a></li>
+							<li><a tabindex="-1" id="link_editar_dependente" href="#" onclick="modalEditarDependente();">Editar</a></li>
+							<li><a tabindex="-1" id="link_encaminhar" href="#" onclick="encaminhaDependente('<?php echo $_GET['matricula'] ?>');" >Encaminhar</a></li>
+							<li><a tabindex="-1" id="link_transferir_cliente" href="#" onclick="abrir_modal('boxes-transf-cliente');">Transferir Clientes</a></li>
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="#" onclick="abrir_modal('boxes-programacaovacinas');controle.limpa();">Programação</a></li>
+							<li class="divider"></li>
+							<li><a tabindex="-1" href="#" onclick="abrir_modal('boxe-grupo_imuno');">Imprimir Ficha de Imunoterapia</a></li>
+							<li><a tabindex="-1" href="#" onclick="controle_imunoterapia();"> Gerar Controle de Imunoterapia</a></li>
+							<!-- <li><a tabindex="-1" href="#" onclick="controle_imunoterapia();"> Gerar Controle de Imunoterapia/ Testes e Outros</a></li> -->
+							<li><a href="#" onclick="modalReimprimirControleVacina(0);">Reimprimir Controle</a></li>
+							<li class="divider"></li>
+<!--							<li class="dropdown submenu">
+								<a href="#" tabindex="-1" class="dropdown-toggle" data-toggle="dropdown">Teste de Triagem</a>
+								<ul class="dropdown-menu submenu-show submenu-hide">
+									<li><a href='#' onclick= "abreModalTesteAuditivo();
+			carregaDadosClienteauditivo();
+			buscaClientes('auditivo');" >Auditiva</a></li>
+									<li><a href='#' onclick= "abremodaltestevisual();
+			buscaClientes('visual');
+			carregaDadosClientevisual();">Visual</a></li>
+								</ul>
+							</li>-->
+							<li><a tabindex="-1" href="#" onclick="abrir_modal('boxes-certificado-imu');">Certificado de imunização</a></li>
+							<li><a tabindex="-1" href="#" onclick="anamense();">Anamense</a></li>
+							<li class="divider"></li>
+							<!--<li><a tabindex="-1" href="#" onclick="abrefichaimunoterapia()"> Imunoterapia </a></li>-->
+							<li><a tabindex="-1" href="#" onclick="abrefichaimunoterapia2();imunoterapia.criaTabelaImunoterapia();"> Imunoterapia </a></li>
+							<li><a tabindex="-1" href="#" onclick="etiquetaDeCarta();">Etiqueta de Carta</a></li>
+							<li class="divider"></li>
+							<li><a tabindex="-1" onclick='abrir_modal("boxe-rgvacina")' href="#">Termo de Consentimento "imunodeficiência"</a></li>
+						</ul>
+					</div>
+					<!--================================ FIM MENU DE CONTEXTO BOTAO DIREITO ====================================== -->
+				<?php } ?>
+			</div>
+		</div>
+		<hr>
+    </div>
+
+</form>
+
+<!-- ================================ FIM FORMULAŔIO DE CADASTRO ============================================================== -->
+
+<!-- ================================ MODAL PROCURAR CLIENTE=================================================================== -->
+<?php
+	require_once('view/recepcao/modal-procurar.phtml');
+?>
+<!-- ================================ FIM MODAL PROCURAR CLIENTE ================================================== -->
+
+<!-- ================================ MODAL CADASTRAR DEPENDENTE ================================================== -->
+<?php
+	require_once('view/recepcao/formDependente.phtml');
+?>
+<!-- ================================ FIM MODAL CADASTRAR DEPENDENTE ============================================== -->
+
+<!-- ================================ MODAL TESTE AUDITIVO DEPENDENTE ============================================================ -->
+
+<div id="teste-auditivo" class="modal-tst-auditivo hide fade">
+    <div id="dialog-auditivo" class=" modal-body-auditivo"  style=" background-image:url('template/img/body-bg.png');">
+        <div id="tst-auditivo"><a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo">Teste Auditivo</h2>
+            <hr/>
+            <form   class="form-tst-auditivo" action="" method="post"  >
+                <fieldset class="flst-tst-auditivo" >
+                    <div class="row-fluid" >
+                        <div class="span7">
+                            <div class="tabbable"> 
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1" data-toggle="tab">Seção 1</a></li>
+                                    <li><a href="#tab2" data-toggle="tab">Seção 2</a></li>
+                                    <li><a href="#tab3" data-toggle="tab">Seção 3</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane  active" id="tab1">
+                                        <fieldset class="flst-tst-auditivo">
+                                            <div class="row-fluid">
+                                                <div class="span8">
+                                                    <label id="lab-tst-nome" for="tst-nome" >Nome
+                                                        <div id="selectClientes-auditivo">
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="span4" >
+                                                    <label id="lab-tst-nascimento" for="tst-nascimento"> Nascimento</label>
+                                                    <input id="tst-nascimento-auditivo"  name="tst-nascimento" type="text"  disabled/>
+                                                </div>
+                                            </div>    
+                                        </fieldset>
+                                        <h5 class="titulo">
+                                            Pediatra :                                             
+                                            <select id="tst-pediatra" name="tst-pediatra">
+                                                <option></option>
+												<?php
+												foreach (buscaTodosMedicos() as $medico) {
+													?>
+													<option value="<?php echo $medico['id']; ?>" >
+														<?php echo $medico['nome']; ?>
+													</option>
+													<?php
+												}
+												?>
+
+                                            </select>
+                                        </h5>
+                                        <div class="row-fluid">
+                                            <fieldset id="flst-tst-auditivo" class="flst-tst-auditivo" >
+                                                <legend >Resultados</legend>
+                                                <label class="titulo"> Emissões otoacústicas evocadas estímulo Transiente</label>
+                                                <ul class="thumbnails">
+                                                    <li class="span6 ">
+                                                        <fieldset class="flst-tst-auditivo">
+                                                            <h6 class="titulo" align="center">OD</h6>
+                                                            <div class="row-fluid">
+                                                                <div class="span3 "  >
+                                                                    <label >TEOAE :</label>
+                                                                </div>   
+                                                                <div class="span3 " >
+                                                                    <input id="tst-od-teoae" name="teoae" type="text"/>
+                                                                </div>
+                                                                <div class="span3 "  >
+                                                                    <label >NOISE :</label>
+                                                                </div>   
+                                                                <div class="span3 " >
+                                                                    <input id="tst-od-noise" name="noise" type="text" />
+                                                                </div>
+                                                            </div>  
+
+                                                            <div class="row-fluid">
+                                                                <div class="span5 "  >
+                                                                    <label >Frequências :</label>
+                                                                </div>
+                                                                <div class="span7 " >
+                                                                    <select id="tst-od-frequencia">
+                                                                        <option value ="0.1" >0.1</option>
+                                                                        <option value ="0.5" >0.5</option>
+                                                                        <option value ="0.75" >0.75</option>
+                                                                        <option value ="1.0" >1.0</option>
+                                                                    </select>
+                                                                </div>   
+                                                            </div>   
+                                                        </fieldset>
+                                                    </li>
+                                                    <li class="span6 ">
+                                                        <fieldset class="flst-tst-auditivo">
+                                                            <h6 class="titulo" align="center">OE</h6>
+                                                            <div class="row-fluid">
+                                                                <div class="span3 "  >
+                                                                    <label >TEOAE :</label>
+                                                                </div>   
+                                                                <div class="span3 " >
+                                                                    <input id="tst-oe-teoae" name="teoae" type="text" />
+                                                                </div>
+                                                                <div class="span3 "  >
+                                                                    <label >NOISE :</label>
+                                                                </div>   
+                                                                <div class="span3 " >
+                                                                    <input id="tst-oe-noise" name="noise" type="text"/>
+                                                                </div>
+                                                            </div>  
+                                                            <div class="row-fluid">
+                                                                <div class="span5 "  >
+                                                                    <label >Frequências :</label>                                                                                                            
+                                                                </div>   
+                                                                <div class="span7 " >
+                                                                    <select id="tst-oe-frequencia">
+                                                                        <option value ="0.1" >0.1</option>
+                                                                        <option value ="0.5" >0.5</option>
+                                                                        <option value ="0.75" >0.75</option>
+                                                                        <option value ="1.0" >1.0</option>
+                                                                    </select>
+                                                                </div>   
+                                                            </div>                                                    
+                                                        </fieldset>
+                                                    </li>
+                                                </ul>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane " id="tab2">
+                                        <div class="row-fluid">
+                                            <fieldset class="flst-tst-auditivo">
+                                                <div class="span7">
+                                                    <h5 class="titulo">Meato acústico externo</h5>
+                                                    <div id="tst-auditivo-mt" class="span12">
+                                                        <div class="span6"> 
+                                                            <h6 class="titulo" align="center">OD</h6>
+                                                            <select id="tst-meato-od">
+                                                                <option value="1">Normal</option>
+                                                                <option value="0">Anormal</option>
+                                                            </select>
+                                                        </div>    
+                                                        <div class="span6"> 
+                                                            <h6 class="titulo" align="center">OE</h6>
+                                                            <select id="tst-meato-oe">
+                                                                <option value="1">Normal</option>
+                                                                <option value="0">Anormal</option>
+                                                            </select>
+                                                        </div>     
+                                                    </div>  
+                                                    <label class="titulo"> Responsivo à Voz Materna/Paterna</label>
+                                                    <label class="titulo"> 
+                                                        Localização :                                             
+                                                        <select id="tst-localizacao" name="tst-localizacao" >
+                                                            <option value="D">D</option>
+                                                            <option value="I">I</option>
+                                                            <option value="N">N</option>
+                                                        </select> 
+                                                    </label>   
+                                                </div>   
+                                                <!--  <div class="span5">
+                                                      <h5 class="titulo">Avaliação do comportamento auditivo</h5>
+                                                      <select class="tst-ava" >
+                                                          <option value=""></option>
+                                                          <option value="teste">Teste</option>
+                                                      </select> 
+                                                      <select class="tst-ava" >
+                                                          <option value=""></option>
+                                                          <option value="teste">Teste</option>
+                                                      </select> 
+                                                      <select class="tst-ava" >
+                                                          <option value=""></option>
+                                                          <option value="teste">Teste</option>
+                                                      </select> 
+                                                      <select  class="tst-ava">
+                                                          <option value=""></option>
+                                                          <option value="teste">Teste</option>
+                                                      </select> 
+                                                  </div> -->
+                                            </fieldset>
+                                        </div>
+                                        <fieldset class="flst-tst-auditivo tst-observacao">
+                                            <legend>Observações</legend>
+                                            <div class="row-fluid">
+                                                <textarea id="tst-observacoes" name="observacoes"></textarea>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="tab-pane " id="tab3">
+                                        <fieldset  class="flst-tst-auditivo" >
+                                            <div class="row-fluid">
+                                                <div class="span8"> 
+                                                    <h5 class="titulo">Resultado</h5>
+                                                    <label id="" class=""  >
+                                                        <input type="checkbox" id="tst-conclusao" value="1"/>
+                                                        Sugestão de função coclear presente bilateralmente
+                                                    </label>
+                                                    <label id="" class=""  >
+                                                        <input type="checkbox" id="tst-check-reavaliacao" value="reteste" />
+                                                        Sugerido reavaliação auditiva em 
+                                                    </label>
+                                                    <input type="text" id="tst-em-data" name="data-reteste"/>
+                                                </div>
+                                                <!--<div class="span4">
+                                                    <ul class="thumbnails">
+                                                        <li>
+                                                            <fieldset class=" thumbnail " >
+                                                                <li >
+                                                                    <div class="row-fluid" id="btn-ultimoexame">
+                                                                        <input class="btn btn-mini span12" type="button" name="procurar" value="Último Exame " />
+                                                                    </div>
+                                                                    <div class="row-fluid" >
+                                                                        <input class="btn btn-mini span12" type="button" name="vacinas" value="Anamese"/>
+                                                                    </div>
+                                                                </li>
+                                                            </fieldset>  
+                                                        </li>
+                                                    </ul>     
+                                                </div>--> 
+                                            </div>    
+                                        </fieldset>    
+                                        <label class="titulo"> Este exame não avalia a função do tronco cerebral</label>
+                                        <ul class="thumbnails">
+                                            <li class="span4 botao">
+                                                <input class="btn btn-mini span10" type="button" name="imprimir" value="Imprimir" />
+                                            </li>
+                                            <li class="span4 botao">
+                                                <input class="btn btn-mini span10" type="button" name="gravar" value="Gravar" onclick="inserirConsultaOrelhinha1();" />
+                                            </li>
+                                            <li class="span4 botao">
+                                                <input class="btn btn-mini span10" type="button" name="fechar" value="Fechar" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span5">   
+                            <fieldset class="flst-tst-auditivo"> 
+                                <legend >Sala de Espera</legend>
+                                <div id="dt_auditivo">
+                                    <div id="dt-tabela-auditivo" >
+                                        <table cellpadding="0" cellspacing="0" border="0"  class="table table-striped table-bordered table-condensed"> 
+                                            <thead>
+                                                <tr>
+                                                    <th>St</th>
+                                                    <th>Ord</th>
+                                                    <th>Hora</th>
+                                                    <th>Matrícula</th>
+                                                    <th>Paciente</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+												<?php
+												foreach (buscaFilaDeEsperaDataMedico(date("Y-m-d"), $_SESSION['usuario']['id']) as $filaDeEspera) {
+													?>
+													<tr name="table-color" class='dayhead '<?php echo 'onclick="carregaClienteFilaEspera(\'' . $filaDeEspera['cliente_id'] . '\');carregaTabelaHistoricoConsulta(\'' . $filaDeEspera['cliente_id'] . '\');"'; ?>>
+														<th  class="center"><?php echo (empty($filaDeEspera['hora_atendimento']) || $filaDeEspera['hora_atendimento'] != "00:00:00") ? 'JÁ' : 'At'; ?></th>
+														<th  class="center"><?php echo $filaDeEspera['id']; ?></th>
+														<th  class="center"><?php echo $filaDeEspera['hora_recepcao']; ?></th>
+														<th  class="center"><?php echo (empty($filaDeEspera['hora_atendimento']) || $filaDeEspera['hora_atendimento'] != "00:00:00") ? $filaDeEspera['hora_atendimento'] : ''; ?></th>
+														<th  class="center"><?php echo buscaNomeCliente($filaDeEspera['cliente_id']); ?></th>
+													</tr>
+
+
+													<?php
+												}
+												?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                </fieldset>
+            </form> 
+        </div>
+    </div>   
+</div>
+
+<!--================================ FIM  MODAL TESTE AUDITIVO DEPENDENTE ========================================= 
+    =============================================================================================================== -->
+
+<!--=================================== MODAL FICHA DE VACINA =====================================================
+    =============================================================================================================== -->
+<script  src="view/recepcao/js/fichaVacina.js"></script>
+<div id="form-ficha-vacina">
+    <div id="ficha-vacina" class="modal-vacina hide fade">
+        <div id="ficha-vac">
+        </div>
+    </div>
+</div>
+
+<!--=================================== FIM MODAL FICHA DE VACINA =================================================
+    =============================================================================================================== -->
+
+<!--================================ MODAL TESTE VISUAL ======================================================================
+  ============================================================================================================================ -->
+
+<div id="boxes-tst-visual" class="modal-tst-visual hide fade">
+    <div id="dialog-visual" class=" modal-body-visual"  style=" background-image:  url('template/img/body-bg.png');">
+        <div id="tst-visual"><a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo">Teste Visual</h2>
+            <hr style="margin-top: -4px;"/>
+            <form   class="form-tst-visual" action="" method="post">
+                <fieldset id="flst-tst-visual-main" class="flst-tst-visual" >
+                    <div class="row-fluid" >
+                        <div class="span7">
+                            <div class="tabbable"> 
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab1-visual" data-toggle="tab">Seção 1</a></li>
+                                    <li><a href="#tab2-visual" data-toggle="tab">Seção 2</a></li>
+                                    <li><a href="#tab3-visual" data-toggle="tab">Seção 3</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane  active" id="tab1-visual">
+                                        <fieldset class="flst-tst-visual" >
+                                            <div class="row-fluid">
+                                                <div class="span8">
+                                                    <label id="lab-tst-nome" for="tst-nome" >Nome
+                                                        <div id="selectClientes-visual">
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="span4" >
+                                                    <label id="lab-tst-nascimento" for="tst-nascimento"> Nascimento</label>
+                                                    <input id="tst-nascimento-visual"  name="tst-nascimento" type="text"  disabled />
+                                                </div>
+                                            </div>    
+                                        </fieldset>
+
+                                        <fieldset class="flst-tst-visual">
+                                            <legend >Dados da gestão, parto e nascimento</legend>
+                                            <div class="row-fluid">
+                                                <div class="span12">
+                                                    <div  class="span6">
+                                                        <fieldset class="flst-tst-visual">
+                                                            <legend >Gestação</legend>
+                                                            <div>
+                                                                <select id="con-gestacao">
+                                                                    <option></option>
+																	<?php
+																	foreach (buscaGestacao() as $gestacao) {
+																		?>
+																		<option <?php echo $selected; ?> value="<?php echo $gestacao['id']; ?>" >
+																			<?php echo $gestacao['tipo']; ?>
+																		</option>
+																		<?php
+																	}
+																	?>
+                                                                </select>
+                                                            </div> 
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="span6">
+
+                                                        <fieldset class="flst-tst-visual">
+                                                            <legend >Parto</legend>
+                                                            <div>
+                                                                <select id="con-parto">
+                                                                    <option></option>
+																	<?php
+																	foreach (buscaParto() as $parto) {
+																		?>
+																		<option <?php echo $selected; ?> value="<?php echo $parto['id']; ?>" >
+																			<?php echo $parto['tipo']; ?>
+																		</option>
+																		<?php
+																	}
+																	?>
+                                                                </select>
+                                                            </div> 
+                                                        </fieldset>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row-fluid">
+                                                <div class="span12">
+                                                    <fieldset class="flst-tst-visual">
+                                                        <legend >Condições de nascimento</legend>
+                                                        <div class="span3">
+                                                            <label for="idade-ges">Idade Gestacional</label>
+                                                            <input id="idade-gestacional" name="idade-ges" type="text"  />
+                                                        </div>  
+                                                        <div class="span3">
+                                                            <label for="peso-nascer">Peso ao nascer</label>
+                                                            <input id="peso-nascimento" name="peso-nascer" type="text"  />
+                                                        </div>  
+
+                                                        <div class="span3">
+                                                            <label for="apgar" > Peso Apgar </label>
+                                                            <input id="apgar" name="apgar" type="text"  />
+                                                        </div>  
+                                                    </fieldset>
+                                                </div> 
+                                            </div>    
+                                        </fieldset>
+
+                                        <div class="row-fluid">
+                                            <fieldset id="flst-tst-visual" class="flst-tst-visual" >
+                                                <legend >Resultados</legend>
+
+                                                <div class="row-fluid">
+                                                    <div class="span6">
+                                                        <fieldset id="flst-tst-visual" class="flst-tst-visual" >
+
+                                                            <legend>OD</legend>
+
+                                                            <select id="olhinho-resultado-od" name="olhinho-resultado-od">
+                                                                <option value="Normal" > Normal </option>
+                                                                <option value="Suspeito" > Suspeito </option>
+                                                                <option value="Leucoria" > Leocoria </option>
+                                                            </select>
+
+
+
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="span6">
+                                                        <fieldset id="flst-tst-visual" class="flst-tst-visual" >
+
+                                                            <legend>OE</legend>
+                                                            <select id="olhinho-resultado-oe" name="olhinho-resultado-od">
+                                                                <option value="Normal" > Normal </option>
+                                                                <option value="Suspeito" > Suspeito </option>
+                                                                <option value="Leucoria" > Leocoria </option>
+                                                            </select>
+
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane " id="tab2-visual">
+
+                                        <fieldset class="flst-tst-visual " > 
+                                            <legend>Anotações</legend>
+
+                                            <div class="row-fluid" >
+                                                <fieldset class="flst-tst-visual tst-qp">
+                                                    <legend>OP</legend>
+                                                    <textarea id="olhinho-anotacoes-op" name="op"></textarea>
+                                                </fieldset>
+
+                                            </div>                 
+                                            <div class="row-fluid">
+                                                <fieldset class="flst-tst-visual tst-nf">
+                                                    <legend>HF</legend>
+                                                    <textarea id="olhinho-anotacoes-hf" name="hf"></textarea>
+                                                </fieldset>
+                                            </div>
+
+                                        </fieldset>
+
+                                        <fieldset class="flst-tst-visual tst-outros">
+                                            <legend>Outros exames e achados oculares</legend>
+                                            <div class="row-fluid" >
+                                                <textarea id="olhinho-anotacoes-outros" name="outros"></textarea>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset class="flst-tst-visual tst-obs">
+                                            <legend>Observações</legend>
+                                            <div class="row-fluid">
+                                                <textarea id="olhinho-anotacoes-obs" name="observacooes"></textarea>
+                                            </div>
+                                        </fieldset>                                              
+                                    </div>
+
+                                    <div class="tab-pane " id="tab3-visual">
+                                        <fieldset  class="flst-tst-visual" >
+                                            <div class="row-fluid">
+                                                <div class="span8"> 
+                                                    <h5 class="titulo">Resultado</h5>
+                                                    <label id="" class=""  >
+                                                        <input type="checkbox" name="olhinho-sug-funcao-normal" id="olhinho-sug-funcao-normal" value="1" name="opcao"> 
+                                                        Sugestiva de função visual normal
+                                                    </label>
+                                                    <label id="" class=""  >
+                                                        <input type="checkbox" name="olhinho-sug-funcao-normal" id="olhinho-sug-funcao-normal" value="1" name="opcao"> 
+                                                        Sugestão de função visual anormalidade 
+                                                    </label>
+                                                    <label id="" class=""  >
+                                                        <input type="checkbox" name="olhinho-reteste-ok" id="olhinho-reteste-ok" value="1" />
+
+                                                        Sugerido reteste em 
+                                                    </label>
+                                                    <input id="tst-visual-data" type="txt"  class="" name="opcao">
+                                                </div>
+                                                <!--  <div class="span4">
+                                                      <ul class="thumbnails">
+                                                          <li>
+                                                              <fieldset class=" thumbnail " >
+                                                                  <li >
+                                                                      <div class="row-fluid"  >
+                                                                          <input id="tst-visual-btn" class="btn btn-mini span12" type="button" name="procurar" value="Últimos Exames " />
+                                                                      </div>
+                                                                  </li>
+                                                              </fieldset> 
+                                                          </li>
+                                                      </ul>     
+                                                  </div>--> 
+                                            </div>    
+                                        </fieldset>    
+                                        <label class="titulo"> Este exame não avalia a função do tronco cerebral</label>
+                                        <ul class="thumbnails">
+                                            <li class="span4 botao">
+                                                <input class="btn btn-mini span10" type="button" name="imprimir" value="Imprimir" />
+                                            </li>
+                                            <li class="span4 botao">
+                                                <input class="btn btn-mini span10" type="button" name="gravar" value="Gravar" />
+                                            </li>
+                                            <li class="span4 botao">
+                                                <input class="btn btn-mini span10" type="button" name="fechar" value="Fechar" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span5">   
+                            <fieldset class="flst-tst-visual"> 
+                                <legend >Sala de Espera</legend>
+                                <div id="dt_visual">
+                                    <div id="dt-tabela-visual" >
+                                        <table cellpadding="0" cellspacing="0" border="0"  class="table table-striped table-bordered table-condensed"> 
+                                            <thead>
+                                                <tr>
+                                                    <th>St</th>
+                                                    <th>Ord</th>
+                                                    <th>Hora</th>
+                                                    <th>Matrícula</th>
+                                                    <th>Paciente</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+												<?php
+												foreach (buscaFilaDeEsperaDataMedico(date("Y-m-d"), $_SESSION['usuario']['id']) as $filaDeEspera) {
+													?>
+													<tr name="table-color" class='dayhead '<?php echo 'onclick="carregaClienteFilaEspera(\'' . $filaDeEspera['cliente_id'] . '\');carregaTabelaHistoricoConsulta(\'' . $filaDeEspera['cliente_id'] . '\');"'; ?>>
+														<th  class="center"><?php echo (empty($filaDeEspera['hora_atendimento']) || $filaDeEspera['hora_atendimento'] != "00:00:00") ? 'JÁ' : 'At'; ?></th>
+														<th  class="center"><?php echo $filaDeEspera['id']; ?></th>
+														<th  class="center"><?php echo $filaDeEspera['hora_recepcao']; ?></th>
+														<th  class="center"><?php echo (empty($filaDeEspera['hora_atendimento']) || $filaDeEspera['hora_atendimento'] != "00:00:00") ? $filaDeEspera['hora_atendimento'] : ''; ?></th>
+														<th  class="center"><?php echo buscaNomeCliente($filaDeEspera['cliente_id']); ?></th>
+													</tr>
+
+
+													<?php
+												}
+												?>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                </fieldset>
+            </form> 
+        </div>
+    </div>
+</div>
+<!--================================  MODAL CONTROLE DE IMUNOTERAPIA  =========================================
+============================================================================================================== -->
+
+<script async defer src="view/recepcao/js/imunoterapia.js"></script>
+<script async defer src="template/js/geral.js"></script>
+<div id="form-controle-imunoterapia">
+    <div id="boxes-ctr-imu" class="modal modal-controle-imu hide fade" style="top: 30%;">
+		<div id="dialog-certificado-imu" class=" modal-body modal-body-certificado-imu"  >
+			<div><a href="#" id="fechar" class="close" />Fechar X</a>
+				<h2 class="titulo">Gerar Novo Controle</h2>
+				<hr style="margin-top: -4px;"/>
+				<div class="row-fluid">
+					<div class="span6">
+						<label>
+							<input type="text" name="" value="<?php echo $clientes['matricula'] . ' - ' . $clientes['nome'] . ' ' . $clientes['sobrenome'] ?>" disabled  />
+						</label>
+					</div>
+				</div><br/>
+				<div class="row-fluid">
+					<div>
+						<span><b>Serviços a serem realizados hoje:</b></span>
+					</div>
+					<div style="height:130px;overflow:auto" class="row-fluid">
+						<table cellspacing='10'align="center" class="table-modfy">
+							<thead>
+								<tr class="white">
+									<th class="line-table titulo" align="center"> Membro </th>
+									<th class="line-table titulo" align="center"> Cliente </th>
+									<th class="line-table titulo" align="center"> Serviço </th>
+									<th class="line-table titulo" align="center"> Incluir </th>
+								</tr>
+							</thead>
+							<tbody id="controle-Imunoterapia-hoje">
+							</tbody>
+						</table>
+					</div>
+				</div><br/>
+				<div>
+					<span> <b>Incluir pagamento antecipado para os seguintes serviços.</b></span>
+				</div>
+				<div style="height:130px;overflow:auto" class="row-fluid">
+					<table cellspacing='10' align="center" class="table-modfy">
+						<thead>
+							<tr class="white">
+								<th class="line-table titulo" align="center"> Membro </th>
+								<th class="line-table titulo" align="center"> Cliente </th>
+								<th class="line-table titulo" align="center"> Serviço </th>
+								<th class="line-table titulo" align="center"> Incluir </th>
+							</tr>
+						</thead>
+						<tbody id="controle-Imunoterapia-programados">
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<span> <b>Pagamento Antecipado</b></span>
+				</div>
+				<div style="height:130px;overflow:auto" class="row-fluid">
+					<table cellspacing='10' align="center" class="table-modfy">
+						<thead>
+							<tr class="white">
+								<th class="line-table titulo" align="center"> Membro </th>
+								<th class="line-table titulo" align="center"> Cliente </th>
+								<th class="line-table titulo" align="center"> Serviço </th>
+								<th class="line-table titulo" align="center"> Incluir </th>
+							</tr>
+						</thead>
+						<tbody id="controle-Imunoterapia-pagos">
+						</tbody>
+					</table>
+				</div>
+				<hr>
+				<div class="row-fluid">
+					<div class="span3">
+						<select id="select_controle_imunoterapia">
+							<option value="0">Novo Controle</option>
+						</select>
+					</div>
+					<div class="span8">
+						<div class="row-fluid" style="margin-bottom: 15px;">
+							<fieldset class="table-bordered">
+								<legend>Módulos</legend>
+								<div class="row-fluid">
+									<div class="block-area" >
+										<ul class="ULDependenteModulos" id="ULDependenteModulosImuno" style="margin-left: -0.1px;" >
+										</ul>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="row-fluid" >
+							<div class="span7" id="botao_gerarcontrole">
+								<input onclick="controle_imunoterapia_imprimir();" class="btn btn-mini span10" type="button" name="" value="Gerar Controle" />
+							</div>
+							<div class="span5">
+								<input class="btn btn-mini span10" onclick="fechar_modal('boxes-ctr-imu');" type="button" name="" value="Cancelar" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+
+<!--================================  MODAL CERTIFICAÇÃO DE IMUNIZACAO ====================================================
+============================================================================================================== -->
+
+<div id="boxes-certificado-imu" class="modal modal-certificado-imu hide fade" style="top: 40%;">
+    <div id="dialog-certificado-imu" class="modal-body modal-body-certificado-imu">
+        <div id=""><a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo">Certificado de Imunização</h2>
+            <hr style="margin-top: -4px;"/>
+            <div id="" class="row-fluid">
+                <div class="span6">
+                    <label>
+                        <input type="text" name="" value="<?php echo $clientes['matricula'] . ' - ' . $clientes['nome'] . ' ' . $clientes['sobrenome'] ?>" disabled  />
+                    </label>
+                </div>
+            </div><br/>
+            <div id="" class="row-fluid">
+                <div class="span1">
+                    Membro:
+                </div>
+                <div class="span5">
+                    <select id="cert-vac-membro" onchange="buscaVacPorCliente();" name="cert-vac-membro" >
+                        <option></option>
+						<?php
+						foreach ($dependentesPorTitular as $dependentes) {
+							?>
+							<option value="<?php echo $dependentes['id']; ?>"><?php echo $dependentes['membro'] . ' - ' . $dependentes['nome'] . " " . $dependentes['sobrenome']; ?></option>
+							<?php
+						}
+						?>
+                    </select>
+                </div>
+            </div><br/>
+
+            <div style="height:200px;overflow:auto" id="" class="row-fluid">
+                <table cellspacing='10' class="table-modfy">
+                    <thead>
+                        <tr class="white">
+                            <th class="titulo" align="center"> Data </th>
+                            <th class="titulo" align="center"> Serviço </th>
+                            <th class="titulo" align="center"> Lote </th>
+                            <th class="titulo" align="center"> Tipo </th>
+                        </tr>
+                    </thead>
+                    <tbody id="cert-vac-vacs">
+                    </tbody>
+                </table>
+            </div>
+            <div class="row-fluid">             
+                <textarea></textarea>     
+
+            </div>
+            <div class="row-fluid">
+                <div class="span3">      
+                    <div class="row-fluid" >
+                        <div class="span6" id="botao_imprimir">   
+                            <input onclick="imprimirCertificadoVacinaCad()" class="btn btn-mini span10" type="button" name="" value="Imprimir" />
+                        </div>
+                        <div class="span6">   
+                            <input class="btn btn-mini span10" onclick="fechar_modal('boxes-certificado-imu');" type="button" name="" value="Fechar" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="span2">
+                    <label>
+                        <input checked="checked" type="radio" value='pt' name="language"/>
+                        Português
+                    </label>
+
+                </div>
+                <div class="span2">
+                    <label>
+                        <input type="radio" value='en' name="language"/>
+                        Inglês
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<!--================================  FIM MODAL CERTIFICADO DE IMUNIZAÇÃO ====================================================
+============================================================================================================== -->
+
+<!--================================  MODAL DE EVENTOS ADVERSOS ==================================================
+============================================================================================================== -->
+<div class="modal hide fade" id="boxe-eventos">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3 align="center">Eventos Adversos</h3>
+        <hr>
+        <div id="reacoes_vac_nome" class="row-fluid">
+        </div>
+    </div>
+    <div class="modal-body">
+        <div id="formvacina">
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Data da queixa:</label>
+                    <input type="text" name="reacoes_vac_data" value="<?php echo date('d/m/Y'); ?>"/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Evento:</label>
+                    <select name="reacoes_vac_evento">
+						<?php
+						foreach (buscaTodosEventosAdversos() as $eventosAdversos) {
+							?>
+							<option value="<?php echo $eventosAdversos['id']; ?>">
+								<?php echo $eventosAdversos['nome']; ?>
+							</option>
+							<?php
+						}
+						?>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Conduta:</label>
+                    <textarea name="reacoes_vac_conduta"></textarea>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Evolução:</label>
+                    <textarea name="reacoes_vac_evolucao"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row-fluid">
+            <div class="span5">
+                <a href="#" class="btn" onclick="excluir_evento_adverso();" >Excluir <i class="icon-trash"></i></a> 
+            </div>
+            <div class="span2">
+                <a href="#" class="btn" onclick="insere_evento_adverso();" style="width: 60px">Gravar<i class=" icon-folder-open"></i></a> 
+            </div>
+            <div class="span2">
+                <a href="#" class="btn" onclick="fechar_modal('boxe-eventos');" style="width: 80px">Descartar<i class="icon-remove"></i></a> 
+            </div>
+        </div>
+    </div>
+</div>
+<!--================================  FIM MODAL DE EVENTOS ADVERSOS ====================================================
+============================================================================================================== -->
+
+<!--================================  MODAL DE DECLARACAO DE COMPARECIMENTO ===========================================
+============================================================================================================== -->
+<div class="modal hide fade" id="boxe-comparecimento">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3 align="center">Declaração de Comparecimento</h3>
+        <hr>
+        <div id="comparecimento_cliente_nome" class="row-fluid">
+        </div>
+    </div>
+    <div class="modal-body">
+        <div id="formvacina">
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Cliente:</label>
+                    <select name="comparecimento_cliente">
+						<?php
+						$deps_comp = buscaDependentesPorTitular($clientes['cliente_id']);
+						foreach ($deps_comp as $deps) {
+							?>
+							<option value="<?php echo $deps['id']; ?>">
+								<?php echo $deps['nome'] . " " . $deps['sobrenome']; ?>
+							</option>
+							<?php
+						}
+						?>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Acompanhante:</label>
+                    <select name="comparecimento_acompanhante">
+						<?php
+						foreach ($deps_comp as $deps) {
+							?>
+							<option value="<?php echo $deps['id']; ?>">
+								<?php echo $deps['nome'] . " " . $deps['sobrenome']; ?>
+							</option>
+							<?php
+						}
+						?>
+                    </select>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row-fluid">
+            <div class="span6">
+                <a href="#" class="btn" onclick="imprimirDeclaracaoComparecimento();" style="width: 80px">Imprimir <i class=" icon-folder-open"></i></a> 
+            </div>
+            <div class="span2">
+                <a href="#" class="btn" onclick="fechar_modal('boxe-comparecimento');" style="width: 80px">Descartar <i class="icon-remove"></i></a> 
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--================================ FIM MODAL DE DECLARACAO DE COMPARECIMENTO =====================================
+============================================================================================================== -->
+
+<!--================================  MODAL RESULTADO DE TESTES TCA IMUNIDADE =======================================
+============================================================================================================== -->
+
+<div id="boxe-resultadoteste_tca" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3> Resultado TCA Imunidade </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <legend> Candidina </legend>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Data de Leitura:</label>
+                    <input type='text' name='resultado_dataleit_tca_candidina' data-mask='99/99/9999' placeholder='Digite a Data'/>
+                </div>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Resultado:</label>
+                    <input type='text' name='resultado_valor_tca_candidina' placeholder='Digite o valor'/>
+                </div>
+            </fieldset>
+        </div> <br>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <legend> E. Coli </legend>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Data de Leitura:</label>
+                    <input type='text' name='resultado_dataleit_tca_ecoli' data-mask='99/99/9999' placeholder='Digite a Data'/>
+                </div>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Resultado:</label>
+                    <input type='text' name='resultado_valor_tca_ecoli' placeholder='Digite o valor'/>
+                </div>
+            </fieldset>
+        </div> <br>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <legend> Tricofitina </legend>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Data de Leitura:</label>
+                    <input type='text' name='resultado_dataleit_tca_tricofitina' data-mask='99/99/9999' placeholder='Digite a Data'/>
+                </div>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Resultado:</label>
+                    <input type='text' name='resultado_valor_tca_tricofitina' placeholder='Digite o valor'/>
+                </div>
+            </fieldset>
+        </div> <br>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <legend> PPD </legend>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Data de Leitura:</label>
+                    <input type='text' name='resultado_dataleit_tca_ppd' data-mask='99/99/9999' placeholder='Digite a Data'/>
+                </div>
+                <div class="span1"></div>
+                <div class="span4">
+                    <label>Resultado:</label>
+                    <input type='text' name='resultado_valor_tca_ppd' placeholder='Digite o valor'/>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="modal-footer" id="resultado_teste_vacina_botao_tca" >
+    </div>
+</div>
+
+<!--================================  FIM MODAL RESULTADO DE TESTES TCA IMUNIDADE =======================================
+============================================================================================================== -->
+
+<!--================================  MODAL RESULTADO DE TESTES ====================================================
+============================================================================================================== -->
+
+<div id="boxe-resultadoteste" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3> Resultado </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div id="resultado_teste_vacina_modal" class="span4">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" id="resultado_teste_vacina_botao" >
+    </div>
+</div>
+
+<!--================================ FIM MODAL RESULTADO DE TESTES ====================================================
+============================================================================================================== -->
+
+<!--================================ MODAL DATA LAUDO IMUNODEFICIENCIA ================================================
+============================================================================================================== -->
+
+<div id="boxe-data_imprime_imuno" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3> Laudo de Imunodeficiência </h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div class="span4">
+                <label>Informe a data do ensaio:</label>
+                <input type='text' data-mask='99/99/9999' name='data_laudo_imu' placeholder='Digite a data'/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" id="resultado_laudo_imu_botao" >
+    </div>
+</div>
+
+<!--================================ FIM MODAL DATA LAUDO IMUNODEFICIENCIA ============================================
+============================================================================================================== -->
+<!--================================  MODAL EDICAO DATA IMUNOTERAPIA =================================================
+============================================================================================================== -->
+
+<div id="boxe-dataimunoterapia" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3> Data da Imunoterapia</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div class="span5">
+                <label>Informe a data da Imunoterapia:</label>
+				<input data-mask='99/99/9999' id='inputTextImunoData' type='text' value="<?php echo date('d/m/Y');?>" placeholder='Digite a Data'/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href='#' onclick='imunoterapia.addbyModal();' class='btn'>Salvar</a>
+        <a href='#' onclick='fechar_modal("boxe-dataimunoterapia");' class='btn'>Cancelar</a>
+    </div>
+</div>
+
+<!--================================ FIM MODAL EDICAO DATA IMUNOTERAPIA ==============================================
+============================================================================================================== -->
+
+<!--================================  MODAL EDICAO DATA VACINA ====================================================
+============================================================================================================== -->
+
+<div id="boxe-datavacina" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+        <h3> Data da Vacina</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row-fluid">
+            <div id="editar_data_vacina_modal" class="span4">
+<!--                <label>Informe a data da vacina:</label>
+				<input type='text' data-mask='99/99/9999' onblur="dateComplete($(this));" id='data_edicao_vacina' value='' placeholder='Digite a data'/>-->
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" id="editar_data_vacina_botao" >
+    </div>
+</div>
+
+<!--================================ FIM MODAL EDICAO DATA VACINA ====================================================
+============================================================================================================== -->
+
+<!--================================  MODAL RG CLIENTE =========================================================
+============================================================================================================== -->
+
+<div id="boxe-rgvacina" class="modal hide fade">
+    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+		<h3> RG do Cliente</h3>
+    </div>
+    <div class="modal-body">
+		<div class="row-fluid">
+			<div class="span4">
+				<label>Informe o RG do Cliente:</label>
+			</div>
+			<div id="rg_vacina_modal" class="span4">
+				<input id='inputTextRG' type='text'  placeholder='Digite o RG'/>
+			</div>
+		</div>
+    </div>
+    <div class="modal-footer" id="rg_vacina_botao" >
+        <a href='#' onclick='termoDeConsentimento();' class='btn'>Imprimir</a>
+        <a href='#' onclick='fechar_modal("boxe-rgvacina");' class='btn'>Cancelar</a>
+    </div>
+</div>
+
+<!--================================  FIM MODAL RG CLIENTE =====================================================
+============================================================================================================== -->
+
+<!--================================  MODAL NOME GRUPO IMUNOTERAPIA =========================================================
+============================================================================================================== -->
+
+<div id="boxe-grupo_imuno" class="modal hide fade">
+    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">Fechar &times;</button>
+		<h3> Nome Da Imunoterapia </h3>
+    </div>
+    <div class="modal-body">
+		<div class="row-fluid">
+			<div class="span4">
+				<label>Informe o Nome da Imunoterapia:</label>
+			</div>
+			<div id="" class="span4">
+				<select id="modeloDeEscolhaDoGrupoDeImunoterapiaParaImpresao" name="">
+					<?php
+					$queryResult = listaGruposImuneterapia();
+					while ($row = mysqli_fetch_assoc($queryResult)) {
+						?>
+						<option value="<?php echo $row['id']; ?>"><?php echo $row['grupo']; ?></option>
+						<?php
+					}
+					?>
+				</select>
+			</div>
+		</div>
+    </div>
+    <div class="modal-footer">
+        <a href='#' onclick='imprimirFichaDeImunoterapia();' class='btn'>Imprimir</a>
+        <a href='#' onclick='fechar_modal("boxe-grupo_imuno");' class='btn'>Cancelar</a>
+    </div>
+</div>
+
+<!--================================ FIM MODAL NOME GRUPO IMUNOTERAPIA =========================================================
+============================================================================================================== -->
+
+<!--================================  MODAL CONTROLE INTERNO NOVO ====================================================
+============================================================================================================== -->
+
+<div id="boxes-controle-novo" class="modal modal-certificado-imu hide fade" style="top: 40%;">
+	<div id="dialog-certificado-imu" class=" modal-body modal-body-certificado-imu"  >
+		<div ><a href="#" id="fechar" class="close" />Fechar X</a>
+			<h2 class="titulo">Gerar Novo Controle</h2>
+			<hr style="margin-top: -4px;"/>
+			<div class="row-fluid">
+				<div class="span6">
+					<label>
+						<input type="text" name="" value="<?php echo $clientes['matricula'] . ' - ' . $clientes['nome'] . ' ' . $clientes['sobrenome'] ?>" disabled  />
+					</label>
+				</div>
+			</div><br/>
+			<div class="row-fluid">
+				<div>
+					<span><b>Serviços a serem realizados hoje:</b></span>
+				</div>
+				<div style="height:130px;overflow:auto" class="row-fluid">
+					<table cellspacing='10'align="center" class="table-modfy">
+						<thead>
+							<tr class="white">
+								<th class="line-table titulo" align="center"> Membro </th>
+								<th class="line-table titulo" align="center"> Cliente </th>
+								<th class="line-table titulo" align="center"> Serviço </th>
+								<th class="line-table titulo" align="center"> Incluir </th>
+							</tr>
+						</thead>
+
+						<tbody id="controle-vac-vacs-hoje">
+						</tbody>
+					</table>
+				</div>
+			</div><br/>
+			<div>
+				<span> <b>Incluir pagamento antecipado para os seguintes serviços.</b></span>
+			</div>
+			<div style="height:130px;overflow:auto" class="row-fluid">
+				<table cellspacing='10' align="center" class="table-modfy">
+					<thead>
+						<tr class="white">
+							<th class="line-table titulo" align="center"> Membro </th>
+							<th class="line-table titulo" align="center"> Cliente </th>
+							<th class="line-table titulo" align="center"> Serviço </th>
+							<th class="line-table titulo" align="center"> Incluir </th>
+						</tr>
+					</thead>
+					<tbody id="controle-vac-vacs-programados">
+					</tbody>
+				</table>
+			</div><hr>
+			<div class="row-fluid">
+				<div class="span3">
+					<select id="select_controle_ctrl" name="select_controle_ctrl">
+					</select>
+				</div>
+				<div class="span8">
+					<div class="row-fluid" style="margin-bottom: 15px;">
+						<fieldset class="table-bordered">
+							<legend>Módulos</legend>
+							<div class="row-fluid">
+								<div class="block-area" >
+									<ul class="ULDependenteModulos" id="dependenteModulos" style="margin-left: -0.1px;" >
+									</ul>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span3">
+					<div class="row-fluid" >
+						<div class="span7" id="botao_gerarcontrole">
+							<input onclick="imprimirControleNovo()" class="btn btn-mini span10" type="button" name="" value="Gerar Controle" />
+						</div>
+						<div class="span5">
+							<input class="btn btn-mini span10" onclick="fechar_modal('boxes-controle-novo');" type="button" name="" value="Cancelar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--================================  FIM MODAL CONTROLE INTERNO NOVO ====================================================
+============================================================================================================== -->
+
+<!--================================  MODAL CONTROLE INTERNO REIMPRIMIR ==================================================
+============================================================================================================== -->
+
+<div id="boxes-controle-reimprimir" class="modal modal-certificado-imu hide fade" style="top: 40%;">
+    <div id="dialog-certificado-imu" class="modal-body modal-body-certificado-imu">
+        <div id=""><a href="#" id="fechar" class="close"/>Fechar X</a>
+            <h2 class="titulo">Reimprimir Controle</h2>
+            <hr style="margin-top: -4px;"/>
+            <div id="" class="row-fluid">
+                <div class="span6">
+                    <label>
+                        <input type="text" name="" value="<?php echo $clientes['matricula'] . ' - ' . $clientes['nome'] . ' ' . $clientes['sobrenome'] ?>" disabled  />
+                    </label>
+                </div>
+            </div><br/>
+            <div id="" class="row-fluid">
+                <div class="span1">
+                    Controle:
+                </div>
+                <div class="span5">
+                    <select id="reimprimir-controle-controles" onchange="buscaDadosControle();" name="reimprimir-controle-controles" >
+                    </select>
+                </div>
+            </div><br>
+
+            <div style="height:300px;overflow:auto" id="" class="row-fluid">
+                <table cellspacing='10' class="table-modfy">
+                    <thead>
+                        <tr class="white">
+                            <th class="titulo" align="center"> Membro </th>
+                            <th class="titulo" align="center"> Nome </th>
+                            <th class="titulo" align="center"> Servico </th>
+                            <th class="titulo" align="center"> Tipo </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-reimprimir-controle">
+                    </tbody>
+                </table>
+            </div> <br><br>
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="row-fluid">
+                        <div class="span6" >
+                            <input onclick="reimprimirControle()" class="btn btn-mini span10" type="button" name="" value="Imprimir" />
+                        </div>
+                        <div class="span6">
+                            <input class="btn btn-mini span10" onclick="fechar_modal('boxes-controle-reimprimir');" type="button" name="" value="Fechar" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================================  FIM MODAL CONTROLE INTERNO REIMPRIMIR =================================================
+================================================================================================================= -->
+
+<!--================================  MODAL PROGRAMAÇÃO  DE VACINAS - ORCAMENTOS ============================================
+================================================================================================================= -->
+
+<div id="boxes-programacaovacinas" class="modal-programacaovacinas hide fade" id="modalvacinas" style="top: 260px;">
+	<div id="dialog-ctr-imu" class=" modal-body-programacaovacinas" style="background-image: url('template/img/body-bg.png');">
+		<div id="ctr-imu"><a href="#" id="fechar" class="close">Fechar X</a>
+			<h2 class="titulo">Programação de Vacinas - Orçamentos</h2>
+			<hr style="margin-top: -4px;"/>
+			<fieldset class="table-bordered" >
+				<legend>Cliente: </legend>
+				<div class="row-fluid" >
+					<div class="span9" >
+						<fieldset class="table-bordered">
+							<div class="row-fluid">
+								<div class="span1">
+									<label class=""> Matrícula:</label>
+								</div>
+								<div class="span1">
+									<input type="text" value="<?= $clientes['matricula'] ?>" />
+								</div>
+								<div class="span10 ">
+									<div class="row-fluid">
+										<div class="span4">
+											<div class="checkbox">
+												<label>Desconto p/Médicos(15% 20%)
+													<input type="checkbox" id="descontoMedico" name="checkboxes" onclick="calculo.MarkMedico();" id="checkboxes-0" value="b">
+												</label>
+											</div>
+										</div>
+										<div class="span3">
+											<div class="checkbox">
+												<label  >
+													Desconto BCG (quinta )
+													<input type="checkbox" name="checkboxes" id="descontoBCG" onclick="calculo.descontoBCG();" value="b">
+												</label>
+											</div>
+										</div>
+										<div class="span4">
+											<div class="checkbox">
+												<label  >
+													Usar apenas desconto promocional
+													<input type="checkbox" name="checkboxes" id="descontoHPV" onclick="calculo.MarkHPV();" value="b">
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid" style="margin-bottom: 15px;">
+								<div class="span9">
+									<div class="row-fluid">
+										<span><b>0. Particular</b></span>
+									</div>
+									<div class="row-fluid">
+										<div class="block-area" >
+											<ul class="ULDependenteModulos" style="margin-left: -0.1px;" >
+												<?php
+												foreach ($dependentesPorTitular as $dependentes) {
+													?>
+													<li class=" line-hover thumbnails" >
+														<label class="ClassDependenteModulos" clienteid="<?php echo $dependentes['dependente_id'] ?>" 
+															   onclick="dependente.SelecionaDependente('<?= $dependentes['dependente_id'] ?>', '<?= $dependentes['nome'] ?>', '<?= $dependentes['sobrenome'] ?>', '<?php echo $dependentes['membro'] ?>')" > <?php echo $dependentes['membro'] . ' - ' . $dependentes['nome'] . " " . $dependentes['sobrenome']; ?>
+														</label>
+													</li>
+													<?php
+												}
+												?>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="span2">
+									<div style="height:15px" ></div>
+									<div class="row-fluid" >
+										<!--<button id="" class="btn btn-mini span10" onclick="controle.sessionSave()" type="button" name="" value="">-->
+										<button class="btn btn-mini span10" onclick="controle.sessionSave();" type="button" value="">
+											Gravar
+										</button>
+									</div>
+									<div class="row-fluid" >
+										<button class="btn btn-mini span10" type="button" onclick="controle.sessionPrint();" value="">
+											Imprimir
+										</button>
+									</div>
+									<div class="row-fluid" >
+										<button class="btn btn-mini span10"  onclick="fechar_modal('boxes-programacaovacinas');" type="button" value="">
+											Fechar
+										</button>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					</div>
+					<div class="span3">
+						<div class="row-fluid" id="">
+							<div class="row-fluid" id="table-block2" >
+								<table  align="center" class="table-modfy" id="" >
+									<thead>
+										<tr class="white" id="">
+											<th class="titulo"  align="center"> Forma de Pagamento </th>
+											<th class="titulo" align="center"> Valor </th>
+										</tr> 
+									</thead>
+									<tbody>
+										<tr class="white">
+											<th class="titulo" id="campo_valor_total"  align="center"> Valor Total </th>
+											<th class="titulo" id="valor_total"   align="center"> 0 </th>
+										</tr> 
+										<tr class="white">
+											<th class="titulo" id="campo_valor_programa" align="center"> Valor do Programa </th>
+											<th class="titulo" id="valor_programa"  align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_desconto_vista"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Valor C/Desc à Vista </th>
+											<th class="titulo" parcela="0" id="desconto_vista" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo"  id="campo_parcelado_1x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 1x CC </th>
+											<th class="titulo" parcela="1" id="parcelado_1x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_2x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 2x CC  </th>
+											<th class="titulo" parcela="2" id="parcelado_2x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_3x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 3x CC  </th>
+											<th class="titulo" parcela="3" id="parcelado_3x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_4x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 4x CC </th>
+											<th class="titulo" parcela="4" id="parcelado_4x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_5x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 5x CC </th>
+											<th class="titulo" parcela="5" id="parcelado_5x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_6x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 6x CC </th>
+											<th class="titulo" parcela="6" id="parcelado_6x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_7x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 7x CC </th>
+											<th class="titulo" parcela="7" id="parcelado_7x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_8x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 8x CC </th>
+											<th class="titulo" parcela="8" id="parcelado_8x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_9x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 9x CC </th>
+											<th class="titulo" parcela="9" id="parcelado_9x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_10x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 10x CC </th>
+											<th class="titulo"parcela="10" id="parcelado_10x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_11x"onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 11x CC </th>
+											<th class="titulo" parcela="11" id="parcelado_11x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> 0 </th>
+										</tr>
+										<tr class="white">
+											<th class="titulo" id="campo_parcelado_12x" onclick="pagamento.seleciona($(this).attr('id'))" align="center"> Parcelado 12x CC </th>
+											<th class="titulo" parcela="12" id="parcelado_12x" onclick="pagamento.seleciona($(this).attr('id'))"  align="center"> 0 </th>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+
+			<fieldset class="table-bordered" style="margin-top: 5px;">
+				<div class="row-fluid" id="table-block1">
+					<div class="span12">
+						<table cellspacing='10'  align="center" class="table-modfy" id="" >
+							<thead>
+								<tr class="white">
+									<th class="titulo" align="center"> Vacinações </th>
+									<th class="titulo" align="center"> 0m </th>
+									<th class="titulo" align="center"> 1m </th>
+									<th class="titulo" align="center"> 2m </th>
+									<th class="titulo" align="center"> 3m </th>
+									<th class="titulo" align="center"> 4m </th>
+									<th class="titulo" align="center"> 5m </th>
+									<th class="titulo" align="center"> 6m </th>
+									<th class="titulo" align="center"> 7m </th>
+									<th class="titulo" align="center"> 8m </th>
+									<th class="titulo" align="center"> 9m </th>
+									<th class="titulo" align="center"> 10m </th>
+									<th class="titulo" align="center"> 11m </th>
+									<th class="titulo" align="center"> 12m </th>
+									<th class="titulo" align="center"> 13m </th>
+									<th class="titulo" align="center"> 14m </th>
+									<th class="titulo" align="center"> 15m </th>
+									<th class="titulo" align="center"> 16m </th>
+									<th class="titulo" align="center"> 2a </th>
+									<th class="titulo" align="center"> 4a </th>
+									<th class="titulo" align="center"> Posto </th>
+									<th class="titulo" align="center"> Climep</th>
+									<th class="titulo" align="center"> Doses </th>
+									<th class="titulo" align="center"> Total </th>
+								</tr>
+							</thead>
+							<input type="hidden" value="0" id="hiddenRowId">
+							<tbody id="Cadastro_tabelaDinamica" >
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</fieldset>
+			<fieldset class="table-bordered" style="margin-top: 5px;">
+				<div class="row-fluid">
+					<div class="span2">
+						<select id="listaVacinasDisponiveis" onclick="listavacinas.updateLista()">
+						</select>
+					</div>
+					<div class="span2">
+						<button class="btn" onclick="controle.mark()"> Inserir</button>
+					</div>
+					<?php
+					$todos_usuarios_mod = buscaTodosUsuarios();
+					?>
+					<div class="span2">
+						<fieldset class="table-bordered">
+							<legend>Indicação: </legend>
+							<select class="SelectList" id="SelectListUsuarioIndicacao" estilo="Indicacao">
+								<?php
+								if(!empty($todos_usuarios_mod)) {
+									foreach ($todos_usuarios_mod as $usuario) {
+										?>
+										<option value='<?= $usuario['id'] ?>'><?= $usuario['nome']; ?></option>
+										<?php
+									}
+								}
+								?>
+							</select>
+						</fieldset>
+					</div>
+					<div class="span6">
+						<fieldset class="table-bordered">
+							<legend>Origem Cliente:</legend>
+							<div class="span3">
+								<select id="ListaOrigemCliente" onchange="cliente.showlist()">
+									<option value="vazio"></option>
+									<option value="Medico">Medico</option>
+									<option value="Climep" >Climep</option>
+									<option value="Midias">Midias</option>
+								</select>
+							</div>
+							<div class="span5">
+								<select class="SelectList" id="SelectList" estilo="Medico" style="display: none">
+									<option value="">Nenhum</option>
+									<?php
+									foreach (buscaTodosMedicosInd() as $medico) {
+										?>
+										<option value='<?= $medico['id'] ?>'><?= $medico['nome'] . ' ' . $medico['sobrenome']; ?></option>
+										<?php
+									}
+									?>
+								</select>
+								<select class="SelectList" id="SelectList" estilo="Climep"  style="display: none">
+									<option value="">Nenhum</option>
+									<?php
+									if(!empty($todos_usuarios_mod)) {
+										foreach ($todos_usuarios_mod as $usuario) {
+											?>
+											<option value='<?= $usuario['id'] ?>'><?= $usuario['nome']; ?></option>
+											<?php
+										}
+									}
+									?>
+								</select>
+								<select class="SelectList" id="SelectList" estilo="Midias" style="display: none">
+									<option value="">Nenhum</option>
+									<?php
+									foreach (buscaTodasMidias() as $midias) {
+										?>
+										<option value='<?= $midias['id'] ?>'><?= $midias['nome']; ?></option>
+										<?php
+									}
+									?>
+								</select>
+							</div>
+						</fieldset>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</div>
+<!--================================ FIM MODAL PROGRAMAÇÃO  DE VACINAS - ORCAMENTOS ============================================
+================================================================================================================================= -->
+
+<!--================================ MODAL TRANSFERENCIA DE CLIENTE FAMILIA ==================================================
+============================================================================================================== -->
+
+<div id="boxes-transf-cliente" class="modal modal-certificado-imu hide fade" style="top: 40%;">
+	<div id="dialog-certificado-imu" class="modal-body modal-body-certificado-imu">
+		<div id=""><a href="#" id="fechar" class="close"/>Fechar X</a>
+			<h2 class="titulo">Transferência de Clientes</h2>
+			<hr style="margin-top: -4px;"/>
+			<div id="" class="row-fluid">
+				<div class="span6">
+					<label>
+						<input type="text" name="" value="<?php echo $clientes['matricula'] . ' - ' . $clientes['nome'] . ' ' . $clientes['sobrenome'] ?>" disabled  />
+					</label>
+				</div>
+			</div><br/>
+			<div class="row-fluid">
+				<div class="span6">
+					<div class="row-fluid">
+						<div class="span10">
+							<select id="transf_select_familia_origem" name="">
+								<?php
+								foreach ($dependentesPorTitular as $dependentes) {
+									?>
+									<option value="<?php echo $dependentes['id']; ?>" membro="<?= $dependentes['membro'] ?>"><?php echo $dependentes['membro'] . ' - ' . $dependentes['nome'] . " " . $dependentes['sobrenome']; ?></option>
+									<?php
+								}
+								?>
+							</select>
+						</div>
+					</div><br>
+					<div class="row-fluid">
+						<div class="span8">
+							<div class="row-fluid">
+								<label class="default-label" value="0" >
+									<input type="radio" id="TitularPropriaFamilia" onclick='$("div#transf_div_matricula_destino").css("display", "none");' name="transf_opcao" class="default-checkbox"> <span id=""> Titular da Própria Família </span>
+								</label>
+							</div>
+							<div class="row-fluid">
+								<label class="default-label" value="0" >
+									<input type="radio" id="TitularNovaFamilia" onclick='$("div#transf_div_matricula_destino").css("display", "none");' name="transf_opcao" class="default-checkbox"> <span id=""> Titular de uma nova família </span>
+								</label>
+							</div>
+							<div class="row-fluid">
+								<label class="default-label" value="0" >
+									<input type="radio" id="TitularFamiliaExistente" onclick='$("div#transf_div_matricula_destino").css("display", "block");' name="transf_opcao" class="default-checkbox"> <span id=""> Titular de uma família existente </span>
+								</label>
+							</div>
+							<div class="row-fluid">
+								<label class="default-label" value="0" >
+									<input type="radio" id="DependenteFamiliaExistente" onclick='$("div#transf_div_matricula_destino").css("display", "block");' name="transf_opcao" class="default-checkbox"> <span id=""> Dependente de uma família existente </span>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span6">
+					<div style="display:none" class="row-fluid" id="transf_div_matricula_destino">
+						<div class="row-fluid">
+							<label>Matrícula da Família de Destino:</label>
+						</div>
+						<div class="row-fluid">
+							<div class="span5">
+								<input type="text" id="MatriculaTitular" name="transf_matricula_familia_destino" placeholder="MATRÍCULA"/>
+							</div>
+							<div class="span1">
+							</div>
+							<div class="span1">
+								<button class="btn" onclick="Pesquisa(function(Resultado) {
+			$('input#MatriculaTitular').val(Resultado['matricula']);
+		}, true);"><i class="icon-search"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><br><br>
+
+			<div class="row-fluid modal-footer">
+				<div class="span3">
+					<div class="row-fluid">
+						<div class="span6" >
+							<input class="btn btn-mini span10" type="button" onclick="trasferencia.executarAlteracao();" name="" value="Transferir" />
+						</div>
+						<div class="span6">
+							<input class="btn btn-mini span10" onclick="fechar_modal('boxes-transf-cliente');" type="button" name="" value="Fechar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--================================ FIM MODAL TRANSFERENCIA DE CLIENTE FAMILIA =================================================
+================================================================================================================= -->
+
+<!--================================ MODAL FICHA DE IMUNOTERAPIA =======================================================
+============================================================================================================== -->
+
+<div id="boxes-ficha-imuno" class="modal modal-imunuterapia2 hide fade" style="top: 40%; ">
+	<!--<div id="boxes-ficha-imuno" class="modal modal-certificado-imu hide fade" style="top: 40%; margin-left: -500px; width:1000px; ">-->
+	<div id="dialog-certificado-imu" class="modal-body modal-body-imunuterapia2" >
+		<div id=""><a href="#" id="fechar" class="close"/>Fechar X</a>
+			<h2 class="titulo">Ficha Imunoterapia</h2>
+			<hr style="margin-top: -4px;"/>
+			<div class="row-fluid">
+				<div class="span7">
+					<div id="" class="row-fluid">
+						<div class="span10">
+							<label>
+								<input type="text" name="" value="<?php echo $clientes['matricula'] . ' - ' . $clientes['nome'] . ' ' . $clientes['sobrenome'] ?>" disabled  />
+							</label>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span7">
+							<div class="row-fluid">
+								<label>Clientes:</label>
+							</div>
+							<div class="row-fluid">
+								<div class="span10">
+									<script type="text/javascript">fichaImunoSelecionaGrupos();</script>
+									<select id="fichaimuno_select_cliente" onclick="imunoterapia.preencherSelectorGrupos();" onchange="imunoterapia.criaTabelaImunoterapia();fichaImunoSelecionaGrupos();" name="fichaimuno_select_cliente">
+										<option> </option>
+										<?php
+										foreach ($dependentesPorTitular as $dependentes) {
+											?>
+											<option value="<?php echo $dependentes['id']; ?>" ><?php echo $dependentes['membro'] . ' - ' . $dependentes['nome'] . " " . $dependentes['sobrenome']; ?></option>
+											<?php
+										}
+										?>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="span5">
+							<div class="row-fluid" id="transf_div_matricula_destino">
+								<div class="row-fluid">
+									<label>Imunoterapia:</label>
+								</div>
+								<div class="row-fluid">
+									<div class="span10">
+										<select id="fichaimuno_select_imunoterapia" onchange="imunoterapia.mostrargrupo();imunoterapia.preencherSelectorGrupos();"   name="fichaimuno_select_imunoterapia">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="span5">
+					<div class="span9">
+						<fieldset style="height:150px;overflow:auto" class="table-bordered">
+							<div class="row-fluid" >
+								<div id="dt_example2">
+									<table id='tabelaDeItensDoModulo' class="table-modify">
+										<thead>
+											<tr>
+												<th>Serviços Prog.</th>
+												<th>Previsto</th>
+											</tr>
+										</thead>
+
+										<tbody id="Corpo_tabela_de_itens_modulo">
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+							
+							<input id='btn_tabela_modulos_imuno' class="btn " style="display:none;float:right;" type='button' value='enviar' onclick="imunoterapia.enviarbtn();"'/>
+								
+						</fieldset>
+					</div>
+				</div>
+			</div><hr>
+			<div class="row-fluid">
+				<div class="row-fluid" >
+                    <div class="span9">
+						<div class="span12" style="max-height: 360px;  max-width: 1100px;overflow: auto;">
+							<table style="width: 1000px;" cellspacing='10'  border='1px'  align="center" class="table table-bordered" id="" >
+								<thead>
+									<tr class="white">
+										<th class="titulo" align="center"></th>
+										<th class="titulo"  colspan="7" align="center" ><h5 id="tabelaimunoterapiaNOME" align="center"> Imunoterapia </h5></th>
+
+									</tr>
+								</thead>
+								<tbody id="tabelaImunoterapia" >
+								</tbody>
+							</table>
+						</div>
+                    </div>
+                    <div class="span3">
+							<fieldset  class="table-bordered" id="" >
+								<legend class="">Imunoterapia</legend>
+								<div class="row-fluid" id="" style="height:300px; overflow: auto;">
+									<?php foreach (listar('material', '*', 'tipo_material_id=2 AND grupo_material_id is not null',null,'nome') as $imunoterapia) { ?>
+                                                                    <div class="imunoterapia-lista" id="imunoterapia-lista-nome-<?php echo $imunoterapia['id']; ?>" onClick="imunoterapia.abrirModal(<?php echo $imunoterapia['id']; ?>, '<?php echo $imunoterapia['nome'] ?>')">
+                                                                        <a href="#"><?php echo utf8_encode($imunoterapia['nome']) ?></a>
+										</div>
+									<?php } ?>
+								</div>
+							</fieldset>
+							<fieldset class="table-bordered span7" id="" >
+								<select id="dose_select_imunoterapia"  name="fichaimuno_select_imunoterapia">
+									<option value="1" ><H4>Frasco</H4></option>
+									<option value="2" ><H4>Dose</H4></option>
+								</select>
+							</fieldset>
+                    </div>
+                </div>
+			</div>
+			<hr>
+
+			<div class="row-fluid " >
+				<div class="span3">
+					<div class="row-fluid">
+						<div class="span6" >
+							<input class="btn btn-mini span10" type="button" onclick="imunoterapia.salvarTabela();imunoterapia.preencherSelectorGrupos();" name="" value="Salvar" />
+						</div>
+						<div class="span6">
+							<input class="btn btn-mini span10" onclick="fechar_modal('boxes-ficha-imuno');" type="button" name="" value="Fechar" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--================================ FIM MODAL FICHA DE IMUNOTERAPIA =======================================================
+================================================================================================================= -->
+
+<?php include('view/recepcao/modal-imunoterapia.phtml'); ?>

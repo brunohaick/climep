@@ -1,0 +1,913 @@
+
+/*================ CONSULTAS ====================*/
+input,
+select, 
+table,
+textarea,
+fieldset
+{ width: 100%; padding-right: 0; padding-left: 0; }
+
+label {
+	font-size: 13px;
+}
+
+#table-FiladeEsperaPacientes{
+	margin-top: -10px;height:100px; max-height: 100px; overflow: auto; max-width: 500px; width: 500px; 	
+}
+.btn-gravar{
+    width: 75px;
+}
+
+.btn-imprimir{
+    width: 75px;
+
+}
+.btn-imunoterapia{
+    margin-left: 260px;
+}
+.bloc-pesquisa{
+    height: 95px; max-height: 95px; width: 330px; max-width: 330px;
+}
+.abas-consulta{
+    color: #0088CC; font-size: 12px;
+}
+
+
+.span6 .dados-mrg{
+    margin-left: 12px;
+}
+
+.span12 .mrg-b{
+    margin-bottom: 3px;
+}
+
+#txarea {
+    height: 85px; max-height: 85px; width: 400px; max-width: 400px;
+}
+
+#txareahip {
+    height: 85px; max-height: 85px; width: 926px; max-width: 926px;
+}
+#txarearesult{
+    height: 340px; max-height: 340px; width: 400px; max-width: 400px;
+}
+
+a.consulta-link {
+    color: #0088CC; font-size: 13px;
+    border-bottom:1px solid #0088CC;
+}
+a.btn-cancelar{
+    width: 70px;
+}
+div.mrg-lef{
+    margin-left: -7px;
+}
+/*===========================================================================*/
+/* FIM  TELA CONSULTAS
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* LISTA EMISSOES
+/*===========================================================================*/
+
+div.emissoes-default {-moz-border-radius: 5px;-webkit-border-radius: 5px;  height: auto; padding: 1px; background-color: #fff; border: 1px solid #DDDDDD; margin-top: -3px;}
+div.emissoes-default-skin { overflow: auto; width: 110px; height: 45px;}
+ul.emissoes-default-multiselect { padding: 0px; margin: 0px; white-space: nowrap; }
+li.emissoes-default-multiselect { list-style-type: none; }
+label.emissoes-default-label { display: block; padding: 2px;  margin-left: -10px; }
+label.emissoes-default-label:hover { background: #DADCFF;}
+input.emissoes-default-checkbox { width: 13px; height: 13px; padding: 0; margin-left: 10px;vertical-align: bottom; position: relative; top: -1px; *overflow: hidden; }
+/*===========================================================================*/
+/* FIM  LISTA EMISSOES
+/*===========================================================================*/    
+
+textarea.mrg-consul{
+    margin-top: 5px;
+}
+
+ul.mrg-tabs{
+    margin-left: 12px;
+}
+
+.medidatextarea{
+    height: 75px; max-height: 75px; width: 99%; max-width: 99%;
+}
+
+.medidatextareapre{
+    height: 250px; max-height: 250px; width: 99%; max-width: 99%;
+}
+.medidatextareaabas{
+	height: 60px; max-height: 60px; width: 100%; max-width: 100%;
+}
+.block-green{
+    width: 35px; height: 20px; background-color: #a9dba9;
+}
+.block-pink{
+    width: 35px; height: 20px; background-color: #ffc4c4;
+}
+.block-brown{
+    width: 35px; height: 20px; background-color: #c67605;
+}
+
+#agenda-fld{
+    width: 250px;
+}
+#anotacoe-orelhinha1{
+    height: 150px;
+}
+
+
+
+
+/*===========================================================================*/
+/*  MODAL Consulta Olhinho
+/*===========================================================================*/
+.modal-olhinho.fade.in {
+	top: 38%;
+}
+.modal-olhinho {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-olhinho.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-olhinho.fade.in {
+	top: 40%;
+}
+
+.modal-body-olhinho {
+	max-height: 1800px;
+	padding: 15px;
+	width:1000px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Consulta Olhinho
+*===========================================================================*/
+
+/*===========================================================================*/
+/*  MODAL Consulta Olhinho
+/*===========================================================================*/
+.modal-orelhinha_1.fade.in {
+	top: 38%;
+}
+.modal-orelhinha_1 {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-orelhinha_1.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-orelhinha_1.fade.in {
+	top: 40%;
+}
+
+.modal-body-orelhinha_1 {
+	max-height: 1800px;
+	padding: 15px;
+	width:1000px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Consulta Olhinho
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL Consulta CoraçãoZinho
+/*===========================================================================*/
+.modal-coracaozinho.fade.in {
+	top: 38%;
+}
+.modal-coracaozinho {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-coracaozinho.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-coracaozinho.fade.in {
+	top: 40%;
+}
+
+.modal-body-coracaozinho {
+	max-height: 1800px;
+	padding: 15px;
+	width:1000px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Consulta CoraçãoZinho
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL Consulta Linguinha
+/*===========================================================================*/
+.modal-linguinha.fade.in {
+	top: 38%;
+}
+.modal-linguinha {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-linguinha.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-linguinha.fade.in {
+	top: 40%;
+}
+
+.modal-body-linguinha {
+	max-height: 1800px;
+	padding: 15px;
+	width:1000px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Consulta Linguinha
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL Consulta Orelhinha 2
+/*===========================================================================*/
+.modal-orelhinha_2.fade.in {
+	top: 38%;
+}
+.modal-orelhinha_2 {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-orelhinha_2.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-orelhinha_2.fade.in {
+	top: 40%;
+}
+
+.modal-body-orelhinha_2 {
+	max-height: 1800px;
+	padding: 15px;
+	width:1000px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Consulta Orelhinha 2
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL Hipotesediagnostica
+/*===========================================================================*/
+.modal-hipotesediagnostica.fade.in {
+	top: 38%;
+}
+.modal-hipotesediagnostica {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-hipotesediagnostica.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-hipotesediagnostica.fade.in {
+	top: 40%;
+}
+
+.modal-body-hipotesediagnostica {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL hipotesediagnostica
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL CID10
+/*===========================================================================*/
+.modal-cid10.fade.in {
+	top: 38%;
+}
+.modal-cid10 {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-cid10.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-cid10.fade.in {
+	top: 40%;
+}
+
+.modal-body-cid10 {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL CID10
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL prescricoes
+/*===========================================================================*/
+.modal-prescricoes.fade.in {
+	top: 38%;
+}
+.modal-prescricoes {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-prescricoes.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-prescricoes.fade.in {
+	top: 40%;
+}
+
+.modal-body-prescricoes {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL prescricoes
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL  Recomendacoes
+/*===========================================================================*/
+.modal-recomendacoes.fade.in {
+	top: 38%;
+}
+.modal-recomendacoes {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-recomendacoes.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-recomendacoes.fade.in {
+	top: 40%;
+}
+
+.modal-body-recomendacoes {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL prescricoes
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL  Atestados
+/*===========================================================================*/
+.modal-atestados.fade.in {
+	top: 38%;
+}
+.modal-atestados {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-atestados.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-atestados.fade.in {
+	top: 40%;
+}
+
+.modal-body-atestados {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Atestados
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL  testescutaneos
+/*===========================================================================*/
+.modal-testescutaneos.fade.in {
+	top: 38%;
+}
+.modal-testescutaneos {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-testescutaneos.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-testescutaneos.fade.in {
+	top: 40%;
+}
+
+.modal-body-testescutaneos {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Atestados
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL  Resultado Testes Cutaneos
+/*===========================================================================*/
+.modal-resultcutaneos.fade.in {
+	top: 38%;
+}
+.modal-resultcutaneos {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-resultcutaneos.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-resultcutaneos.fade.in {
+	top: 40%;
+}
+
+.modal-body-resultcutaneos {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Resultado Testes Cutaneos
+*===========================================================================*/
+
+/*===========================================================================*/
+/*  MODAL  Requisições e Exames
+/*===========================================================================*/
+.modal-requisicoesencaminhamento.fade.in {
+	top: 38%;
+}
+.modal-requisicoesencaminhamento {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	z-index: 1050;
+	margin: -250px 0 0 -500px;
+	width: 1000px;
+
+}
+.modal-requisicoesencaminhamento.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-requisicoesencaminhamento.fade.in {
+	top: 40%;
+}
+
+.modal-body-requisicoesencaminhamento {
+	max-height: 1800px;
+	padding: 15px;
+	width: 860px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL Requisições e Exames
+*===========================================================================*/
+textarea.textarea-prescricoes{
+    height: 400px; overflow: auto;
+}
+textarea.textarea-prescricoes-editar{
+    height: 500px; overflow: auto;
+}
+textarea.textarea-recomendacoes{
+    width: 310px; height: 350px; overflow: auto;
+}
+textarea.textarea-atestados{
+    height: 250px; overflow: auto;
+}
+textarea.textarea-requisicoesencaminhamento{
+    height: 250px; overflow: auto;
+}
+div#table-consulta{
+    overflow: auto;
+    width: 395px;
+    height: 450px;
+}
+div#table-hipotesediagnostica{
+    overflow: auto;
+    width: 840px;
+    height: 300px;
+}
+div#table-prescricoes{
+    overflow: auto;
+    width: 430px;
+    height: 550px;
+}
+
+div#table-recomendacoes{
+	overflow: auto;
+    width: 430px;
+    height: 550px;
+}
+
+div#table-resultados{
+	overflow: auto;
+	width: 420px;
+	height: 350px;
+}
+
+div#tabela-testecutaneos{
+    overflow: auto; 
+    height: 230px; 
+
+}
+
+div#tabela_resultcutaneos{
+    overflow: auto;
+    height: 450px; 
+    width: 850px;
+}
+
+div#tabela-testeselecionados{
+    overflow: auto;
+    height: 230px;
+    width: 860px;
+}
+div#tabela-testedisponiveis{
+    overflow: auto;
+    height: 230px;
+    width: 860px;
+}
+
+.modal-consultas.fade.in {
+	top: 38%;
+}
+.modal-consultas {
+	position: fixed;
+	top: 38%;
+	left: 40%;
+	z-index: 1050;
+	margin: -285px 0 0 -520px;
+	width:1300px; 
+
+}
+.modal-consultas.fade {
+	top: -25%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+	transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-consultas.fade.in {
+	top: 38%;
+}
+
+.modal-body-consultas {
+	max-height: 1800px;
+	min-height: 570px;
+	padding: 15px;
+	width:1260px; 
+	border:none 4px #000000;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright:3px;
+	-moz-border-radius-bottomleft:3px;
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-top-left-radius:4px;
+	-webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-top-left-radius:4px;
+	border-top-right-radius:3px;
+	border-bottom-left-radius:3px;
+	border-bottom-right-radius:3px;
+}
+
+.contextMenu {
+	position: absolute;
+	width: 120px;
+	z-index: 99999;
+	border: solid 1px #CCC;
+	background: #EEE;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
+.contextmenu{
+	background-color: white;
+}
+
+.contextmenu li{
+	
+	cursor: pointer;
+}
+
+ul#list-menu-context{
+	margin-left: -40px;
+}
+
+ul#menu-context{
+	margin-top: -450px;
+	margin-left: -430px;
+	width: 300px;
+	position: absolute;
+}

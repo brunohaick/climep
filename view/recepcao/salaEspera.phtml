@@ -1,0 +1,82 @@
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+<script async defer src="view/estoque/js/index.js"></script>
+<script async defer src="view/recepcao/js/salaEspera.js"></script>
+
+<div id="form-data-atendimento" >
+	<div class="row-fluid">
+		<div class="span5" id="estoque-left" >
+			<div class="row-fluid" id="estoque-data">
+				<fieldset class="estoque-data table-bordered" id="flst-estoque-data">
+					<legend>Data</legend>
+					<div class="row-fluid" id="estoque-body">
+						<div class="span5">
+							<label class="nome-text" >Data de Atendimento:
+							</label>
+						</div>
+						<div class="span4">
+							<input id="data-estoque" name="data-atendimento" onChange="carregaData();" type="text" value="<?php echo converteData($data); ?>" />
+							<input id="medico" type="hidden" value="<?php echo $medicoID; ?>" />
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="row-fluid" id="tabela-estoque-medicos">
+				<fieldset class="flst-estoque table-bordered" id="flst-estoque" >
+					<legend> Médicos</legend>
+					<div class="row-fluid" style="width: 350px;height:500px; overflow: auto;">
+						<table class="table-modify table-bordered">
+							<thead>
+								<tr class="white">
+									<th align="center"> CRM </th>
+									<th align="center"> Nome </th>
+									<th align="center"> Consutório </th>
+								</tr>
+							</thead>
+							<tbody >
+								<?php
+									foreach (buscatodosMedicosComConsultorio() as $medico) {
+								?>
+										<tr name="table-color" medicoId="<?php echo $medico['medico_id']; ?>"  ondblclick="carregaHorariosDoMedico($(this));" class='dayhead pointer-cursor'>
+											<th align="center"> <?php echo $medico['crm']; ?> </th>
+											<th align="center"> <?php echo $medico['nome'].' '.$medico['sobrenome']; ?> </th>
+											<th align="center"> <?php echo $medico['consultorio']; ?> </th>
+										</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<div class="span7">
+			<div class="row-fluid">
+				<fieldset class="table-bordered">
+					<legend> Dia da semana</legend>
+					<h3 class="titulo" ><?php echo $dia_semana[$SDMA[0]] . " , " . $SemanaDiaMesAno[2] . " de " . $mes_ano[$SDMA[1]] . " de " . $SemanaDiaMesAno[0]; ?></h3>
+				</fieldset >
+			</div><br>
+			<div class="row-fluid" style="overflow-y: auto;">
+				<fieldset class="table-modify table-bordered" style="height:500px;">
+					<legend> Relação de Paciente</legend>
+					<div class="row-fluid" id="">
+						<table class="table-modify table-bordered" >
+							<thead>
+								<tr class="white">
+									<th align="center" width="10%"> ST </th>
+									<th align="center"> Ord </th>
+									<th align="center"> Chegada </th>
+									<th align="center"> Atendimento </th>
+									<th align="center"> Matrícula </th>
+									<th align="center"> Paciente </th>
+									<th align="center"> Remetente </th>
+								</tr>
+							</thead>
+							<tbody id="salaEsperaHorarios">
+							</tbody>
+						</table>
+					</div>
+				</fieldset>
+			</div><br/>
+		</div>
+	</div>
+</div>

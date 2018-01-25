@@ -1,0 +1,71 @@
+<!--================================  MODAL BUSCA CONSULTAS POR PERÍODO ==================================================
+============================================================================================================= -->
+
+<div id="boxes-busca-boletim_imunobiologico" class="modal modal-boletim_imunobiologico hide fade" style="top: 35%;">
+    <div id="dialog-busca-consultas-periodo" class="modal-body modal-body-boletim_imunobiologico" style="width: 1024px;">
+        <div>
+			<a href="#" id="fechar" class="close"/>Fechar X</a>
+            <h4 class="titulo">Procurar Consulta</h4>
+            <hr style="margin-top: -2px;"/>
+            <div class="row-fluid">
+                <div class="span6">
+                    <fieldset class="table-bordered">
+                        <legend>Período</legend>
+                        <div class="row-fluid">
+                            <div class="span1">
+                                <label> Início: </label>
+                            </div>
+                            <div class="span10">
+                                <input id="consultaInicial" type="text" onblur="getdate2();" value="" />
+                            </div>
+                            <div class="span1">
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span1">
+                                <label> Final: </label>
+                            </div>
+                            <div class="span10">
+                                <input id="consultafinal" onblur="getdate();" type="text" />
+                            </div>
+                            <div class="span1">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="span3">
+                    <div class="row-fluid">
+                        <div class="span6">
+							<input onclick="consultasTela.capturaClientesporPeriodo(<?php echo $_SESSION[''] ?>)" class="btn btn-mini span10" type="button" name="" value="Mostrar" />
+						</div>
+                    </div>
+                    <div class="row-fluid" style="height:10px">
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <input class="btn btn-mini span10" onclick="fechar_modal('boxes-busca-boletim_imunobiologico');" type="button" name="" value="Sair" />
+                        </div>
+                    </div>
+                </div>
+            </div><br><br>
+            <div style="height:300px;overflow:auto" class="row-fluid">
+                <table cellspacing='10' class="table-striped table-bordered">
+                    <thead>
+                        <tr class="white">
+                            <th class="titulo" align="center"> Matrícula </th>
+                            <th class="titulo" align="center"> Membro </th>
+                            <th class="titulo" align="center"> Nome </th>
+                            <th class="titulo" align="center"> Idade </th>
+                            <th class="titulo" align="center"> Data </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-PesquisaClientePorPeriodo">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================================ FIM MODAL BUSCA CONSULTAS POR PERÍODO ======================================
+================================================================================================================= -->

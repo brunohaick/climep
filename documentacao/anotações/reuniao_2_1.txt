@@ -1,0 +1,32 @@
+No Menu principal tem um outro botao.
+Procedimentos no padrao TISS: 
+  Oque são? (testes e consultas e algumas vacinas que são as de convenio )
+  existem convenios para procedimentos
+
+  FICHA.
+    fieldset ->Seleção do médico
+      campos: nome_medico
+	      matricula do cliente
+	      convênio
+	      tabela ( interna / CBHPM / TUSS )
+
+    fieldset com a lista de procedimentos ja escolhidos com o preço
+
+    dependendo do medico, e do convenio, aparece uma lista diferente dos procedimentos ( lista com preço, nome, codigo, descricao. CH e um checkbox )
+
+    fieldset com lista dos ultimos procedimentos e das ultimas consultas
+
+    mais em baixo:
+      forma de pagamento
+	valor
+	desconto
+	total geral
+
+      
+	tipo de pagamento (cartao, dinheiro, cheque) parcelas nº de guia(se convenio, todos tem)
+	cpf (quando consulta particular e precisa de nota fiscal)
+
+	botao : dinheiro ou cartao, direito -> direito a nota fiscal -> ele
+		gravar -> é o encaminhar
+		estornar - visualiza quem encaminhou e pode cancelar
+		

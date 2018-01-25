@@ -1,0 +1,1153 @@
+<!--<link type="text/css" rel="stylesheet" href="view/consultas/css/index.css" />-->
+<link type="text/css" rel="stylesheet" href="view/caixa/css/caixa.css" />
+<link type="text/css" rel="stylesheet" href="view/caixa/css/style-tab-ui.css" />
+<script src="view/js/utils.js"></script>
+<script src="view/caixa/js/cliente.js" ></script>
+<script src="view/caixa/js/servicosModel.js" ></script>
+<script src="view/caixa/js/controleModel.js" ></script>
+<script src="view/caixa/js/caixaModel.js" ></script>
+
+<div id="xxxx"></div>
+<div class="row-fluid">
+    <fieldset class="table-bordered">   
+        <legend><b> Caixa Vacina </b></legend>
+
+        <div id="tabs" class="tabbable">
+            <ul class="nav nav-tabs nav-aba" >
+                <li class="active"><a href="#controlependentes" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > 1- Controle Pendentes</h4></a></li>
+                <!--<li ><a href="#creditosmodulos" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > 2- Créditos e módulos pagos</h4></a></li>-->
+                <!--                <li class=""><a href="#creditopago" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > 2- Crédito e módulos pagos</h4></a></li> -->
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active controlependentes" id="controlependentes">
+                    <div class="row-fluid">
+                        <div class="span10" id="table-controlependentes">
+                            <table cellspacing='5' border='1px' align="center" class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr class="white">
+                                        <th align="center"> Matricula</th>
+                                        <th align="center"> Nome Cliente</th>
+                                        <th align="center"> Controle </th>
+                                        <th align="center"> Data </th>
+                                        <th align="center"> Usuário </th>
+                                    </tr>
+                                </thead>
+                                <input type="hidden" id="id-fila-espera-atual"/>
+                                <tbody id="tbody_caixa_controles_pendentes">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="span2">
+                            <ul class="thumbnails">
+                                <li>
+                                    <a href="#" class=" btn btn-iniciar" onclick="caixamodel.ControlesPendentes(); caixamodel.updateView();">  <i class="icon-ok-sign"></i> Iniciar </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="botao_resumo_caixa" class="btn btn-resumo"><i class="icon-file"></i> Resumo </a>
+                                </li>
+								<li>
+									<a href="#" id="botao_nota_fiscal" class="btn btn-iniciar"><i class="icon-ok-sign"></i> NFSe </a>
+                                </li>
+                                <li>
+                                    <a href="index.php" class=" btn btn-fechar" ><i class="icon-remove-circle"></i> Fechar </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<div class="tab-pane" id="creditosmodulos" >
+					<div class="row-fluid">
+						<table cellspacing='5' border='1px' align="center" class="table table-bordered table-condensed">
+							<thead>
+								<tr class="white">
+									<th align="center"> Cliente</th>
+									<th align="center"> Serviço</th>
+									<th align="center"> R$ </th>
+									<th align="center"> Ref. </th>
+									<th align="center"> Data </th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="white">
+									<th align="center"> C </th>
+									<th align="center"> S </th>
+									<th align="center"> R </th>
+									<th align="center"> R </th>
+									<th align="center"> D </th>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--
+								<div class="tab-pane " id="clinica" >
+									<div class="row-fluid">
+										<div class="span6">
+											<fieldset class=" table-bordered" id="" >
+												<legend> Antecedentes Familiares</legend>
+												<div class="row-fluid">
+													<textarea  id="txarea"class="textarea-dados"></textarea>
+												</div>
+											</fieldset>
+										</div>    
+										<div class="span6">
+											<fieldset class=" table-bordered" id="" >
+												<legend> Antecedentes Pessoais</legend>
+												<div class="row-fluid"  >
+													<textarea id="txarea" class="textarea-dados"></textarea>
+												</div>
+											</fieldset>
+										</div>    
+									</div>    
+									<div class="row-fluid">
+										<div class="span6">
+											<fieldset class=" table-bordered" id="" >
+												<legend> Alergias</legend>
+												<div class="row-fluid " >
+													<textarea id="txarea"></textarea>
+												</div>
+											</fieldset>
+										</div>
+										<div class="span6"> 
+											<fieldset class=" table-bordered" id="" >
+												<legend> Imunizações</legend>
+												<div class="row-fluid"> 
+													<div class="span1 " >
+														<a href="#"  class="btn ">Visualizações</a>
+													</div>
+				
+													<div class="span1 " >
+														<a href="#"  class="btn  btn-imunoterapia">Imunoterapia</a>
+													</div>
+				
+												</div>
+				
+											</fieldset><br>
+											<div class="row-fluid">
+												<div class="span12"> 
+													<fieldset class=" table-bordered" id="" >
+														<legend>Dados</legend>
+														<div class="span2">
+															<input type="text" name="" />
+														</div>
+														<div class="span1 dados-mrg" >
+															<label> cm </label>
+														</div>
+														<div class="span2">
+															<input type="text" name="" />
+														</div>
+														<div class="span1 dados-mrg" >
+															<label> kg </label>
+														</div>
+														<div class="span1 dados-mrg" >
+															<label> PA </label>
+														</div>
+														<div class="span2">
+															<input type="text" name="" />
+														</div>
+													</fieldset>
+												</div>    
+											</div> 
+										</div> 
+									</div><br>
+									<div class="row-fluid">   
+										<div id="tabs" class="tabbable">
+											<ul id="" class="nav nav-tabs mrg-tabs">
+				
+												<li  class="active"><a href="#consultas" data-toggle="tab" ><h4 class="abas-consulta" >Consultas</h4></a></li>
+				
+											</ul>
+											<div class="tab-content">
+				
+												<div class="active tab-pane " id="consultas" >
+													<fieldset class="table-bordered-enc">
+				
+														<textarea class="medidatextarea" placeholder="Consultas"></textarea>
+													</fieldset>
+												</div>
+											</div>                       
+										</div>
+									</div>
+								</div> -->
+
+            </div>
+        </div>
+        <br>
+        <div class="row-fluid">
+            <fieldset class="table-bordered">
+                <legend style="color: #0088CF;"><b>
+						Dados do Cliente</b>
+                </legend>
+
+                <div class="row-fluid">>
+					<div class="row-fluid">
+						<div class="span9">
+							<label id="nome-completo"> - </label>
+							<!--							<label id="nome-matricula" >
+															<h3> - </h3>
+														</label>-->
+						</div>
+						<div class="span3">
+							<div class="span6">
+								<label id="num_controle" style="color: #0088CF;"><h4>Nº: </h4></label>
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span4">
+							.
+							<select id="convenio-caixa">
+								<?php foreach (buscaConvenio() as $convenio) { ?>
+									<option value="<?php echo $convenio['id'] ?>"><?php echo $convenio['nome'] ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<div class="span5" style="margin-top: 13px;">
+							<a id="caixa_cadastro_cliente" href="#" class="btn btn-iniciar"> Cadastro </a>
+							<a id="caixa_visita1" href="#" class="btn btn-iniciar"> Visita 1 </a>
+							<a id="caixa_visita2" href="#" class="btn btn-iniciar"> Visita 2 </a> 
+						</div>
+						<div class="span3">
+							<label id="total_servicos" style="color: #0088CF;">
+								<h3>Total: </h3>
+							</label>
+						</div>
+					</div>
+                </div>
+            </fieldset>
+        </div>
+
+        <br>
+        <div id="tabs-abas" class="tabbable">
+            <ul class="nav nav-tabs nav-aba" >
+                <li class="active"><a href="#servicosrealizados" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > Serviços a serem realizados agora</h4></a></li>
+				<li class=""><a href="#programacaovacina" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > Programação Vacina</h4></a></li> 
+                <!--<li class=""><a href="#quitacaodebitos" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > Quitação de Débitos</h4></a></li>--> 
+                <li class=""><a id="dadosdopagamento" href="#dadospagamento" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > Dados do Pagamento</h4></a></li>
+                <li class=""><a href="#recibo" data-toggle="tab" ><h4 class="active-titulo abas-consulta" > Recibo </h4></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active servicosrealizados" id="servicosrealizados">
+                    <div  id="table-servicosrealizados">
+                        <table  cellspacing='10' border='1px' align="center" class="table table-bordered table-condensed">
+                            <thead>
+                                <tr class="white">
+                                    <th align="center"> Membro</th>
+                                    <th align="center"> Nome Cliente</th>
+                                    <th align="center"> Idade </th>
+                                    <th align="center"> Serviços</th>
+                                    <th align="center"> Valor R$</th>
+                                    <th align="center"> Tipo</th>
+                                    <th align="center"> Forma Pag.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_caixa_servicos">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane " id="programacaovacina">
+                    <div class="row-fluid">  
+                        <div class="span6">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <label class="" style="font-size: 12px; color: #0088CF; "><b>Módulos confirmados:</b></label>
+                                </div>
+                                <div class="span8">
+                                    <select id='select_programacaovacina' onchange="caixamodel.listarItensModulo()">
+
+                                    </select>
+                                </div>
+                            </div> 
+                            <div class="row-fluid">
+                                <label class="" style="font-size: 12px;"><b style="color: #0088CF;">Preferência:</b> <span id="span_parcela_modulo" style="color: red;"></span></label>
+                            </div>
+                        </div>
+                        <div class="span6"  >
+                            <fieldset class="table-bordered">
+                                <legend style="color: #0088CF;"><b>Pagamento Escolhido</b></legend>
+								<div class="row-fluid">
+									<div class="control-group">
+										<div class="controls">
+											<label id="radioButtonIndefinido" class="radio inline">
+												<input type="radio" name="radios"  value="1"/>
+												Indefinido
+											</label>
+											<label id="radioButtonDesconto" class="radio inline">
+												<input type="radio" name="radios" value="2"/>
+												Desconto (R$)
+											</label>
+											<label id="radioButtonCartao" class="radio inline">
+												<input type="radio" name="radios" value="3"/>
+												Cartão (R$)
+											</label>
+										</div>
+										<!--										<div class="controls">
+																					<label id="radioButtonAvistaCartao" class="radio inline">
+																						<input type="radio" name="radios" value="3"/>
+																						À Vista + Cartão(R$2.568,00)
+																					</label>
+																				</div>-->
+									</div>
+								</div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid" id="table-vacinasmodulos" style="margin-top: 10px;">
+                        <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered table-condensed">
+                            <thead>
+                                <tr class="white">
+                                    <th align="center"> Membro</th>
+                                    <th align="center"> Nome Cliente</th>
+                                    <th align="center"> Serviços</th>
+                                    <th align="center"> Valor R$</th>
+                                    <th align="center"> Cod</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id='tbody_programacaovacina'>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane " id="quitacaodebitos">
+                    <div class="row-fluid">
+
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <a class="btn"><i class="icon-arrow-up"></i> <b>Importar</b> </a>
+                            </div>
+                            <div class="span2">
+                                <h3><b>0,00 </b></h3>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid" id="table-quitacaodebitos">
+                            <table cellspacing='10' border='1px' align="center" class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr class="white">
+                                        <th align="center"> Controle</th>
+                                        <th align="center"> Data</th>
+                                        <th align="center"> Cliente</th>
+                                        <th align="center"> Serviço</th>
+                                        <th align="center"> R$</th>
+                                        <th align="center"> Forma</th>
+                                        <th align="center"> Total</th>
+                                        <th align="center"> Ref</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody >
+                                    <tr name="table-color" class='dayhead'>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center">3 </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+
+                                    </tr>
+                                    <tr name="table-color" class='dayhead'>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center">3 </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+
+                                    </tr>
+                                    <tr name="table-color" class='dayhead '>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center">3 </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+
+                                    </tr>
+                                    <tr name="table-color" class='dayhead '>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center">3 </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+
+                                    </tr>
+                                    <tr name="table-color" class='dayhead '>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center">3 </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+
+                                    </tr>
+                                    <tr name="table-color" class='dayhead'>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center">3 </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                        <th align="center"> </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+                <div class="tab-pane " id="dadospagamento">
+                    <div class="row-fluid">
+
+                        <div class="span5">
+                            <ul class="thumbnails">
+								<table class="table-striped" id="tabelaFormasPagamento">
+									<thead>
+										<tr>
+											<th>Forma</th>
+											<th>Previsto</th>											
+											<th>Recebido</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<div id=''><h6 >Dinheiro :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_0"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_0" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Cheque/dia :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_1"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_1" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Depósito :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_2"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_2" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Cheque pré :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_3"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_3" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Cartão :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_4"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_4" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Convênio :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_5"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_5" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Cortesia :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_6"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_6" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Débito pend. :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_7"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_7" ></div>
+											</td>
+										</tr>
+
+										<tr>
+											<td>
+												<div id=''><h6 >Desconto :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_8"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_8" ></div>
+                                                                                                <input type="checkbox" id="DescontoMedicoNoCaixa" onclick="caixamodel.setDescontoMedico()" title="Desconto Medico">Desconto Médico
+											</td>
+										</tr>
+                                                                                <tr>
+											<td>
+												<div id=''><h6 >Utilização de Credito :</h6></div>
+											</td>
+											<td>
+												<div id='previsto'><h6 align="center" id="dadoPagamento-previsto_9"> 0,00</h6></div>
+											</td>												
+											<td>
+												<div class=" caixa-forma-"><input type="text" style="width: 120px;"	id="caixa-forma-" onchange="caixamodel.atualizaDadosPagamento();" name="dadoPagamento-definido_9" ></div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div><h6 >Total :</h6></div>
+											</td>
+											<td>
+												<div><h6 id='dadoPagamento_previsto_total' align="center"> </h6></div>
+											</td>											
+											<td>
+												<div><input type="text" style="width: 120px;" id='dadoPagamento_recebido_total' /></div>
+											</td>
+										</tr>
+									</tbody>
+                            </ul>
+							</table>
+                        </div>
+
+                        <div class="span7"> 
+                            <div class="row-fluid">    
+                                <div class="span9">
+                                    <div class="row-fluid">
+                                        <a class="caixalink"><b> Detalhamento Cartão </b></a>
+                                    </div>
+                                    <div class="row-fluid" style="margin-top: 12px;" id="table-detalhamentocartao">   
+                                        <table cellspacing='5' border='1px' align="center" class="table table-bordered table-condensed">
+                                            <thead>
+                                                <tr class="white">
+                                                    <th align="center"> Bandeira</th>
+                                                    <th align="center"> R$</th>
+                                                    <th align="center"> Parcs</th>
+                                                    <th align="center"> Autoriz</th>                                       
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="tabela-bandeiras" >
+                                                <tr numbandeira="1" name="table-color" class='dayhead'>
+                                                    <th align="center"> 
+                                                        <select onChange="caixamodel.insereNovaLinhaBandeira(1)" id="selectBandeiras_1" >
+                                                            <option></option>
+															<?php foreach (listar('cartao_bandeiras', '*') as $bandeira) { ?>
+																<option value="////<?php echo $bandeira['id'] ?>"> <?php echo utf8_encode($bandeira['nome']) ?> </option>
+															<?php } ?>
+                                                        </select>
+                                                    </th>
+                                                    <th align="center">
+                                                        <input style="width: 120px;" type="text" name="valor-cartao"  id="valor-cartao_1" onKeyPress="return(MascaraMoeda(this, '', '.', event))" />
+                                                    </th>
+                                                    <th align="center"> 
+                                                        <select id="num_parcelas_cartao_1">
+                                                            <option></option>
+															<?php for ($i = 1; $i < 13; $i++) { ?>
+																<option> <?php echo $i ?> </option>
+															<?php } ?>
+                                                        </select>
+                                                    </th>
+                                                    <th align="center">
+                                                        <input style="width: 120px;" type="text" name="valor-cartao"  id="autoriz-cartao_1" />
+                                                    </th>
+                                                </tr>
+                                            </tbody>
+                                        </table>   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span9">
+                                    <fieldset class="table-bordered">
+                                        <legend>OBS</legend>
+                                        <div class="span10">
+                                            <input id="caixa-obs" type="text" />
+                                        </div>
+                                    </fieldset> 
+                                </div><br>
+                                <div class="span3">
+                                    <a class="btn" onclick="caixamodel.confirmaDadosPagamento();"><i class="icon-ok"></i> Confirmar</a>
+                                </div>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+                <div class="tab-pane " id="recibo">
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <fieldset class="table-bordered">
+                                <legend style="color: #0088CF;" ><b>Recibo em nome completo</b></legend>
+                                <div class="row-fluid">
+									<div class="span11">
+										<div class="span2">
+											<label>Nome:</label>
+										</div>
+										<div class="span10">
+											<input type="text" id="nome_cliente_recibo" /> 
+										</div>
+									</div>
+                                </div>
+                                <div class="row-fluid">
+									<div class="span11">
+										<div class="span2">
+											<label>Doc:</label>
+										</div>
+										<div class="span3">
+											<input type="text" id="cpf_cliente_recibo" /> 
+										</div>
+										<div class="span1">
+											<label>Cep:</label>
+										</div>
+										<div class="span2">
+											<input type="text" id="cep_cliente_recibo" /> 
+										</div>
+										<div class="span1">
+											<label>Tel:</label>
+										</div>
+										<div class="span1">
+											<input type="text" id="ddd_cliente_recibo" />
+										</div>
+										<div class="span2">
+											<input type="text" id="telefone_cliente_recibo" /> 
+										</div>
+									</div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+										<div class="span2">
+											<label>Endereço:</label>
+										</div>
+										<div class="span5">
+											<input type="text" id="endereco_cliente_recibo" /> 
+										</div>
+										<div class="span2">
+											<label>Bairro:</label>
+										</div>
+										<div class="span3">
+											<input type="text" id="bairro_cliente_recibo" /> 
+										</div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+									<div class="span11">
+										<div class="span2">
+											<label>Categoria:</label>
+										</div>
+										<div class="span3">
+											<input type="text" id="categoria_cliente_recibo" /> 
+										</div>
+										<div class="span2">
+											<label>Cidade:</label>
+										</div>
+										<div class="span3">
+											<input type="text" id="cidade_cliente_recibo"/> 
+										</div>
+										<div class="span1">
+											<label>UF:</label>
+										</div>
+										<div class="span1">
+											<input type="text" id="estado_cliente_recibo"/> 
+										</div>
+
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+										<div class="span2">
+											<label>E-mail:</label>
+										</div>
+										<div class="span10">
+											<input type="text" id="email_cliente_recibo"/>
+										</div>
+                                    </div>
+                                </div>
+                            </fieldset>
+							<!--                            <div class="row-fluid">
+															<fieldset class="table-bordered">
+																<legend>Nomes disponíveis</legend>
+																<textarea></textarea>
+															</fieldset>
+														</div>
+							-->
+                        </div> 
+                        <div class="span4">
+                            <div class="row-fluid">
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <a id="gerar_recibo_caixa" class="btn"> Gerar Recibo</a>
+                                    </div>    
+                                </div>
+                                <div class="row-fluid"> 
+                                    <div class="row-fluid">
+                                        <fieldset class="table-bordered">
+											<legend>Opções de Nota Fiscal</legend>
+                                            <br>
+                                            <div class="row-fluid">
+												<div class="span11">
+                                                    <label>
+														<input type="checkbox" checked="checked" name="b"/>Detalhar Serviços
+													</label>
+												</div>
+											</div>
+											<!--                                            <div class="row-fluid">
+																							<div class="span11">
+																								<label>
+																									<input type="radio" name="b"/>Sem CPF (consumidores diversos)
+																								</label>
+																							</div>
+																						</div>-->
+                                            <div class="row-fluid">
+                                                <div class="span5">
+                                                    <label>Valor da Nota</label>                                             
+                                                </div>
+                                                <div class="span4">
+                                                    <input type="text" id="valorNota-recibo" onKeyPress="return(MascaraMoeda(this, '.', ',', event))"/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div> 
+        </div> 
+</div> 
+</fieldset>
+</div>
+
+<!-- ===================== MODAL CONSULTA NFSe  ====================--> 
+<div id="boxes-emissaonfs" class="modal modal-emissaonfs hide fade">
+    <div id="dialog-emissaonfs" class=" modal-body-emissaonfs">
+		<!--<div id="boxes-resumocaixa" class="modal modal-resumocaixa hide fade">
+			<div id="dialog-resumocaixa" class=" modal-body-resumocaixa"  >-->
+        <div>
+			<a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo"> Emissão de NFSe</h2>
+            <hr style="margin-top: -4px;"/>
+            <div class="row-fluid">
+                <div class="span2">
+<!--                    <label>Nº do Controle : </label>
+                    <input type="text"/>-->
+                </div>
+                <div class="span1">
+					<label>Alíquota : </label>
+                    <select id="nfse_aliquota">
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="span2">
+                    <label>Tipo : </label>
+                    <select id="nfse_tipo_recolhimento">
+                        <option value="A">A - A Recolher</option>
+                        <option value="R">R - Retido na Fonte</option>
+                    </select>
+                </div>
+                <div class="span1 " style="margin-top: 14px; width: 90px;">
+                    <label>
+                        <input id="nfse_notas_emitidas" type="checkbox" name="nfseEmitidas" value="1"/>
+                        NFEmitidas
+                    </label>
+                </div>
+<!--                <div class="span3">
+                    <div class="row-fluid">
+						<fieldset class="table-bordered">
+							<legend>Origem</legend>
+							<div class="span5">
+								<label>Consutório
+									<input type="checkbox"/>
+								</label>
+							</div>
+							<div class="span5">
+								<label>Vacinas
+									<input type="checkbox"/>
+								</label>
+							</div>
+						</fieldset>
+                    </div>
+                </div>
+                <div class="span1">
+                    <label> Data:</label>
+                    <input type="text" />
+                </div>
+                <div class="span2" style="margin-top: 14px;">
+                    <a class="btn" onClick="consultaNotaFiscal()"> Consultar <i class="icon-arrow-right"></i></a>
+                </div>
+            </div>
+-->
+
+            <div class="row-fluid">
+                <fieldset class="table-bordered">
+                    <legend> Movimento do Caixa</legend>
+                    <div class="row-fluid">
+                        <div class="span10" style="overflow: auto;" id="tabele-modal-ntf">
+                            <table  cellspacing='10' border='1px' align="center" class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr class="white">
+                                        <th style='text-align:center;'> Sel</th>
+                                        <th> Controle</th>
+                                        <th> NFSe</th>
+                                        <th> Matrícula</th>
+                                        <th> Membro</th>
+                                        <th> Cpf_Cnpj</th>
+                                        <th> Nome</th>
+                                        <th> Valor (R$)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-nfse">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="span2">
+<!--                            <div class="row-fluid btn-modalnotafiscal" > 
+                                <a class="btn span10" id="nfse_enviar_declaracao"><label class="btn-txt"><i class=" icon-arrow-up"></i> Enviar Declaração</label></a>
+                            </div>-->
+                            <div class="row-fluid btn-modalnotafiscal" > 
+                                <a class="btn span10" id="nfse_editar_nota"><label class="btn-txt"><i class="icon-edit"></i> Editar Nota Selecionada</label></a>
+                            </div>
+
+                            <div class="row-fluid btn-modalnotafiscal" > 
+                                <a class="btn span10" id="nfse_excluir_nota"><label class="btn-txt"><i class=" icon-trash"></i> Excluir Lançamento</label></a>
+                            </div>
+                            <div class="row-fluid btn-modalnotafiscal" > 
+                                <a class="btn span10" id="nfse_imprimir_nota"><label class="btn-txt"><i class="icon-print"></i> Imprimir</label></a>
+                            </div>
+                            <div class="row-fluid btn-modalnotafiscal" > 
+                                <a class="btn span10" id="nfse_processar_nota"><label class="btn-txt"><i class="icon-file"></i> Processar Nota Fiscal</label></a>
+                            </div>
+                            <!--                            <div class="row-fluid btn-modalnotafiscal"> 
+                                                            <a class="btn span10"><label class="btn-txt"><i class="icon-arrow-up"></i> Importar Cadastro</label></a>
+                                                        </div>
+                                                        <div class="row-fluid btn-modalnotafiscal"  > 
+                                                            <a class="btn span10"  ><label class="btn-txt"><i class="icon-remove"></i> Fechar</label></a>
+                                                                                    </div>
+                            -->
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="row-fluid">
+                <fieldset class="table-bordered">
+                    <legend> Mensagem de Validação</legend>
+					<div id="msg_erro_rps"></div>
+                </fieldset>
+            </div>    
+        </div>
+    </div>
+</div>
+<!-- =================== FIM MODAL CONSULTA NFSe====================-->
+
+<!-- ===================== MODAL Resumo Caixa  ====================--> 
+<div id="boxes-resumocaixa" class="modal modal-resumocaixa hide fade">
+    <div id="dialog-resumocaixa" class=" modal-body-resumocaixa"  >
+		<div>
+			<a href="#" id="fechar" class="close"/>Fechar X</a>
+			<h2 class="titulo"> Resumo do Caixa</h2>
+			<hr style="margin-top: -4px;"/>
+            <div class="row-fluid">
+                <div class="span4">
+                    <fieldset class="table-bordered">
+                        <legend>Periodo</legend>
+						<div class="span10">
+                            <div class="span2">
+                                <label class="abas-consulta"> Inicio</label>
+                            </div>
+                            <div class="span8">
+                                <input type="text" id="data_inicio_resumo_caixa" value="<?php echo converteData(date('Y-m-d')); ?>">
+                            </div>
+                        </div>
+                        <div class="span10">
+                            <div class="span2">
+                                <label class="abas-consulta"> Final</label>
+                            </div>
+                            <div class="span8">
+                                <input type="text" id="data_fim_resumo_caixa" value="<?php echo converteData(date('Y-m-d')); ?>">
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="span3" style="margin-top: 10px;">
+                    <div class="row-fluid" >
+                        <a href="#" id="carrega_resumo_caixa" class="btn btn-cancelar"><i class=" icon-ok"></i> Mostrar</a>      
+                        <a href="#" id="imprime_resumo_caixa" class="btn btn-cancelar" ><i class=" icon-print"></i> Imprimir</a>
+                    </div><br>
+                    <div class="row-fluid" >
+                        <a href="#" onclick="fechar_modal('boxes-resumocaixa')" class="btn btn-cancelar" ><i class=" icon-ok"></i> Sair</a>      
+                        <a href="#" class="btn btn-cancelar" ><i class=" "></i>Hist.Cliente</a>
+                    </div>
+
+                </div>
+            </div>
+			<hr>
+
+            <div class="row-fluid" id="table-resumocaixa">
+                <table cellspacing='10' border='1px' align="center" class="table table-bordered table-condensed">
+                    <thead>
+                        <tr class="white">
+                            <th align="center"> Data</th>
+                            <th align="center"> Controle</th>
+                            <th align="center"> Matrícula</th>
+                            <th align="center"> Responsável</th>
+                            <th align="center"> Operador</th>
+                            <th align="center"> Dinheiro</th>
+                            <th align="center"> Cheque</th>
+                            <th align="center"> Cartão</th>
+                            <th align="center"> Convênio</th>
+                            <th align="center"> Cortesia</th>
+                            <th align="center"> Desconto</th>
+                            <th align="center"> Débito</th>
+                            <th align="center"> Total</th>
+                            <th align="center"> NF</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tbody-resumo-caixa" >
+                        <tr name="table-color" class='dayhead'>
+                            <th colspan="14" align="center" style="text-align:center;"> Não há Dados Disponíveis </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+		</div>
+    </div>
+</div>
+<!-- ===================FIM MODAL Resumo Caixa====================--> 
+
+<!-- =================== MODAL EDITA NFSe ====================--> 
+
+<div id="boxes-editanfs" class="modal  modal-editanfs hide fade">
+    <div id="dialog-editanfs" class=" modal-body  "  >
+		<div>
+			<a href="#" id="fechar" class="close"/>Fechar X</a>
+			<h2 class="titulo">EditaNF</h2>
+			<hr style="margin-top: -4px;"/>
+            <div class="row-fluid">
+				<div class="span10">
+					<div class="row-fluid">
+						<div class="span3">
+							<label>Matrícula</label>
+							<input id="nfse_matricula" type="text" placeholder="Nota Fiscal" />
+						</div>
+						<div class="span1">
+							<label>Membro</label>
+							<input id="nfse_membro" type="text" placeholder="Membro" />
+						</div>
+						<div class="span4">
+							<label>Valor Serviço</label>
+							<input id="nfse_valor_servico" type="text" placeholder="Código" />
+						</div>
+						<div class="span4">
+							<label>D Emissão</label>
+							<input id="nfse_data_emissao" type="text" placeholder="Data Emissão" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span4">
+							<label  >Cpl/Cnpj</label>
+							<input id="nfse_cpf_cnpj" type="text" placeholder="Cpl/Cnpj" value=""  />
+						</div>
+						<div class="span8">
+							<label>Razão Social</label>
+							<input id="nfse_razao_social" type="text" placeholder="Razão Social" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span4">
+							<label>Tipo Log</label>
+							<input id="nfse_tipo_log" type="text" placeholder="Tipo Log"/>
+						</div>
+						<div class="span4">
+							<label>Logradouro</label>
+							<input id="nfse_logradouro" type="text" placeholder="Tipo Log"/>
+						</div>
+						<div class="span4">
+							<label>Nº</label>
+							<input id="nfse_numero_casa" type="text" placeholder="Nº" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span4">
+							<label>Bairro</label>
+							<input id="nfse_bairro" type="text" placeholder="Bairro"/>
+						</div>
+						<div class="span2">
+							<label>UF</label>
+							<input id="nfse_estado" type="text" placeholder="UF"/>
+						</div>
+						<div class="span4">
+							<label>Cidade</label>
+							<input id="nfse_cidade" type="text" placeholder="Cidade"/>
+						</div>
+						<div class="span2">
+							<label>Cep</label>
+							<input id="nfse_cep" type="text" placeholder="CEP" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span6">
+							<label>Email</label>
+							<input id="nfse_email" type="text" placeholder="Email"/>
+						</div>
+						<div class="span6">
+							<label>Descrição</label>
+							<input id="nfse_descricao" type="text" placeholder="Descrição" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span4">
+							<label>DDD</label>
+							<input id="nfse_ddd" type="text" placeholder="DDD" value=""  />
+						</div>
+						<div class="span6">
+							<label>Telefone</label>
+							<input id="nfse_telefone" type="text" placeholder="Telefone" />
+						</div>
+					</div>
+				</div>
+				<div class="span2"><br><br><br>
+					<div class="row-fluid"><a id="nfse_botao_editar" class="btn">Editar</a></div><br><br>
+					<div onclick="fechar_modal('boxes-editanfs');" class="row-fluid"><a class="btn">Fechar</a></div>
+				</div>
+            </div><hr>
+			<div class="row-fluid">
+				<table>
+					<thead>
+						<tr>
+							<th>Descrição</th>
+							<th>Qualidade</th>
+							<th>Valor únitario</th>
+							<th>Valor Total</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<hr>
+		</div>
+    </div>
+</div>
+
+<!-- =================== FIM MODAL EDITA NFSe ====================--> 
+
+<!--			 =================== TESTATNDO TABS JQUERY-UI ===============================
+
+			<div class="row-fluid">
+				<div class="span7">
+                <div  id="tabsvacina">
+                    <ul class="nav nav-tabs">
+                        <li ><a href="#tabs-1">Cleyton do Nascimento Gama</a></li>
+                        <li><a href="#tabs-2">Beatriz Marques Bellesi</a></li>
+                        <li><a href="#tabs-3">Bruno do Nascimento Gama</a></li>
+                        <li><a href="#tabs-4">Gleyson do Nascimento Gama</a></li>
+                        <li><a href="#tabs-5">Paulo Soares da Silva Gomes</a></li>
+                        <li><a href="#tabs-6">Carlos Eduardo pereira da Silva</a></li>
+                        <li><a href="#tabs-7">Juca de Oliveira antonio moreira</a></li>
+                        <li><a href="#tabs-8">Teste teste teste teste teste</a></li>
+                        <li><a href="#tabs-9">Bla bla bla bla bla</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane "  id="tabs-1">
+                            <table class="table table-striped table-bordered table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Coluna_1</th>
+                                        <th>Coluna_2</th>
+                                        <th>Coluna_3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Teste</th>
+                                        <th>Teste</th>
+                                        <th>Teste</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Teste</th>
+                                        <th>Teste</th>
+                                        <th>Teste</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane " id="tabs-2">
+                            <p>Tabela_2</p>
+                        </div>
+                        <div class="tab-pane " id="tabs-3">
+                            Tabela_3
+                        </div>
+                        <div class="tab-pane " id="tabs-4">
+                            Tabela_4
+                        </div>
+                        <div class="tab-pane " id="tabs-5">
+                            Tabela_5
+                        </div>
+                        <div class="tab-pane " id="tabs-6">
+                            Tabela_6
+                        </div>
+                        <div class="tab-pane " id="tabs-7">
+                            Tabela_7
+                        </div>
+                        <div class="tab-pane " id="tabs-8">
+                            Tabela_8
+                        </div>
+                        <div class="tab-pane "id="tabs-9">
+                            Tabela_9
+                        </div>
+
+                    </div>
+					</div>
+				</div>
+			</div>
+			=================== FIM TESTANDO TABS JQUERY-UI =============================== -->

@@ -1,0 +1,37 @@
+<?php
+if(isset($_POST['id'])) {
+	$filtroLote = buscaloteByMaterialId($_POST['id']);
+	if(!empty($filtroLote)) {
+?>
+		<label>Lote :</label>
+		<select id="lote-id" onChange="buscaValidadeLote();">
+			<option>- - - -</option>
+			<?php
+					foreach($filtroLote as $lote) {
+			?>
+						<option value="<?php echo $lote['id']; ?>" ><?php echo $lote['nome']; ?></option>
+			<?php
+					}
+			?>
+		</select>
+<?php
+	} else {
+?>
+		<label>Lote :</label>
+		<select>
+				<option> Sem Lotes Disponiveis</option>
+		</select>
+<?
+	}
+}
+
+if(isset($_POST['lote_id'])) {
+	$lote = loteById($_POST['lote_id']);
+?>
+		<label>
+		    Validade:
+			<input type="text" class="" name="" value="<?php echo converteData($lote['validade']); ?>" disabled/>
+		</label>
+	
+<?php
+}

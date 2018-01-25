@@ -1,0 +1,105 @@
+<link type="text/css" rel="stylesheet" href="view/convenio/css/index.css" />
+<script src="view/convenio/js/producaotiss.js"></script>
+<div id="producaotiss" style="display: block;">
+    <div class="row-fluid">
+        <h2 class="titulo">Produção TISS (Convênio Terceiros) </h2>
+        <hr style="margin-top: -5px;">
+        <p style="margin-left: 15px;">
+            Preencha os campos abaixo e clique em <b> 'Localizar' </b> para iniciar a pesquisa na base de dados. Clique em <b>'Novo' </b> para inclusão.
+        </p>
+    </div>
+    <div class="row-fluid">
+        <fieldset class="table-bordered">
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Convênio:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" name="idConvenio" onchange="buscaPorCodigo();"/>
+                </div>
+                <div class="span5">
+                    <input type="text"  id="producaotiss_convenio_nome" name="producaotiss_convenio_nome"/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Empresa:</label>
+                </div>
+                <div class="span1">
+                    <input type="text" name="idEmpresa" value="1" READONLY/>
+                </div>
+                <div class="span5">
+                    <input type="text" id="producaotiss_empresa_nome" name="producaotiss_empresa_nome" value="CLIMEP" READONLY />
+                </div>
+            </div>
+			<div class="row-fluid">
+                <div class="span2">
+                    <label>De:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" id="producaotiss_data_inicio" name="producaotiss_data_inicio"/>
+                </div>
+                <div class="span1">
+                    <label>Até:</label>
+                </div>
+                <div class="span2">
+                    <input data-mask="99/99/9999" type="text" id="producaotiss_data_fim" name="producaotiss_data_fim"/>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Tipo de guia:</label>
+                </div>
+                <div class="span3">
+                    <select id="producaotiss_tipo_procedimento" name="producaotiss_tipo_procedimento">
+                        <option value="1"> Procedimentos </option>
+                        <option value="2"> Consultas </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2">
+                    <label>Ordenar Por:</label>
+                </div>
+                <div class="span3">
+                    <select id="producaotiss_ordenado">
+                        <option value="1"> Data de Autorização </option>
+                        <option value="2"> Nome do Cliente </option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row-fluid">
+                <div class="offset5">
+                    <a href="#" class="btn" onclick="fechar();"><i class="icon-remove"></i> Fechar </a>
+                    <a href="#" class="btn" onclick="preencheProducao();"><i class="icon-search" ></i> Localizar </a>
+                </div>
+            </div>
+        </fieldset>
+		<br/>
+	</div>
+</div>
+
+<div id="producaotiss_lista" style="display: none">
+	<a href="#" onclick="voltaLocaliza();" class="btn"><i class="icon-circle-arrow-left"></i> Voltar</a>
+	<fieldset class="table-bordered">
+		<div class="row-fluid span11" id="table-resumocaixa" style="overflow: auto;">
+			<table cellspacing='10' border='1px' align="center" class="table table-bordered table-condensed">
+				<thead id="thead-mapa">
+					<tr class="white">
+						<th align="center"> Nº Guia </th>
+						<th align="center"> Data Aut. </th>
+						<th align="center"> Convenio </th>
+						<th align="center"> Matricula </th>
+						<th align="center"> Nome </th>
+						<th align="center"> Serviço </th>
+						<th align="center"> Empresa </th>
+						<th align="center"> Valor </th>
+					</tr>
+				</thead>
+				<tbody id="tbody-mapa">
+				</tbody>
+			</table>
+		</div>
+	</fieldset>
+</div>

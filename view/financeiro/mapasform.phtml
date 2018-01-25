@@ -1,0 +1,61 @@
+<link type="text/css" rel="stylesheet" href="view/financeiro/css/index.css"/>
+<!-- Tela CTPG - Consultar Duplicata-->
+<div class="row-fluid">
+	<div id="consultarduplicatas">
+		<script async defer language="javascript" src="view/financeiro/js/mapas.js"></script>
+		<div class="row-fluid">
+			<h2 class="titulo">Consulta de Mapas </h2>
+			<hr style="margin-top: -5px;">
+		</div>
+		<div class="row-fluid">
+			<fieldset class="table-bordered">
+				<div class="row-fluid">
+					<div class="span1">
+						<label>De:</label>
+					</div>
+					<div class="span2">
+						<input data-mask="99/99/9999" type="text" id="consulta-map-data_inicio" value="01/07/2014"/>
+					</div>
+					<div class="span1">
+						<label>Até:</label>
+					</div>
+					<div class="span2">
+						<input data-mask="99/99/9999" type="text" id="consulta-map-data_fim" value="24/07/2014"/>
+					</div>
+					<div class="span1">
+						<label>Relatório:</label>
+					</div>
+					<div class="span2">
+						<select id="consulta-map-tipo">
+							<option value="9"> Forma de Pagamento </option>
+							<option value="2"> Padrão </option>
+							<option value="3"> Vacinas Pagas</option>
+							<option value="4" selected="selected"> Vacinas Realizadas </option>
+							<!-- <option value="6" selected> Vacinas Realizadas </option> -->
+						</select>
+					</div>
+				</div>
+				<hr>
+				<div class="row-fluid">
+					<div class="span6">
+						<label>
+							Preencha os campos abaixo e clique em<b> 'Localizar'</b>.
+						</label>
+					</div>
+					<a href="#" class="btn" onclick="limparConsultaMapa()"> Limpar </a>
+<!--					<a href="#" class="btn" onclick=""><i class="icon-plus-sign"></i> Lançamentos </a>-->
+					<a href="#" class="btn" onclick="localizaMapa()"><i class="icon-search"></i> Localizar </a>
+					<a href="#" id="btn_imprimirmapas" class="btn"><i class="icon-print"></i> Imprimir </a>
+				</div>
+			</fieldset>
+		</div><br>
+	</div>
+	<!-- =================== Fim ============================-->
+	<div class="row-fluid span11" id="table-resumocaixa" style="height: 500px; overflow: auto;">
+		<!-- <table cellspacing='10' border='1px' class="table table-bordered table-condensed" id="" > -->
+		<table cellspacing='10' style="font-size: 11px" width:"auto" >
+			   <thead id="thead-mapa"></thead>
+			<tbody id="tbody-mapa"></tbody>
+		</table>
+	</div>
+</div>

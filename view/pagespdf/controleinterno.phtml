@@ -1,0 +1,112 @@
+<?php
+$_POST['usuario'] = 'Marcus Vinicius de Oliveira Dias';
+$_POST['data'] = date('d/m/Y');
+$_POST['hora'] = '18:05:01';
+$_POST['id'] = '4415';
+$_POST['titular'] = 'Marcus Vinicius de Oliveira Dias';
+$_POST['matricula_titular'] = '5115';
+$_POST['dependente'] = 'Marcus  Dias';
+$_POST['matricula_dependente'] = '5115';
+$_POST['tipo_pagamento'] = 'dinheiro';
+
+?>
+<html lang="pt" >
+    <head>
+        <meta charset="utf-8">
+                <link href="./css/bootstrap.css" rel="stylesheet">
+
+        <link href="./css/pdfs.css" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <div class="container-fluid" >
+            <div class="page-header">
+                <div class="row-fluid">
+                    <div class="pull-left span3  margintop" style="margin-left: 15px">
+                        <div class="input-prepend">
+                            <span class="add-on"><b>NOME:</b><?php echo $_POST['usuario']; ?></span>
+                        </div>
+                    </div>
+                    <div class="span1 margintop " >
+                        <span><b><?php echo $_POST['data']; ?></b></span>
+                    </div>
+                    <div class="span1 margintop   " >
+                        <span><b><?php echo $_POST['hora']; ?></b></span>
+                    </div>
+
+                    <div class="span5 margintop" >
+                        <fieldset class="table-bordered">
+                            <b>CLIMEP</b>-<span>CONTROLE INTERNO Nº <?php echo $_POST['id']; ?></span>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="page-header">
+                    <div class="row-fluid">
+
+                        <fieldset class="table-bordered">
+                            <div id="mr" class=" span5 ">
+                                <div class="row-fluid">
+                                    <div class="pull-left"  >
+                                        <div class="input-prepend">
+                                            <span class="add-on"><b><?php echo $_POST['matricula_titular']; ?> - <?php echo $_POST['titular']; ?></b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <span><b><?php echo $_POST['matricula_dependente']; ?> - <?php echo $_POST['dependente']; ?></b></span><br>
+                                    <ul >
+                                        <li>Módulo</li>
+                                        <li>Varicela</li>
+                                        <li>HPV MSD</li>
+                                        <li>HPV MSD</li>
+                                        <li>HPV MSD</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="mr" class=" span5">
+                                <div class="row-fluid">
+                                    <div class="pull-left"  >
+                                        <div class="input-prepend">
+											<span class="add-on"><b><?php echo $_POST['tipo_pagamento'];?></b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <span><b>1 a 1 m</b></span><br>
+                                    <li class="thumbnails">
+                                        PAGTO.ANTECIPADO                                    
+                                    </li>
+                                    <li class="thumbnails">
+                                        PAGTO.ANTECIPADO                                    
+                                    </li>
+                                    <li class="thumbnails">
+                                        PAGTO.ANTECIPADO                                    
+                                    </li>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="page-header">
+                            <h2>&nbsp;</h2>
+                        </div>
+                    </div>
+                    <div class="span5">
+                        <div class="page-header">
+                            <h2>&nbsp;</h2>
+                        </div>
+                    </div>
+                    <div class="span2" style="margin-top: 30px;">
+                        <span><b><?php echo $_POST['data']; ?></b></span>
+                    </div>
+                </div>
+                <hr>
+            </div>
+    </body>
+</html>

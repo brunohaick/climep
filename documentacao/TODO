@@ -1,0 +1,224 @@
+A FAZER:
+
+colocar CLEDITOR em todos os textareas
+
+* IMPORTAÇÃO
+	- importar medicos e vacinadores
+	- importar consultas
+	- verificar importação de usuários
+	- importar controles
+	- imrportar agrupamentos de vacinas
+	- Importar eventos adversos
+	- importar testes na tabela testes ou ajeitar o sistema pra apontar teste para material classe C
+	- ATESTADOS SÓ TEM DADOS NULL
+	- PROCEDOMENTOS foram importados com somente a descrição falta o nome deles.
+	- TA FALTANDO TODOS OS DADOS DAS ABAS DE FICHA DE VACINA - PARTO, ANTECEDENTES MORBIDOS, CONDIÇÕES DE NASCIMENTO E GESTAÇÃO, PESO
+
+* RECEPÇÃO
+
+
+	== IMPRIMIR ==
+
+=== FEITO ===
+
+	- tela de programação - módulos de vacinas. (Luiz)
+	- Medicos e Medicos indicação devem ser corrigidos. Criar banco para medicos indicação.
+	- Inserir reacoes adversas, e colocar o icone de vacina na celula indicando que tem uma reação;
+	- "menu imunoterapia" -> no menu de contexto
+	- ficha de imunoterapia - nao fazer agora
+	- certificado internacional de vacinas
+	- carteira de vacinas.
+	- certificado de comparecimento.	
+	- Editar Controle.(Bruno)
+	- Agrupar Vacinas;(Bruno)
+		-- Criar Banco para agrupar vacinas;
+		-- excluir/editar/inserir
+	- Ficha de vacinas deve inserir, editar e excluir, utilizando os botões dentro da celula da tabela. (Bruno)
+	- criar banco para eventos adversos. (Bruno)
+	- Correção no modal de editar dependentes. (Bruno)
+	- listar Serviços programados (ficha de vacina - listar as vacinas que ainda serão feitas e as imunoterapias que deveriam ser feitas também) (Bruno)
+	- modulo controle de imunoterapia, completo. (Bruno)
+	- Gerar controle de imunoterapia --> select serviços está em branco. (Bruno)
+	- Correção de codificação de dados. (Bruno)
+	- Mudar a forma de apresentação dos dados na ficha de vacinas  (Bruno)
+	- Corrigir os dados importados com codificação errada em material e procedimentos.(Bruno)
+	- Encaminhar cliente está permitindo encaminhar mais de uma vez para a fila
+	  de espera (aki só tem que fazer um teste pra ver se ele jah ta na fila)
+	  nao prioritários (Bruno)
+	- Mais um campo nos "contatos" para informar de quem é o telefone
+	- modal para gerar controle de imunoterapia -> no menu de contexto -> nao abre se nao tiverem dependentes cadastrados
+	- mensagem de "editado com sucesso" quando cadastrar dependente.
+	- mensagem de "editado com sucesso" quando editar dependente
+	- colocar a busca do crm na listagem de medico no cadastro dependente
+		-> Já está feito utilizando js, não substitui toda a div mais.
+	- encaminhar cliente -> jogar ele na fila de espera
+		-- (Agora a lista de vacinas mostra primeiro 5 ultimos resultados, uma linha em branco e depois mo resto dos resultados).
+
+* AGENDA
+
+=== A FAZER ===
+
+	- cadastrar mensagem interna
+	- definir cores diferentes para cada tipo de status na listagem
+	- implementar a busca no modal de agendamento
+	- verificar as sessões no modal de agendamento
+	- habilitar o checkbox para mostrar agendamentos cancelados(Ao cancelar, nao
+	  pode excluir do banco, pois tem que armazenar para mostrar depois )
+
+	- NAO TA FUNCIONANDO NO HEINDALL O AGENDAMENTO
+
+
+	== IMPRIMIR ==
+
+	
+=== FEITO ===
+
+* CONSULTAS
+
+=== A FAZER ===
+
+	- modal para os botoes da prescrição
+	- criar um botao (visualizar cadastro completo do cliente)
+
+	== IMPRIMIR ==
+		- diagnosticos
+		- ficha de prescrições
+		- testes
+		- vacinas que ja foram tomadas
+
+=== FEITO ===
+
+	- tabela de histórico consulta deve possuir 3 linhas no mínimo, mesmo que vazias -> Feito
+	- link do botao "imunoterapias" deve ir para o modal de imunoterapias -> Feito
+		- gerar lógica para resultados
+	- gerar lógica para atestados
+	- gerar lógica para testes clínicos
+	- criar banco para área da triagem- link do botao "vacinações" deve ir para o modal de vacinas
+
+* ENCAMINHAMENTO E PROCEDIMENTOS TISS
+
+=== A FAZER ===
+
+	- definir no banco de dados, o tipo de procedimento, se é exame ou consulta
+	- mostrar guia de consulta
+	- no modal de procedimentos TISS -> abaixar os botoes e a linha na parte
+	  inferior direita do modal.
+
+	== IMPRIMIR ==
+
+=== FEITO ===
+
+	- listar titular e dependentes na "listagem de membros da família"
+	- colocar minimo de 3 linhas na listagem de procedimentos (nem que sejam em
+	  branco)
+	- implementar a listagem das ultimas consultas
+
+* ESTOQUE
+
+=== A FAZER ===
+
+	== IMPRIMIR ==
+
+=== FEITO ===
+
+	- imprimir o estoque de vacinas
+	- O botao "Novo" em entrada de nota fiscal, deve ser do tipo reset
+	- em entrada de nota fiscal, retirar o botao "ajuda"
+	- em entrada de nota fiscal, retirar o botao "Excluir item da lista"
+	- implementar o modal "consulta" ou retira-lo de lá (na transf. de estoque)
+	- ao escrever o código do fornecedor, carregar o seu nome com ajax/jquery
+	- Implementar "Dados Do Faturamento"
+
+* GERAL
+
+=== A FAZER ===
+
+	- Implementar cadastro de especialidade/teste/exame/convenios
+		- se cadastrar convenio tem que colocar o mesmo em plano de contas.
+	- modal de "como chegou aqui?"
+	- definir pagina de Produção ( Sistema>Produção )
+	- Sistema>Cadastro>Vacina
+		-> mudar de estoque>cadastro>vacina para sistema>cadastro...
+		-> colocar mascaras
+		-> nao permitir o cadastro de duas vacinas com o
+	- Sistema>Cadastro>Fornecedores 
+		-> mudar de estoque>cadastro>Fornecedores para sistema>cadastro...
+		-> colocar mascaras
+	- Ultimas entradas (testar) -> precisa colocar uma data default no input de
+	  quando dizem o seu peso
+	- Atualizar os módulos no banco de dados
+	- Os links não podem aparecer para quem não tiver permissão, e não somente
+	  dizer que não se pode acessar
+	- Colocar os menus de convenio e financeiro para a lateral
+	- Enxugar os menus que não são utilizados ou não tem lógica
+
+	== IMPRIMIR ==
+
+
+=== FEITO ===
+
+	- IMPLEMENTAR A FILA DE ESPERA DE VACINA
+	- Implementar o Cadastro de Fornecedores
+	- mostrar o nome do login no modal de mudar senha
+
+* CAIXA
+
+=== A FAZER ===
+
+	- cadastro da tabela de Preços e CRUD completo
+	- Sincronizar caixa com financeiro.
+
+	== IMPRIMIR ==
+
+=== FEITO ===
+
+	- 
+
+* FINANCEIRO
+
+=== A FAZER ===
+
+	- Criar lógica do plano contábil
+	- Terminar Mapas
+	- Imprimir extrato na tela
+	- Alinhar valores em dinheiro sempre à direita
+	- Verificar arredondamento, e fazer cáculos no php pra fazer com precisão
+
+	== IMPRIMIR ==
+
+		- Extrato
+		- Imprimir Mapas
+
+=== FEITO ===
+
+* CONVÊNIO
+
+=== A FAZER ===
+
+	- Corrigir o ícone do menu para gerar o XML Tiss
+	- Construir o XML Tiss
+	- Terminar a lógica de Consulta Convenio
+
+	== IMPRIMIR ==
+
+=== FEITO ===
+
+	- criar logica de Confecção de faturas
+
+* NOTA FISCAL
+
+=== A FAZER ===
+	- 
+
+=== FEITO ===
+
+	- 
+
+
+DEFINIDO NA REUNIAO
+	- nome consulta em: ZZ/ZZ/ZZZZ, no menu de consulta, acrescentar história clinica e exame físico
+	- imprimir história clínica do sistema (definir opções para impressão)
+	- upload de imagem no cadastro de cliente
+		-> nao esquecer que o sistema pode alterar a matricula de qualquer cliente
+	- ver detalhes de quantos lembretes, e avisos, ou qualquer tipo contato que
+	  foram realizados com o cliente. (HOJE TEM NA HISTÒRIA CLÍNICA)

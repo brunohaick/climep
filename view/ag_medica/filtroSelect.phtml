@@ -1,0 +1,74 @@
+<?php
+if(isset($_POST['id_tabela'])) {
+	$filtroConvenio = filtraConvenioPorTabela($_POST['id_tabela']);
+	if(!empty($filtroConvenio)) {
+?>
+		<select id="arc-horario-convenio" onChange="filtraProcedimento();">
+			<option>- - - -</option>
+			<?php
+				foreach($filtroConvenio as $convenio) {
+			?>
+					<option value="<?php echo $convenio['id']; ?>" ><?php echo $convenio['nome']; ?></option>
+			<?php
+				}
+			?>
+		</select>
+<?php
+	} else {
+?>
+		<select>
+				<option>Sem Convenios Disponiveis</option>
+		</select>
+<?php
+	}
+}
+
+if(isset($_POST['id_convenio'])) {
+	$filtroTabela = filtraTabelaPorConvenio($_POST['id_convenio']);
+	if(!empty($filtroTabela)) {
+?>
+		<select id="arc-horario-tabela" onChange="filtraProcedimento();">
+			<option>- - - -</option>
+			<?php
+				foreach($filtroTabela as $tabela) {
+			?>
+					<option value="<?php echo $tabela['id']; ?>" ><?php echo $tabela['nome']; ?></option>
+			<?php
+				}
+			?>
+		</select>
+<?php
+	} else {
+?>
+		<select>
+				<option>Sem Tabelas Disponiveis</option>
+		</select>
+<?php
+	}
+}
+
+if(isset($_POST['tabela_id']) && isset($_POST['convenio_id'])) {
+
+	$filtroProcedimento = listaProcedimentos($_POST['convenio_id'],$_POST['tabela_id']);
+
+	if(!empty($filtroProcedimento)) {
+?>
+		<select id="arc-horario-servicos" >
+			<option>- - - -</option>
+			<?php
+				foreach($filtroProcedimento as $procedimento) {
+			?>
+						<option value="<?php echo $procedimento['id']; ?>" ><?php echo $procedimento['descricao']; ?></option>
+			<?php
+				}
+			?>
+		</select>
+<?php
+	} else {
+?>
+		<select>
+				<option>Sem Procedimentos Disponiveis</option>
+		</select>
+<?php
+	}
+}

@@ -1,0 +1,162 @@
+<script async defer src="template/js/geral.js"></script>
+<script async defer src="view/recepcao/js/imunoterapia.js"></script>
+<script async defer src="view/js/utils.js"></script>
+<div id="dialog-ctr-imu" class=" modal-body-ctr-imu" style="background-image: url('template/img/body-bg.png');">
+	<div id="ctr-imu"><a href="#" id="fechar" class="close">Fechar X</a>
+		<h2 class="titulo">Controle para Imunoterapia</h2>
+		<hr style="margin-top: -4px;"/>
+		<fieldset class="table-bordered" >
+			<div class="row-fluid" >
+				<div class="span8" >
+					<fieldset class="table-bordered" >
+						<div class="row-fluid">
+							<div class="span6">
+								<input type="text" value="<?php echo $clienteEscolhido; ?>" disabled />
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="span10">
+								<label class="ctr-imu-text" for="ctr-imu-membro"> Membro :</label>
+								<select id="ctr-imu-membro" onchange="buscaImunoPorCliente();" name="ctr-imu-membro" >
+									<?php
+									foreach ($clientesControleImuno as $membro) {
+										?>
+										<option value="<?php echo $membro['id']; ?>">
+											<?php echo $membro['nome'] . " " . $membro['sobrenome']; ?>
+										</option>
+										<?php
+									}
+									?>
+								</select>
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="span8">
+								<label class="ctr-imu-text" for="ctr-imu-servico"> Serviço :</label>
+								<select id="ctr-imu-servico" name="ctr-imu-servico" >
+									<?php
+									foreach ($servicos as $servico) {
+										?>
+										<option value="<?php echo $servico['id']; ?>">
+											<?php echo $servico['nome']; ?>
+										</option>
+										<?php
+									}
+									?>
+								</select>
+							</div>
+						</div> <br>
+
+						<div class="row-fluid" style="margin-bottom: 15px;">
+							<div class="span3">
+								<button id="imuno-append" class="btn btn-mini span10" type="button" name="" value="">
+									<i class="icon-plus"> </i>
+								</button>
+							</div>
+
+							<div class="span6"></div>
+							<div class="span2">
+								<div class="span3" >
+									<b>R$</b>
+								</div>
+
+								<div class="span9">
+									<input class="" type="text" id="precoTotal" name="precoTotal" value="0" disabled />
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+
+				<div class="span4">
+					<div class="row-fluid">
+						<div class="row-fluid" id="tab-scroll-im-ctr" >
+							<table cellspacing='10' border='1px' align="center" class="table table-bordered">
+								<thead>
+									<tr class="white">
+										<th class="titulo" align="center"> Data </th>
+										<th class="titulo" align="center"> Descrição </th>
+										<th class="titulo" align="center"> Doses </th>
+									</tr>
+								</thead>
+								<tbody id="ctr-imu-imunos">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="table-bordered" style="margin-top: 5px;">
+			<div class="row-fluid" id="tab-scroll-im-large-ctr">
+				<div class="span12">
+					<table cellspacing='10' border='1px' align="center" class="table table-bordered">
+						<thead>
+							<tr class="white">
+								<th class="titulo" align="center"> Cliente </th>
+								<th class="titulo" align="center"> Serviços [Série ou teste] </th>
+								<th class="titulo" align="center"> Qtd </th>
+								<th class="titulo" align="center"> Preço </th>
+								<th class="titulo" align="center"> Pagamento </th>
+								<th class="titulo" align="center"> Fazer Hoje ?</th>
+								<th class="titulo" align="center"> Divisão (mL)</th>
+								<th class="titulo" align="center"> Remover </th>
+							</tr>
+						</thead>
+						<input type="hidden" value="0" id="hiddenRowId">
+						<tbody id="table-imuno-append">
+							<?php
+							$a = 0;
+							foreach ($todosServicos as $serv) {
+								?>
+							<input type='hidden' id='hidden-hist-servico-<?php echo $a; ?>' value='<?php echo $serv['servico_id']; ?>'>
+							<tr id='tr-imuno-insert-historico' class='dayhead tr-imuno-insert-historico-<?php echo $a; ?>'>
+								<th id='th-imuno-insert-historico'><?php echo $serv['pessoa_nome']; ?> </th>
+								<th id='th-imuno-insert-historico'><?php echo $serv['material_nome']; ?> </th>
+								<th id='th-imuno-insert-historico'><?php echo $serv['qtd']; ?> </th>
+								<th id='th-imuno-insert-historico'><?php echo $serv['servico_preco']; ?> </th>
+								<th id='th-imuno-insert-historico'><?php echo $serv['status_nome']; ?> </th>
+								<th>
+							<center>
+								<input type='checkbox' name='hist-fazerhoje-<?php echo $a; ?>' id='fazerhoje-<?php echo $a; ?>' value='<?php echo $a; ?>'>
+							</center>
+							</th>
+
+							<th>
+								<input type='text' class="span11" name='hist-divisao-<?php echo $a; ?>' id='divisao-<?php echo $a; ?>' 
+									   onblur='verificaQtdMl("<?php echo $a; ?>", "<?php echo $serv['material_qtd_ml_por_dose']; ?>", "<?php echo "hist"; ?>");' 
+									   value='<?php echo $serv['material_qtd_ml_por_dose']; ?>'>
+							</th>
+							<th align='center'><a class='btn mrg-center'><i class='icon-remove icon-white'></i></a> </th>
+							</tr>
+							<?php
+							$a++;
+						}
+						?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset class="table-bordered" style="margin-top: 5px;">
+			<div class="row-fluid">
+				<div class="span2">
+					<button class="btn btn-mini span10" id="submit-controle-imuno" name="ok"><i class="icon-ok"></i> OK</button>    
+				</div>
+
+				<div class="span8">
+					<label class="nome-text">
+						<input class="" type="checkbox" name="ok"/>
+						Incluir Módulo no controle
+					</label>
+				</div>
+				<div class="span2">
+					<button class="btn btn-mini span11" onclick="fechar_modal('boxes-ctr-imu');" name="cancelar" ><i class="icon-remove"></i> Cancelar</button>
+				</div>
+		</fieldset>
+	</div>
+</div>

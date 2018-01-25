@@ -1,0 +1,108 @@
+<script async defer src="view/estoque/js/index.js"></script>
+<script async defer src="template/js/bootstrap-datepicker.js"></script>
+<script async defer src="template/js/maskedinput.js" ></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+
+<h2 class="titulo">Histórico do Estoque</h2>
+<fieldset class=" table-bordered">
+    <div class="row-fluid">
+        <div class="span4">
+            <fieldset class=" table-bordered">
+                <legend> Escolher Vacina</legend>
+                <label>
+                    Vacina :
+				 <select id="id-material" >
+				 	<option></option>
+				 	<?php
+
+				 			foreach(buscaMaterial('') as $vacinamaterial) {
+								$select = '';
+								if($vacinamaterial['id'] == $idMaterial){
+									$select = "SELECTED";
+								}
+				 	?>
+								<option <?php echo $select; ?> value="<?php echo $vacinamaterial['id']; ?>" ><?php echo $vacinamaterial['nome']; ?></option>
+				 	<?php
+				 			}
+				 	?>
+        		 </select>
+                </label>
+
+            </fieldset>
+        </div>
+        <div class="span6">
+            <fieldset class=" table-bordered">
+                <legend>Pesquisa :</legend>
+                <div class="span4">
+                    <label>Início :</label>
+					<input type="text" class=""  name="" id="he-dataInicio" value="<?php echo converteData($dataInicio); ?>" />
+                </div>
+                <div class="span4" style="margin-left: 15px;">
+                    <label>Fim :</label>
+					<input type="text" class=""  name="" id="he-dataFim" value="<?php echo converteData($dataFim); ?>" />
+                </div>
+            </fieldset>
+        </div>
+        <div class="span2">
+
+
+            <div class="row-fluid">
+                <div class="span10">
+                    <button class="btn btn-mini  span12" style="height: 30px; margin-bottom: 10px;" onclick="histEstoqueMaterial();" >Processar <i class=" icon-arrow-right">  </i> </button>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span10">
+                    <button class="btn btn-mini  span12" style="height: 30px;" onclick="document.location.href='index.php'"  ><i class="icon-remove"> </i> Fechar</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</fieldset><br/>
+<fieldset class="table-bordered">
+<div class="row-fluid" >
+            <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" >
+                    <thead>
+                        <tr class="white">
+                            <th align="center" width="10%">Data</th>
+                            <th align="center"> Histórico </th>
+                            <th align="center"> Qtd </th>
+                            <th align="center"> Validade </th>
+                            <th align="center"> Lote </th>
+                            <th align="center"> NF </th>
+                            <th align="center"> Almox</th>
+                            <th align="center"> Sala</th>
+                            <th align="center"> Usuário</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+					<?php
+						foreach($materiais as $material) {
+							$divisor = $material['quantidade_doses']*$material['qtd_ml_por_dose'];
+							$materialEmFrasco = ($material['quantidade'])/($divisor);
+					?>
+
+                         <tr name="table-color" class='dayhead' >
+                            <th align="center" ><?php echo converteData($material['data_movimentacao']); ?></th>
+                            <th align="center" ><?php echo histByFlag($material['flag'],$material['id_motivo']); ?></th>
+                            <th align="center" ><?php echo frascosML($material['quantidade_doses'],$material['qtd_ml_por_dose'],$materialEmFrasco); ?></th>
+                            <th align="center" ><?php echo converteData($material['validade']); ?></th>
+                            <th align="center" ><?php echo $material['nome_lote']; ?></th>
+                            <th align="center" ><?php echo $material['nota_fiscal']; ?></th>
+                            <th align="center" ><?php echo quantidadeMaterialByLocalId($material['materialid'],1,$material['id_lote']); ?></th>
+                            <th align="center" ><?php echo quantidadeMaterialByLocalId($material['materialid'],2,$material['id_lote']); ?></th>
+                            <th align="center" ><?php echo buscaUsuarioPorId($material['usuario_id']); ?></th>
+                         </tr>
+					<?php
+						}
+					?>
+                         
+                     
+                    </tbody>
+
+                </table>
+        </div>
+</fieldset>

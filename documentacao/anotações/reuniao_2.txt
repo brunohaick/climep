@@ -1,0 +1,20 @@
+FICHA DE VACINAS
+  tabela de vacinas
+    - tipos de vacinas
+      vermelho - ainda nao fez, porem está agendado
+      verde - pago e agendado, porém nao tomada
+      preta - fez a vacina, e na climep
+      laranja
+      azul - fez a vacina, mas em outro local
+      cinza -> vai tomar -> passou no caixa
+
+  mostra o nome da pessoa
+  nome do medico
+  data de nascimento
+  categoria
+
+  pode editar e imprimir
+  * no canto superior direito da tela (area de vacinas), tem uma lista com as vacinas programadas (perguntar sobre módulos com xirlene ou leide)
+
+      
+      

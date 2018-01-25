@@ -1,0 +1,78 @@
+<script async defer src="view/estoque/js/index.js"></script>
+<script async defer src="view/estoque/js/cadVacina.js"></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css"/>
+<h2 class="titulo">Cadastro de Vacinas</h2>
+<fieldset class=" table-bordered">
+	<div class="row-fluid">
+		<div class="span1">
+			<label>
+				Código:
+				<input class="" name="cad-vac-codigo" type="text"/>
+			</label>
+		</div>
+
+		<div class="span3">
+			<label>
+				Nome :
+				<input class="" name="cad-vac-nome" type="text"/>
+			</label>
+		</div>
+
+		<div class="span2">
+			<label>
+				Qtd dose(ml):
+				<input class="" name="cad-vac-qtd_ml_dose" type="text"/>
+			</label>
+		</div>
+
+		 <div class="span6">
+			<label>
+				Descrição :
+				<textarea name="cad-vac-descricao"></textarea>
+			</label>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<label>
+				Desc. Lembrete:
+				<textarea name="cad-vac-descricao_lembrete"></textarea>
+			</label>
+		</div>
+
+		<div class="span6">
+			<label>
+				Desc. Inglês:
+				<textarea name="cad-vac-descricao_ingles"></textarea>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span2">
+			<label>
+				Valor Dinheiro (R$):
+				<input class="" name="cad-vac-valor_dinheiro" type="text"/>
+			</label>
+		</div>
+
+		<div class="span2">
+			<label>
+				Valor Cartão (R$) :
+				<input class="" name="cad-vac-valor_cartao" type="text"/>
+			</label>
+		</div>
+    </div>
+</fieldset><br>
+
+<fieldset class=" table-bordered">
+	<div class="row-fluid" >
+		<div class="span2">
+			<button class="btn btn-mini span12" onclick="inserirVacina();" style="height: 50px;" ><i class=" icon-ok"> </i> Gravar</button>
+		</div>
+
+		<div class="span2">
+			<button class="btn btn-mini span12" onclick="botaoFechar();" style="height: 50px;" ><i class="icon-remove"> </i> Fechar</button>
+		</div>
+	</div>
+</fieldset>

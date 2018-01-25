@@ -1,0 +1,148 @@
+<div id="lancamento">
+	<script async defer language="javascript" src="view/financeiro/js/lancamentos.js"></script>
+	<div class="row-fluid">
+		<div class="row-fluid">
+			<h2 class="titulo"> FLCX - Lançamentos </h2>
+			<hr style="margin-top: -5px;">
+			<p style="margin-left: 15px;">
+				Preencha os campos abaixo informando que Conta Corrente será usada para efetuar a transação e clique em Avançar.
+			</p>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<fieldset class="table-bordered">
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Data Operação:</label>
+				</div>
+				<div class="span2">
+					<input data-mask="99/99/9999" type="text" name="lancamentos-data_operacao" />
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Conta Corrente:</label>
+				</div>
+				<div class="span1">
+					<input type="text" onchange="buscaPorCodigoLanc('conta_corrente', 'lancamentos');" name="lancamentos-cod_conta_corrente"/>
+				</div>
+				<div class="span5">
+					<input type="text" name="lancamentos-conta_corrente"/>
+				</div>
+			</div>
+            <!--
+			<div class="row-fluid">
+				<fieldset class="table-bordered">
+					<legend>Dados adicionais</legend>
+					<div class="row-fluid">
+						<div class="span3">
+							<label>Banco/Agência:</label>
+						</div>
+						<div class="span7">
+							<input type="text" name="baixa-dup-modal-banco_agencia" value="CLIMEP / CLIMEP"  disabled/>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3">
+							<label>Saldo Disponível/Indisponível:</label>
+						</div>
+
+						<div class="span7">
+							<input type="text" name="baixa-dup-modal-disponivel_indisponivel" value="R$ 1.031.213.01/ R$ 0,00" disabled />
+						</div>
+					</div>
+				</fieldset>
+			</div><br>
+            -->
+			<div class="row-fluid">
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Tipo de Operação:</label>
+					</div>
+					<div class="span1">
+						<input type="text" onchange="buscaPorCodigoLanc('tipo_operacao', 'lancamentos');" class="" name="lancamentos-cod_tipo_operacao" value="">
+					</div>
+					<div class="span5">
+						<input type="text" name="lancamentos-tipo_operacao">
+					</div>
+					<div class="span1">
+						<button class="btn " onclick="abrir_modal('modalcadastro')"><i class="icon-search"></i></button>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>N.Documento:</label>
+					</div>
+					<div class="span3">
+						<input type="text" class="" name="lancamentos-numero_documento">
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Valor:</label>
+					</div>
+					<div class="span2">
+						<input type="text" name="lancamentos-valor"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span2">
+						<label>Observação:</label>
+					</div>
+					<div class="span6">
+						<textarea style="width: 100%;" name="lancamentos-observacao"> </textarea>
+					</div>
+				</div>
+				<div class="offset7">
+						<!--<a href="#" class="btn" onclick="fechar_modal('baixaduplicata');cleanFormConsultaBaixaCpModal();"><i class="icon-circle-arrow-left"></i> Visualizar</a> -->
+					<a href="#" class="btn" onclick="insereLancamentos();" id="insere-lancamentos" > Avançar <i class="icon-circle-arrow-right"></i></a>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div id="modalcadastro" class="modal hide fade" >
+	<div class="modal-body" style=" background-image: url('template/img/body-bg.png');">
+		<div id="">
+			<div class="row-fluid"><br>
+				<table class="table table-bordered table-condensed">
+					<thead>
+						<tr >
+							<th> COD OPERACAO </th>
+							<th> OPERACAO </th>
+							<th> E_S </th>
+							<th> COMPENSACAO </th>
+						</tr>
+					</thead>
+
+					<tbody id="lancamentos-lista_tipo_operacoes" >
+					<?php
+						$tipos = buscaTodosTipoOperacoes();
+						foreach ($tipos as $tipo) {
+					?>
+							<tr id="teste" ondblclick="escolherOperacao('<?php echo $tipo['nome'];?>');">
+								<th> <?php echo $tipo['codigo'];?> </th>
+								<th> <?php echo $tipo['nome'];?> </th>
+								<th> <?php echo $tipo['e_s'];?> </th>
+								<th> <?php echo $tipo['compensacao'];?> </th>
+							</tr>
+					<?php
+						}
+					?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" onclick="fechar_modal('modalcadastro');"><i class="icon-remove"></i> Fechar </button>
+		</div>
+	</div>
+</div>
+<script>
+function testecolor(c) {
+	var id = c.attr('id');
+	var classe = $("#" + id).addClass('info');
+}
+</script>
+

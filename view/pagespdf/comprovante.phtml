@@ -1,0 +1,85 @@
+<?php
+$comprovante = $_SESSION['comprovante'];
+unset($_SESSION['comprovante']);
+?>
+<html lang="pt" >
+	<head>
+		<meta charset="utf-8">
+		<link href="./view/pagespdf/css/bootstrap.css" rel="stylesheet">
+		<link href="./view/pagespdf/css/pdfs.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container-fluid" >
+			<div class="page-header">
+				<h3 align="center">Copia de Cheque</h3>
+				<div class="row-fluid" >
+					<div class="pull-right" style="margin-right:20px;">
+						<div class="input-prepend">
+							<span class="add-on" style="font-size: 12px;">Data:<b> <?php echo date('Y/m/d'); ?> </b></span>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid" >
+					<div class="pull-left marginleft" >
+						<div class="input-prepend">
+						<span class="add-on" style="font-size: 12px;">Empresa:<b> <?php echo $comprovante['nome_empresa']; ?> </b></span>
+						</div>
+					</div>
+					<div class="pull-right" style="margin-right:20px;">
+						<div class="input-prepend">
+							<span class="add-on" style="font-size: 12px;">Usuário:<b> <?php echo $comprovante['nome_pessoa']; ?> </b></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="page-header">
+					<div class="row-fluid">
+						<fieldset class="table-bordered">
+							<div class=" span5">
+								<div class="pull-left"  >
+									<div class="input-prepend">
+										<span class="add-on" style="font-size: 12px;">Banco:<b> <?php echo $comprovante['nome_banco']; ?> </b></span>
+									</div>
+								</div>
+							</div>
+							<div class="span4">
+								<div class="pull-left">
+									<div class="input-prepend">
+										<span class="add-on" style="font-size: 12px;">Cheque:<b> <?php echo $comprovante['numero_cheque']; ?> </b></span>
+									</div>
+								</div>
+							</div>
+							<div class="span3">
+								<div class="pull-right"  >
+									<div class="input-prepend">
+										<span class="add-on" style="font-size: 12px;"><b> <?php echo $comprovante['valor']; ?> </b></span>
+									</div>
+								</div>
+							</div>
+							<div class="row-fluid">
+								<span>A quantia: <b> <?php echo $comprovante['valor_extenso']; ?> </b></span>
+							</div><br></br>
+							<div class="row-fluid">
+								<div class=" span5">
+									<div class="pull-left"  >
+										<div class="input-prepend">
+											<span class="add-on" style="font-size: 12px;">Nominal a:<b> <?php echo $comprovante['nome_fornecedor']; ?> </b></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset class="table-bordered">
+							<legend> Histórico </legend>
+							<div class="input-prepend">
+								<span class="add-on"style="font-size: 12px;"><b> <?php echo $comprovante['historico']; ?> </b></span>
+							</div>
+						</fieldset>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

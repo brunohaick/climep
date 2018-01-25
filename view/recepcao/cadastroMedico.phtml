@@ -1,0 +1,277 @@
+<?php
+$listabairros = mostraBairros();
+?>
+<script async defer language="javascript" src="view/recepcao/js/cadastro.js"></script>
+<link  type="text/css"  rel="stylesheet" href="view/recepcao/css/cadastroMedico.css" />
+
+<!--================================ 	FORMULAŔIO DE CADASTRO ============================================================
+    ======================================================================================================================= -->
+	<h2 class="titulo"><?php echo $tituloPessoa; ?></h2>
+
+<form class="cadastro" action="" method="post">
+	<fieldset class="cadastro table-bordered">
+		<div class="row-fluid">
+			<div class="span1">
+				<label for="cad-matricula">Identif.</label>
+				<input id="cad-matricula" name="cad-matricula" type="text" value="<?php echo $clientes['id'];?> " disabled />
+			</div>
+
+			<div class="span4">
+				<label for="cad-nome">Nome / Titular</label>
+				<input id="cad-nome" name="cad-nome" type="text" placeholder="Informe o seu nome" value="<?php echo $clientes['nome'];?>"/>
+			</div>
+
+			<div class="span4">
+				<label for="cad-sobrenome">Sobrenome</label>
+				<input id="cad-sobrenome" name="cad-sobrenome" type="text"  placeholder="Informe o seu sobrenome" value="<?php echo $clientes['sobrenome'];?>" />
+			</div>
+            <div class="span2" class="input-append date">
+				<label for="cad-nascimento">D. Nascimento</label>
+				<input id="cad-nascimento" name="cad-nascimento"  type="text" placeholder="99/99/9999" value="<?php echo converteData( $clientes['data_nascimento'] );?>"/>
+			</div>
+			<div class="span1">
+				<label for="cad-sexo">Sexo</label>
+				<select id="cad-sexo" name="cad-sexo" >
+
+					<?php
+						if($clientes['sexo'] == "F") {
+							$f = "SELECTED";
+						} else if($clientes['sexo'] == "M") {
+							$m = "SELECTED";
+						}
+					?>
+					<option <?php echo $m; ?> value="M" >M</option>
+					<option <?php echo $f; ?> value="F">F</option>
+				</select>
+			</div>
+		</div>
+		<div class="row-fluid">	
+			<div class="span10">
+				<div class="row-fluid">
+					<div class="span10">
+						<label for="cad-conjuge">Cônjuge</label>
+						<input id="cad-conjuge" name="cad-conjuge" type="text" placeholder="Informe o nome do Cônjuge" value="<?php echo $clientes['conjuge'];?>"/>
+					</div>
+					<div class="span2">
+						<label for="cad-conjuge">Trat.</label>
+						<input id="cad-conjuge" name="cad-conjuge" type="text" placeholder="Trat" value="<?php echo $clientes['conjuge'];?>"/>
+					</div>
+				</div>
+
+				<div class="row-fluid">	
+					<div class="span6">
+						<label for="cad-endereco">Endereço</label>
+						<input id="cad-endereco" name="cad-endereco" type="text" placeholder="Informe o endereço" value="<?php echo $clientes['endereco'];?>"/>
+					</div>
+					<div class="span1">
+						<label for="cad-numero">Número</label>
+						<input id="cad-numero" name="cad-numero" type="text" placeholder="Nº 00" value="<?php echo $clientes['numero'];?>"/>
+					</div>
+					<div class="span3">
+						<label for="cad-bairro">Bairro</label>
+						<input type="text" name="cad-bairro" data-provide="typeahead" data-items="4" data-source='<?php echo $listabairros; ?>' placeholder="Informe o bairro" value="<?php echo $clientes['bairro'];?>"/>
+					</div>
+					<div class="span2">
+						<label for="cad-cep">CEP</label>
+						<input id="cad-cep" name="cad-cep" type="text" placeholder="cep EX: XXXXX-XX" value="<?php echo $clientes['cep'];?>"/>
+					</div>
+				</div>
+
+				<div class="row-fluid">	
+					<div class="span6">
+						<label for="cad-complemento">Complemento</label>
+						<input id="cad-complemento" name="cad-complemento" type="text" placeholder="Informe o complemento do Endereco" value="<?php echo $clientes['complemento'];?>" />
+					</div>
+					<div class="span2">
+						<label for="cad-estado">Estado</label>
+						<input type="text" name="cad-estado" data-provide="typeahead" data-items="4" data-source='<?php echo $listabairros; ?>' placeholder="Informe o bairro" value="<?php echo $clientes['estado'];?>"/>
+					</div>
+					<div class="span4">
+						<label for="cad-cidade">Cidade</label>
+						<input type="text" name="cad-cidade" data-provide="typeahead" data-items="4" data-source='<?php echo $listabairros; ?>' placeholder="Informe o bairro" value="<?php echo $clientes['cidade'];?>"/>
+					</div>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8">
+						<label for="cad-email">Email</label>
+						<input id="cad-email" name="cad-email" type="text" placeholder="Informe o email" value="<?php echo $clientes['email'];?>"/>
+					</div>
+
+					<div class="span2">
+						<label for="cad-origem">CRM</label>
+						<input id="cad-crm" name="cad-crm" type="text" placeholder="informa o CRM" value="<?php echo $clientes['email'];?>"/>
+					</div>
+
+					<div class="span2 cad-lembrete" ><center>
+						<label for="cad-lembrete"> Ativo
+							<?php
+								if($clientes['ativo'] == '0') {
+									$checklembrete = "checked";
+								} else {
+									$checklembrete = "";
+								}
+							?>
+							<input <?php echo $checklembrete; ?> id="cad-ativo" value='1' name="cad-ativo" type="checkbox" />
+							</center>
+						</label>
+					</div>
+                </div>
+            </div>
+            <div class="span2">
+                <fieldset class="menu-botoes table-bordered">
+                    <legend>Menu</legend>
+                    <div class="row-fluid">
+                    </div>
+                    <div class="row-fluid">
+                        <input class="btn btn-mini"   type="submit" name="submit" value="<?php echo $tituloPessoa; ?>" />
+                    </div>
+                    <div class="row-fluid">
+                        <input id="cad-procurar" class="btn btn-mini span12" type="button" name="cad-procurar" value="Procurar" onclick="abrir_modal('boxes-busca')" />
+                    </div>
+                    <div class="row-fluid">
+                        <a id="cad-fechar" class="btn btn-mini span12" href="index.php">Fechar</a>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
+    <div  class="row-fluid">
+
+        <div class="span5">
+
+            <fieldset class="table-bordered" id="contatos-telefonicos" >
+                <legend align="center">Contatos Telefônicos</legend>
+                <div class="row-fluid">
+                    <label class="span3" for="ddd-residencial" >Residencial</label>
+
+                    <input class="fone" id="fone-residencial" name="tel-residencial" type="text" placeholder="(91) 9999-9999" value="<?php echo $clientes['tel_residencial'];?>"/>
+
+                </div>
+
+				<div class="row-fluid">
+                    <label class="span3" for="ddd-comercial" >Comercial</label>
+
+                    <input class="fone" id="fone-comercial" name="tel-comercial" type="text" placeholder="(91) 9999-9999" value="<?php echo $clientes['tel_comercial'];?>"/>
+
+                </div>
+
+                <div class="row-fluid">
+                    <label class="span3" for="ddd-apoio">Apoio</label>
+
+                    <input class="fone" id="fone-apoio" name="tel-apoio" type="text" placeholder="(91) 9999-9999" value="<?php echo $clientes['tel_apoio'];?>"/>
+
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="span7">
+            <div class="span6">
+                <fieldset class="atualizado table-bordered" >
+                    <legend>Atualizado</legend>
+					<?php
+					$FulanoDeTal = buscaUsuarioPorId($clientes['pessoa_modificou']);
+					if(!empty($FulanoDeTal)) {
+					?>
+						<legend><?php echo "em ".$clientes['ultima_modificacao']." por ".$FulanoDeTal;?><legend>
+					<?php
+					}
+					?>
+                </fieldset>
+			</div>
+			<div class="span6">
+				<fieldset class="indicacao table-bordered" >
+					<legend>Indicação</legend>
+				</fieldset>
+			</div>
+			<div class="row-fluid">
+				<div class="span6">
+					<label for="cad-medico">Especialidade 1</label>
+					<select id="cad-selc-especialidade-1" name="cad-selc-especialidade-1" >
+					<?php
+					foreach (buscaTodosEspecialidades() as $espec) {
+						$selected = "";
+							if ($clientes['especialidade_id_1'] == $espec['id']) {
+								$selected = "SELECTED";
+							}
+					?>
+						<option <?php echo $selected; ?> value="<?php echo $espec['id']; ?>" >
+							<?php echo $espec['nome']; ?>
+						</option>
+					<?php
+						}
+					?>
+					</select>
+				</div>
+
+				<div class="span6">
+					<label for="cad-vacinador">Especialidade 2</label>
+					<select id="cad-selc-especialidade-2" name="cad-selc-especialidade-2" >
+						<?php
+						foreach (buscaTodosEspecialidades() as $espec) {
+							$selected = "";
+							if ($clientes['especialidade_id_2'] == $espec['id']) {
+								$selected = "SELECTED";
+							}
+						?>
+							<option <?php echo $selected; ?> value="<?php echo $espec['id']; ?>">
+								<?php echo $espec['nome']; ?>
+							</option>
+						<?php
+						}
+						?>
+					</select>
+				</div>
+			</div>
+
+	</div>
+                <div class="row-fluid">
+            <fieldset class="emissao-nf table-bordered">
+                <legend>Emissão de Nota Fiscal</legend>
+                <div class="row-fluid">
+                    <div class="span1 nome-nfla"  >
+                        <label for="nome-nf" >Login:</label>
+                    </div>
+                    <div class="span5 nome-inp" >
+                        <input id="nome-nf" name="login" type="text" placeholder="Informe o login" value="<?php echo $clientes['login'];?>"/>
+                    </div>
+
+                    <div class="span1 doc-lab"  >
+                        <label for="doc-nf">Senha:</label>
+                    </div>   
+                    <div class="span5 doc-inp"  >
+                        <input id="senha1" name="senha1" type="text" placeholder="Informe a senha" value=""/>
+                    </div>
+                </div>
+            </fieldset>
+        </div>        
+
+        <div id="bloco-dep-obs" class="row-fluid" >
+            <div class="span12">
+                <fieldset class="observacoes table-bordered">
+                    <legend>Observações</legend>
+                    <div class="row-fluid">
+                        <textarea name="observacoes" placeholder="Informe uma observação"><?php echo $clientes['observacao'];?></textarea>
+                    </div>
+                </fieldset>
+            </div>
+		</div>
+		<hr>
+	</div>
+
+</form>
+
+<!--================================ FIM FORMULAŔIO DE CADASTRO ==============================================================
+    ========================================================================================================================== -->
+
+<!--================================ MODAL PROCURAR CLIENTE===================================================================
+  ============================================================================================================================ -->
+<?php
+require_once('view/recepcao/modal-procurar.phtml');
+?>
+<!--================================ FIM MODAL PROCURAR CLIENTE ==================================================
+    ============================================================================================================== -->
+
+
+
+

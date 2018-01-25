@@ -1,0 +1,149 @@
+<script async defer src="view/estoque/js/index.js"></script>
+<script async defer src="template/js/bootstrap-datepicker.js"></script>
+<script async defer src="template/js/maskedinput.js"></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+<?php
+if (isset($_POST['flag']))
+	if (empty($materiais)) {
+		?>
+		<script>
+			alert("Não há registros no período escolhido");
+		</script>
+		<?php
+	}
+?>
+
+<h2 class="titulo">Mapa de Consumo de Estoque</h2>
+<!--================================  MODAL  ====================================================
+  =============================================================================================== -->
+
+<div id="mapa-consumo"  >
+    <fieldset  class="table-bordered">
+        <div class="row-fluid">
+            <div class="span9">
+                <fieldset class="table-bordered">
+                    <legend>Pesquisa</legend>
+					<div class="span3">
+						<label>Final :</label> 
+						<input type="text" id="mc-dataFim" value="<?php echo converteData($dataFim); ?>"/>
+					</div>
+					<div class="span3" style="margin-top: 17px;">
+						<select id="mc-material-consumo" name="mc-material-consumo" onChange="mapaConsumoMaterial();">
+							<option <?php echo $selectTodos; ?> >Todos</option>
+							<option <?php echo $selectVacina; ?> value="vacina" >Vacinas</option>
+							<option <?php echo $selectImuno; ?> value="imunoterapia" >Imunoterapia</option>
+							<option <?php echo $selectTriagem; ?> value="triagem">Teste de Triagem</option>
+						</select>
+					</div>
+				</fieldset>
+            </div>
+            <div class="span3">
+                <fieldset class="" style="margin-top: 7px;"> 
+                    <ul class="">   
+						<li class="span9 "> 
+							<input class="btn btn-mini span10" style="margin-left: 4px;" type="button" name="processar" value="Processar" onclick="mapaConsumoMaterial();"/>
+						</li>
+						<li class="span9 " style="padding-top: 5px;">
+							<input class="btn btn-mini span10" type="button" name="imprimir" value="Imprimir" onclick="imprimeMapaConsumo();" />
+						</li>
+						<li class="span9 " style="padding-top: 5px;">
+							<input class="btn btn-mini span10" type="button" name="fechar" value="Fechar" onclick="document.location.href = 'index.php'" />
+						</li>
+					</ul>
+				</fieldset>
+            </div>
+        </div> 
+    </fieldset><br>
+    <fieldset  class="table-bordered" >
+        <legend>Mapa de Consumo</legend>
+        <div class="row-fluid" >
+            <div class="row-fluid" style="overflow-x: auto; overflow-y: auto; width: 840px; height: 450px;">
+                <table cellspacing='10' border='1px' align="center" class="table table-bordered">
+                    <thead>
+                        <tr class="white">
+                            <th class="titulo" align="center"> Cod </th>
+                            <th class="titulo" align="center"> Descrição</th>
+                            <th class="titulo" align="center"> Lote </th>
+                            <th class="titulo" align="center"> Validade </th>
+                            <th class="titulo" align="center"> Pacotes </th>
+                            <th class="titulo" align="center"> Total </th>
+                            <th class="titulo" align="center"> Consumo </th>
+                            <th class="titulo" align="center"> Entrada </th>
+                            <th class="titulo" align="center"> Data </th>
+							<?php
+							for ($i = 0; $i <= 6; $i++) {
+								?>
+								<th class="titulo" align="center"><?php echo date("d/m/Y", strtotime($dataInicio . " + $i days")); ?></th>
+								<?php
+							}
+							?>
+                        </tr>
+                    </thead>
+                    <tbody>
+						<?php
+						$incImpress = 0;
+						foreach ($materiais as $material) {
+							$arrayPacotes = buscaPacotes($material['materialid']);
+							$quantidade = estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'quantidade');
+							$pacotes = $arrayPacotes[0]['qtdML'];
+
+							if ($materialIdAnterior == $material['materialid']) {
+								if (isset($MaisPacotes)) {
+									$pacotes = $pacotesRestantes;
+									$pacotesRestantes = 0;
+								} else {
+									$pacotes = 0;
+								}
+							}
+
+							if ($pacotes > $quantidade['qtd']) {
+								$pacotesRestantes = $pacotes - $quantidade['qtd'];
+								$pacotes = $quantidade['qtd'];
+								$MaisPacotes = 1;
+							}
+							$materialIdAnterior = $material['materialid'];
+						?>
+	                        <tr name="table-color" class='dayhead'>
+								<th align="center" class="th-mod" ><?php echo $material['materialid']; ?></th>
+								<th align="center" class="th-mod" ><?php echo $material['materialnome']; ?></th>
+								<th align="center" class="th-mod" ><?php echo $material['nome']; ?></th>
+	                            <th align="center" class="th-mod" ><?php echo converteData($material['validade']); ?></th>
+	                            <th align="center" class="th-mod" ><?php echo frascosML($quantidade['qtd_doses'], $quantidade['qtd_ml'], $pacotes); ?></th>
+	                            <th align="center" class="th-mod" ><?php echo estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'total'); ?></th>
+	                            <th align="center" class="th-mod" ><?php echo estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'consumo'); ?></th>
+	                            <th align="center" class="th-mod" ><?php echo estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'entrada'); ?></th>
+	                            <th align="center" class="th-mod" ><?php echo converteData($material['data']); ?></th>
+								<?php
+								$array = buscaMaterialMPConsumoAux($material['materialid'], $material['id'], $dataInicio, $dataFim);
+								$incremento = 0;
+								for ($i = 0; $i <= 6; $i++) {
+									$a = date("Y-m-d", strtotime($dataInicio . " + $i days"));
+									if ($a == $array[$incremento]['data']) {
+								?>
+										<th align="center" class="th-mod" ><?php echo $_SESSION['impressaoMpConsumo']['material'][$incImpress]['data'][$i] = frascosML($quantidade['qtd_doses'], $quantidade['qtd_ml'], $array[$incremento]['qtd'], "flag"); ?></th>
+										<?php
+										$incremento++;
+									} else {
+										?>
+										<th align="center" class="th-mod" ><?php echo $_SESSION['impressaoMpConsumo']['material'][$incImpress]['data'][$i] = ""; ?></th>
+											<?php
+										}
+									}
+									?>
+	                        </tr>
+									<?php
+									$_SESSION['impressaoMpConsumo']['material'][$incImpress]['nome'] = $material['materialnome'];
+									$_SESSION['impressaoMpConsumo']['material'][$incImpress]['lote'] = $material['nome'];
+									$_SESSION['impressaoMpConsumo']['material'][$incImpress]['pacote'] = frascosML($quantidade['qtd_doses'], $quantidade['qtd_ml'], $pacotes);
+									$_SESSION['impressaoMpConsumo']['material'][$incImpress]['total'] = estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'total');
+									$_SESSION['impressaoMpConsumo']['material'][$incImpress]['consumo'] = estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'consumo');
+									$_SESSION['impressaoMpConsumo']['material'][$incImpress]['entrada'] = estoqueMaterialPorLote($material['materialid'], $material['id'], $dataInicio, $dataFim, 'entrada');
+									$incImpress++;
+								}
+								?>
+                    </tbody>
+                </table>
+            </div>
+        </div>                   
+    </fieldset>
+</div>

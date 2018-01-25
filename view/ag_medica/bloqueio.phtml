@@ -1,0 +1,65 @@
+<script async defer src="view/ag_medica/js/bloqueio.js"></script> 
+<div id="boxes-acr-bloqueio" class=" modal-acr-bloqueio hide fade">
+    <div id="dialog-acr-horario" class=" modal-body-acr-horario"  style="   background-image:  url('template/img/body-bg.png');">
+        <div id="acr-horario"><a href="#" id="fechar" class="close"> Fechar X</a>
+            <h2 class="titulo"><?php echo (isset($nomeTitulo)) ? $nomeTitulo : 'Bloqueio'; ?> de Horario</h2>
+            <hr style="margin-top: -4px;"/>
+            <div id="result-bloqueio"></div>
+            <fieldset  class="table-bordered" >
+                <legend>Dados <?php echo (isset($nomeTitulo)) ? $nomeTitulo : 'Bloqueio'; ?></legend>
+                <div class="row-fluid" >
+                    <div class="span10" >
+                        <div class="row-fluid" >
+                            <div class="span4">
+                                <label class="arc-nome-text" for="arc-horario-data">Data :</label>
+                                <input id="arc-horario-data" name="arc-horario-data" type="text" placeholder="" value="<?php echo $dataAgenda; ?>"/>
+                            </div>
+                            <div class="span4">
+                                <label class="arc-nome-text" for="arc-horario-chegada"> Horario de Inicio :</label>
+                                <select id="arc-horario-inicio" name="arc-horario-chegada" >
+                                    <?php
+                                    for ($j = 0;; $j++) {
+                                        if (strtotime($hora_inicio_cal . " + " . ($intervalo_hora_data * $j) . "minutes") > strtotime($hora_fim_cal)) {
+                                            break;
+                                        }
+                                        ?>
+                                        <option value="<?php echo date("H:i:s", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")); ?>" <?php echo $selectHoraChegada; ?>>
+                                            <?php echo date("H:i", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")); ?>
+                                        </option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="span4">
+                                <label class="arc-nome-text" for="arc-horario-atendimento"> Horario de Término :</label>
+                                <select id="arc-horario-termino" name="arc-horario-atendimento" >
+                                    <?php
+                                    for ($j = 0;; $j++) {
+                                        if (strtotime($hora_inicio_cal . " + " . ($intervalo_hora_data * $j) . "minutes") > strtotime($hora_fim_cal)) {
+                                            break;
+                                        }
+                                        ?>
+                                        <option value="<?php echo date("H:i:s", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")); ?>" <?php echo $selectHoraAtendimento; ?> >
+                                            <?php echo date("H:i", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")); ?>
+                                        </option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span2">   
+                        <br>
+                        <li class="span12 botao"> 
+                            <input class="btn btn-mini span10" type="button" name="novo" value="<?php echo (isset($nomeButton)) ? $nomeButton : 'Bloquear'; ?>" id="<?php echo (isset($button)) ? $button : 'ag-bloquear'; ?>"/>
+                        </li>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>   
+</div>
+<!--================================  BLOQUEIO HORÁRIO ====================================================
+==============================================================================================================--> 

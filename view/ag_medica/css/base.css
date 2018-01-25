@@ -1,0 +1,195 @@
+div.calendar {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  width: 196px;
+  height: 147px;
+  position: absolute;
+  cursor: default;
+  top: 0;
+  left: 0;
+  display: none;
+
+}
+.calendarContainer {
+  position: absolute;
+}
+
+/* Hide border divs by default */
+.calendarBorderT,
+.calendarBorderB,
+.calendarBorderL,
+.calendarBorderR,
+.calendarBorderTL,
+.calendarBorderTR,
+.calendarBorderBL,
+.calendarBorderBR {
+  display:none;
+}
+
+.calendarHidden {
+  display: none;
+}
+div.calendar table {
+  border-collapse:collapse;
+  
+}
+div.calendar a {
+  color: black;
+  text-decoration: none;
+  cursor: default;
+  outline: none;
+}
+
+div.calendar table td {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+div.calendar th {
+
+  text-align: center;
+  color: #666666;
+  font-weight: normal;
+  padding:0;
+}
+div.calendar tbody a {
+  display: block;
+
+}
+
+.calendarDays a {
+  width: 20px;
+  line-height: 16px;
+  height: 16px;
+  padding-right: 2px;
+}
+.calendarYears a,
+.calendarMonths a{
+  width: 39px;
+  line-height: 36px;
+  height: 36px;
+  text-align: center;
+
+}
+.calendarYears a:hover{
+     background-color: #F5F5F5;
+}
+
+.calendarMonths a:hover{
+ background-color: #F5F5F5;
+
+}
+
+
+.calendarMonths td:first-child a,
+.calendarMonths td:last-child a,
+.calendarYears td:first-child a,
+.calendarYears td:last-child a {
+  width:38px;
+}
+td.calendarNotInMonth a {
+  color: #666666;
+}
+tbody.calendarDays td.calendarSelected{
+  background: #136A9F;
+}
+tbody.calendarDays td.calendarNotInMonth.calendarSelected {
+  background: #17384d;
+}
+tbody.calendarYears td.calendarSelected,
+tbody.calendarMonths td.calendarSelected{
+  background: #17384d;
+}
+div.calendar td.calendarSelected a {
+  color:white;
+}
+div.calendar a:hover,
+div.calendar a:hover {
+  color: #88c5eb;
+}
+div.calendar td.calendarNotInMonth a:hover {
+  color: #999999;
+}
+.calendarSpace div {
+  width: 20px;
+}
+.calendarBlock {
+  vertical-align:top;
+}
+a.calendarGoNext,
+a.calendarGoPrev,
+a.calendarMonth {
+  text-align: center;
+  height: 20px;
+  line-height: 20px;
+  float:left;
+}
+div.calendar th a.calendarGoNext,
+div.calendar th a.calendarGoPrev {
+  width: 20px;
+  color: #666666;
+  display:none;
+}
+div.calendar th a.calendarMonth {
+  width:114px;
+  display:block;
+}
+/* Only display the previous/next arrows on the first/last calendars */
+div.calendar .calendarFirstView th a.calendarGoPrev,
+div.calendar .calendarLastView th a.calendarGoNext {
+  display:block;
+}
+/* Compensate for the space lost by not having a previous arrow */
+div.calendar th a.calendarMonth {
+  margin-left:20px;
+}
+div.calendar .calendarFirstView th a.calendarMonth {
+  margin-left:0;
+}
+/* Day mode calendar body */
+table.calendarViewDays tbody.calendarMonths,
+table.calendarViewDays tbody.calendarYears {
+  display: none;
+}
+/* Month mode calendar body */
+table.calendarViewMonths tbody.calendarDays,
+table.calendarViewMonths tbody.calendarYears,
+table.calendarViewMonths tr.calendarDoW {
+  display: none;
+}
+/* Year mode calendar body */
+table.calendarViewYears tbody.calendarDays,
+table.calendarViewYears tbody.calendarMonths,
+table.calendarViewYears tr.calendarDoW {
+  display: none;
+}
+td.calendarDisabled a,
+td.calendarDisabled.calendarNotInMonth a{
+  color: #555555;
+}
+td.calendarDisabled a:hover {
+  color: #333333;
+}
+/* Not used by default, calendar cells can be marked as special if desired (doesn't seem to be totally working) */
+div.calendar tbody.calendarDays td.calendarSpecial a {
+  background: #770000;
+  color:white;
+}
+div.calendar tbody.calendarDays td.calendarSpecial.calendarSelected a {
+  background: #aa0000;
+}
+
+/* style the 'not in month' day cell away */
+tbody.calendarDays td.calendarNotInMonth.calendarSelected {
+  background-color:transparent;
+}
+div.calendar td.calendarNotInMonth a span {
+  display:none;
+}
+div.calendar td.calendarNotInMonth a:hover span {
+  display:none;
+}
+div.calendar tbody.calendarDays td.calendarNotInMonth:hover {
+  background-color: transparent;
+}

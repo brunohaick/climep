@@ -1,0 +1,64 @@
+<div id="boxes-estorno-guia-tiss-result" class="modal-estorno-guia-tiss">
+	<link type="text/css"rel="stylesheet" href="view/recepcao/css/index.css" />
+	<script async defer src="view/recepcao/js/insere-procedimento.js"></script>
+	<div id="dialog-estorno-guia-tiss" class="modal-body-estorno-guia-tiss">
+		<div id="estorno-guia-tiss"><a href="#" id="fechar" class="close"> Fechar X</a>
+			<h2 class="titulo">Estorno Encaminhamento</h2>
+			<fieldset class=" table-bordered" id="flst-enc" >
+				<table cellspacing='10' border='1px' align="center" class="table-modify table-bordered">
+					<thead>
+						<tr class="white">
+							<!-- <th align="center"> SEL. </th>-->
+							<th align="center"> Data </th>
+							<th align="center"> Médico </th>
+							<th align="center"> Convênio </th>
+							<th align="center"> Nome do Paciente </th>
+							<th align="center"> Valor </th>
+							<th align="center"> Imprimir </th>
+							<th align="center"> Excluir </th>
+						</tr>
+					</thead>
+					<tbody id="proc-tiss-lista-proc-tbody" >
+						<?php
+							foreach($guiasTiss as $guia) {
+								$class = 'proc-tiss-lista-proc-tr-'.$guia['grupo_id'];
+						?>
+								<tr id="proc-tiss-lista-proc-tr" name="table-color" class='<?php echo $class; ?> dayhead '>
+									<th align="center"> <?php echo converteData($guia['data']); ?> </th>
+									<th align="center"> <?php echo $guia['nome_medico']; ?> </th>
+									<th align="center"> <?php echo $guia['nome_convenio']; ?> </th>
+									<th align="center"> <?php echo $guia['nome_cliente']; ?> </th>
+									<th align="center"> <?php echo number_format($guia['valor'],2,',','.'); ?> </th>
+									<th align="center" onclick="ImprimirFicha(<?php echo $guia['grupo_id'];?>);" > <a class='btn mrg-center'> Imprimir </a> </th>
+									<th align="center" onclick="estornarGuiaTiss('<?php echo $class; ?>','<?php echo $guia['grupo_id'];?>');" > <a class='btn btn-mini btn-danger mrg-center'><i class='icon-trash icon-white'></i></a> </th>
+								</tr>
+						<?php
+								unset($class);
+							}
+						?>
+					</tbody>
+				</table>
+			</fieldset>
+
+			<div class="row-fluid">
+				<fieldset class=" table-bordered" id="flst-enc" >
+					<div class="span2">
+						<select id="proc-tiss-usuario_id" name="proc-tiss-usuario_id" onchange="modalEstornoGuiaTiss2();" >
+							<option> </option>
+							<?php
+							foreach (buscaTodosUsuarios() as $usuario) {
+								?>
+								<option value='<?= $usuario['id'] ?>'><?= $usuario['nome'] . ' ' . $usuario['sobrenome']; ?></option>
+								<?php
+							}
+							?>
+						</select>
+					</div>
+					<div class="span2" >
+						<input type="button" class="btn btn-mini span12" onclick="fechar_modal('boxes-estorno-guia-tiss');" name="" value="Fechar"/>
+					</div>
+				</fieldset >
+			</div>
+		</div>
+	</div>
+</div>

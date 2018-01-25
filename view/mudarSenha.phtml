@@ -1,0 +1,68 @@
+<script src="view/js/mudarSenha.js"></script>
+
+<div id="form-dependente">
+	<div id="mudar-senha" class="modal-mudar-senha hide fade">
+		<div id="dialog-dependente" class=" modal-body-mudar-senha" style="background-image:  url('template/img/body-bg.png');">
+			<div id="cad-dependente" >
+				<a href="#" id="fechar" class="close">Fechar X</a>
+				<h2 class="titulo" >Mudar Senha </h2>
+				<hr/>
+				<div id="modal-mudar-senha" ></div>
+				<div class="form-mudar-senha">
+					<fieldset class="flst-dependente">
+						<div class="row-fluid" id="campos-header"></div>
+					</fieldset>
+					<fieldset >
+						<div class="row-fluid">
+							<div class="span7">
+								<div class="span3">
+									<label class="nome-text">Login:</label>
+								</div>
+								<div class="span4">
+                                                                    <input id="login-usuario" name="" type="text" value="<?php echo ((isset($_SESSION['usuario']['login'])) ? $_SESSION['usuario']['login'] : null); ?>" disabled/>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span7">
+								<div class="span3">
+									<label class="nome-text">Senha Atual:</label>
+								</div>
+								<div class="span4 " >
+									<input id="senha-atual" name="" type="password" value=""/>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid ">
+							<div class="span7">
+								<div class="span3" >
+									<label class="nome-text">Nova Senha :</label>
+								</div>
+								<div class="span4" >
+									<input id="nova-senha" name="" type="password" value=""/>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid ">
+							<div class="span7">
+								<div class="span3" >
+									<label class="nome-text">Repetir Nova Senha :</label>
+								</div>
+								<div class="span4" >
+									<input id="nova-senha2" name="" type="password" value=""/>
+								</div>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<br>
+							<li class="span3 botao">
+								<input class="btn btn-mini span10" type="button" value="Enviar" id="submit-nova-senha"/>
+							</li>
+						</div>
+					</fieldset>
+				</div>
+				<hr>
+			</div>
+		</div>
+	</div>
+</div>

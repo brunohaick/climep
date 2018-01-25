@@ -1,0 +1,331 @@
+/**
+ * Estilos CSS para o sistema CLIMEP.
+ */
+@CHARSET "UTF-8";
+/*===========================================================================*/
+/* IMPORTS
+/*===========================================================================*/
+@import url("home.css");
+@import url("menu.css");
+@import url("cadastro.css");
+/*
+[class*="span"] { border: 1px solid red;}
+[class*="row"] { border: 1px solid blue;}
+*/
+/*===========================================================================*/
+/* G E R A L
+/*===========================================================================*/
+body { background-color: #E3E3E3;}
+label { color: #666666; }
+a:link, a:active, a:visited, a:hover { text-decoration: none; color: #000; }
+div#pagina { width: 97%; margin: 0 auto; }
+input{width: 100%;}
+input[type="text"] { height: 12px; text-transform:uppercase; margin-bottom: 0; font-size: x-small; }
+/*textarea {text-transform:uppercase;}*/
+select { height: 23px; font-size: x-small; margin-bottom: 0; }
+label { margin: 0; font-size: 11px; }
+/*fieldset.table-bordered { border: 1px solid #000; padding: 4px; }*/
+fieldset.table-bordered { border: 2px solid #E3E3E3; padding: 3px; width: 96%; margin-left: 1%; }
+fieldset.table-bordered-enc { padding: 3px; width: 96%; margin-left: 1%; }
+legend {margin: 0 5px; padding: 0 5px; font-size: 14px; line-height: 20px; border: none; width: auto; }
+.color-line:nth-child(odd){
+			background-color: #D3D6FF;
+}
+.color-line:nth-child(even){
+	background-color: #FFFFFF;	
+	}
+
+/*===========================================================================*/
+/* B A R R A   D E   M E N U S
+/*===========================================================================*/
+div#menu-bar { background-color: #F5F5F5;}
+p.linha { margin: 1px 0; }
+
+/*===========================================================================*/
+/* S I D E B A R
+/*===========================================================================*/
+div#side-bar { margin : 30px auto; }
+/* BOTÕES ===================================================================*/
+
+div#botoes, div#botoes a { margin: 5px auto;  padding: 0; }
+
+/*===========================================================================*/
+/* C O N T E Ú D O
+/*===========================================================================*/
+div#conteudo { margin: 35px auto; padding: 0; }
+
+/*===========================================================================*/
+/* B A R R A   D E   S T A T U S
+/*===========================================================================*/
+div#status-bar { padding-left: 50px; z-index: 2;}
+
+div#status-bar span { display: inline-block;  padding: 5px 10px; margin-right: 100px;}
+
+/*===========================================================================*/
+/* BUSCA CLIENTE
+/*===========================================================================*/
+div#procura fieldset.busca{  border: 2px solid #E3E3E3; padding: 3px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; border-bottom-style:solid; border-top-left-radius:4px; border-top-right-radius:4px;}
+div#procura .form-busca .busca label.nome-text{ font-size: 12px; color: #666666;}
+div#procura .form-busca .busca input#nome, #outro { width: 250%;}
+div#procura .form-busca .busca ul li.tipo-list{ margin: -25%; margin-top: -5%;}
+div#procura .form-busca .busca ul li.tipo-list label{ font-size: 12px; padding-top: 3px;}
+div#procura .form-busca .busca ul li.option-butoes{ margin-left: 60%; margin-top: -5%;}
+div#procura .form-busca .busca ul li.option-butoes fieldset.menu-butoes .row-fluid { margin-bottom: 8px;}
+div#procura .form-busca .radio-list{ margin-left: 11%; margin-top: -5%;}
+div#procura .form-busca .radio-list label{/* font-size: 12px;*/}
+div#procura .form-busca .radio-list .checkbox-option{ margin-left: -12%;}
+div#tabela-busca{margin-top: -14px;}
+
+/*===========================================================================*/
+/* FIM BUSCA CLIENTE
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* LISTA DE  DEPENDENTE 
+/*===========================================================================*/
+div#dependentes fieldset.table-bordered{ width: 95%; height:155px; }
+div.dependente-default {-moz-border-radius: 5px;-webkit-border-radius: 5px;  height: auto; padding: 3px; background-color: #fff; border: 1px solid #DDDDDD; margin-top: -3px;}
+div.dependente-default-skin { overflow: auto; width: 342px; height: 127px; margin-left: -14px; }
+ul.dependente-default-multiselect { padding: 0px; margin: 0px; white-space: nowrap; }
+li.dependente-default-multiselect { list-style-type: none; }
+label.default-label { display: block; padding: 2px;  margin-left: 10px;}
+label.default-label:hover { background: #DADCFF;}
+input.default-checkbox { width: 13px; height: 13px; padding: 0; margin-left: 10px;vertical-align: bottom; position: relative; top: -1px; *overflow: hidden; }
+.contextmenu {  min-width:160px; margin-left: -365px; margin-top: -350px;}
+.contextmenu-plus {  min-width:160px; margin-left: -145px; margin-top: -255px; position: absolute !important;z-index: 99999;}
+/*===========================================================================*/
+/* FIM  LISTA DE  DEPENDENTE 
+/*===========================================================================*/    
+
+
+
+/*===========================================================================*/
+/* MODAL TESTE AUDITIVO  DEPENDENTE 
+/*===========================================================================*/
+div#tst-auditivo fieldset.flst-tst-auditivo{  border: 2px solid #E3E3E3; padding: 3px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; border-bottom-style:solid; border-top-left-radius:4px; border-top-right-radius:4px; margin-bottom:  1px;}
+div#tst-auditivo fieldset#flst-tst-auditivo{height: 190px;}
+div#tst-auditivo .form-tst-auditivo .flst-tst-auditivo label.nome-text{  font-size: 12px; color: #666666; float: right;}
+div#tst-auditivo .form-tst-auditivo .flst-tst-auditivo #tst-nome{ width: 90%; }
+div#tst-auditivo .form-tst-auditivo .flst-tst-auditivo #tst-nascimento{ width: 55%; float: right;}
+div#tst-auditivo .form-tst-auditivo .flst-tst-auditivo label#lab-tst-nascimento{ margin-left: 40%;}
+div#tst-auditivo .form-tst-auditivo .radio-list{margin-left: 11%; margin-top: -5%;}
+div#btn-ultimoexame{ margin-bottom: 10px;}
+fieldset.flst-tst-auditivo label#lab-tst-nascimento, #lab-tst-nome{font-size: 12px; }
+fieldset.flst-tst-auditivo select#tst-pediatra{width: 86%; margin-top:8px; margin-bottom:8px; }
+fieldset.flst-tst-auditivo  label.titulo{font-size: 14px; margin-bottom: 5px; }
+fieldset.flst-tst-auditivo  ul.thumbnails input#tst-teoae , #tst-noise{width: 75%;}
+fieldset.flst-tst-auditivo  div#tst-auditivo-mt{margin-bottom: 8px;}
+fieldset.flst-tst-auditivo  div#tst-auditivo-mt select#tst-od ,#tst-oe{width: 100px;}
+fieldset.flst-tst-auditivo  select#tst-localizacao{width: 225px;}
+fieldset.flst-tst-auditivo  select.tst-ava{width: 155px; margin-bottom: 3px;}
+fieldset.flst-tst-auditivo  input#tst-em{width: 10%; margin-left: 66%; margin-top:-20px;}
+fieldset.flst-tst-auditivo  label#tst-lab-em{font-size: 10px; margin-left: 80%;  margin-top:-20px;}
+fieldset.flst-tst-auditivo  input#tst-em-data{width: 20%; margin-top:-22px; margin-left: 86%;}
+fieldset.flst-tst-auditivo  div#dt-tabela-auditivo{overflow-y:scroll;overflow-x: scroll; width: 290px; height: 283px;}
+
+
+
+/*===========================================================================*/
+/* LISTA TESTE AUDITIVO
+/*===========================================================================*/
+
+div.auditivo-default {-moz-border-radius: 5px;-webkit-border-radius: 5px;  height: auto; padding: 1px; background-color: #fff; border: 1px solid #DDDDDD; margin-top: -3px;}
+div.auditivo-default-skin { overflow: auto; width: 105px; height: 70px; }
+ul.dependente-default-multiselect { padding: 0px; margin: 0px; white-space: nowrap; }
+li.dependente-default-multiselect { list-style-type: none; }
+label.auditivo-default-label { display: block; padding: 2px;  margin-left: -30px; }
+label.auditivo-default-label:hover { background: #DADCFF;}
+input.auditivo-default-checkbox { width: 13px; height: 13px; padding: 0; margin-left: 10px;vertical-align: bottom; position: relative; top: -1px; *overflow: hidden; }
+fieldset.tst-observacao textarea { width: 98%; height: 70px; overflow: scroll; }
+/*===========================================================================*/
+/* FIM  LISTA TESTE AUDITIVO
+/*===========================================================================*/    
+
+/*===========================================================================*/
+/* FIM MODAL TESTE AUDITIVO  DEPENDENTE 
+/*===========================================================================*/    
+
+
+/*===========================================================================*/
+/* MODAL FICHA DE VACINA
+/*===========================================================================*/
+div#ficha-vacina { padding: 10px; } 
+
+
+.vaci-superior .tabbable { height: 200px; margin-top: -9px; }
+.vaci-inferior .tabbable { height: 410px; }
+#line-vacina{margin-top: -7px;}
+#ficha-vacina ul.nav { margin-bottom: 0; }
+#ficha-vacina .vaci-superior .tab-content {height: 145px; border: 2px solid #E3E3E3; padding: 3px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; border-bottom-style:solid; border-top-left-radius:4px; border-top-right-radius:4px; margin-bottom:  1px;
+}
+
+form label, form input[type="text"] { display: inline-block; padding-right: 0; padding-left: 0; }
+form.vaci-dados label.vaci-nome { width: 20%; }
+form.vaci-dados input#vaci-nome { width: 75%; }
+
+form.vaci-dados label.vaci-sexo { width: 40%; }
+form.vaci-dados input#vaci-sexo { width: 50%; }
+
+form.vaci-dados label.vaci-nasc { width: 25%; }
+form.vaci-dados input#vaci-nasc { width: 69%; }
+
+form.vaci-dados label.vaci-idade { width: 33%; }
+form.vaci-dados input#vaci-idade { width: 58%; }
+
+form.vaci-dados label.vaci-medico { width: 20%; }
+form.vaci-dados input#vaci-medico { width: 75%; }
+
+form.vaci-dados label.vaci-categoria { width: 30%; }
+form.vaci-dados input#vaci-categoria { width: 65%; }
+
+form.vaci-dados label.vaci-inscricao { width: 40%; }
+form.vaci-dados input#vaci-inscricao { width: 54%; }
+
+form.vaci-dados label.vaci-obs { width: 8%; }
+/*form.vaci-dados textarea#vaci-obs { width: 88%; }*/
+form.vaci-dados textarea#vaci-obs { margin-left: 12px; width: 445px; max-width: 445px; height: 68px; max-height: 68px;  }
+/*form.vaci-dados textarea.vaci-obs2 { width: 90%; }*/
+.vaci-obs2 {width: 150px; max-width: 150px; height: 60px; max-height: 60px; background-color: #0088CC; }
+.texto-obs2{color:#fff;}
+/*form.vaci-dados textarea.vaci-obs2 {width: 150px; max-width: 150px; height: 60px; max-height: 60px;  }*/
+
+fieldset.vaci-botoes, fieldset.vaci-servicos { margin-top: 30px; height: 150px;}
+fieldset.vaci-botoes .btn { margin: 5px 0; }
+fieldset.vaci-botoes a#vaci-fechar { padding: 5px 10px;  opacity: 0.9; font-weight: lighter; }
+fieldset.vaci-servicos { padding: 0 0 9px 0; }
+
+form.vaci-imunidade input#vaci-vivas { width: 33%;  margin: 25px 0;}
+form.vaci-imunidade select { width: 100%; }
+form.vaci-imunidade textarea { display: block; width: 94%; height: 90px; }
+
+form.vaci-historia select, form.vaci-historia input#vaci-peso { width: 60%; }
+form.vaci-historia select#vaci-gestacao { margin: 20px 0; }
+form.vaci-historia div.vaci-parto { text-align: right;}
+
+form.vaci-ficha select, form.ficha input#vaci-peso { width: 60%; }
+form.vaci-ficha select#vaci-vacina-select { margin: 20px 0; }
+form.vaci-ficha div.vaci-parto { text-align: right;}
+select#vaci-nome-select,#vaci-vacina-select,#vaci-status-select{
+    width: 160px;
+}
+
+table.vaci-vacinas { table-layout: fixed; }
+table.vaci-vacinas tbody tr { height: 63px; }
+table.vaci-vacinas thead tr th,table.vaci-vacinas tbody tr td {margin: 0; padding: 0; border: 1px solid #dddddd; font-size: xx-small; text-align: center; color: white; }
+
+table.vaci-vacinas th { background: #0088CC; }
+table.vaci-vacinas td { background: white; }
+/*table.vaci-vacinas th { background: #C0C0FF; }*/
+/*table.vaci-vacinas td { background: #FFFFC0; }*/
+
+/*===========================================================================*/
+/* LISTA ALERGIAS ABA 2 VACINA
+/*===========================================================================*/
+
+div.alergias-default {-moz-border-radius: 5px;-webkit-border-radius: 5px;  height: auto; padding: 1px; background-color: #fff; border: 1px solid #DDDDDD; margin-top: -3px;}
+div.alergias-default-skin { overflow: auto; width: 152px; height: 110px; }
+ul.alergias-default-multiselect { padding: 0px; margin: 0px; white-space: nowrap; }
+li.alergias-default-multiselect { list-style-type: none; }
+label.alergias-default-label { display: block; padding: 2px;  margin-left: -10px; }
+label.alergias-default-label:hover { background: #DADCFF;}
+input.alergias-default-checkbox { width: 13px; height: 13px; padding: 0; margin-left: 10px;vertical-align: bottom; position: relative; top: -1px; *overflow: hidden; }
+
+/*===========================================================================*/
+/* FIM  LISTA ALERGIAS ABA 2 VACINA
+/*===========================================================================*/    
+
+/*===========================================================================*/
+/* LISTA ANTECENDETES ABA 2 VACINA
+/*===========================================================================*/
+div.antecedentes-default {-moz-border-radius: 5px;-webkit-border-radius: 5px;  height: auto; padding: 1px; background-color: #fff; border: 1px solid #DDDDDD; margin-top: -3px;}
+div.antecedentes-default-skin { overflow: auto; width: 210px; height: 110px; }
+ul.antecedentes-default-multiselect { padding: 0px; margin: 0px; white-space: nowrap; }
+li.antecedentes-default-multiselect { list-style-type: none; }
+label.antecedentes-default-label { display: block; padding: 2px;  margin-left: -10px; }
+label.antecedentes-default-label:hover { background: #DADCFF;}
+input.antecedentes-default-checkbox { width: 13px; height: 13px; padding: 0; margin-left: 10px;vertical-align: bottom; position: relative; top: -1px; *overflow: hidden; }
+
+/*#tabela-scr {overflow-y: auto; overflow-x: auto;height:  380px; width: 850px;}*/
+.tabela-scr {
+    /*overflow-y: auto;*/
+    overflow-y: auto;
+    /*overflow-x: auto;*/
+    height:  420px;
+    width: 900px;
+    border: 1px solid #dddddd;
+    border-collapse: separate;
+    *border-collapse: collapsed;  
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.tabela-scr2 {
+    /*overflow-y: auto;*/
+    /*overflow-y: auto;*/
+    /*overflow-x: auto;*/
+    height:  420px;
+    width: 900px;
+    border: 1px solid #dddddd;
+    border-collapse: separate;
+    *border-collapse: collapsed;  
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+/*===========================================================================*/
+/* FIM  ANTECEDENTES ABA 2 VACINA
+/*===========================================================================*/    
+/*===========================================================================*/
+/* FIM MODAL FICHA DE VACINA
+/*===========================================================================*/
+
+
+/*===========================================================================*/
+/* MODAL TELA TESTE VISUAL
+/*===========================================================================*/
+div#tst-visual fieldset.flst-tst-visual{  border: 2px solid #E3E3E3; padding: 3px; border-bottom-left-radius:4px; border-bottom-right-radius:4px; border-bottom-style:solid; border-top-left-radius:4px; border-top-right-radius:4px; margin-bottom:  1px;}
+/*div#tst-visual fieldset#flst-tst-visual{height: 100px;}*/
+div#flst-tst-visual-main{margin-top: -10px;}
+div#tst-visual .form-tst-visual .flst-tst-visual label.nome-text{  font-size: 14px; color: #666666; float: right;}
+div#tst-visual .form-tst-visual .flst-tst-visual #tst-nome{ width: 90%; }
+div#tst-visual .form-tst-visual .flst-tst-visual #tst-nascimento{ width: 55%; float: right;}
+div#tst-visual .form-tst-visual .flst-tst-visual label#lab-tst-nascimento{ margin-left: 40%;}
+div#tst-visual .form-tst-visual .radio-list{margin-left: 11%; margin-top: -5%;}
+fieldset.flst-tst-visual label#lab-tst-nascimento, #lab-tst-nome{font-size: 12px; }
+fieldset.flst-tst-visual select#tst-pediatra{width: 86%; margin-top:8px; margin-bottom:8px; }
+fieldset.flst-tst-visual  label.titulo{font-size: 14px; margin-bottom: 5px; }
+fieldset.flst-tst-visual  ul.thumbnails input#tst-teoae , #tst-noise{width: 75%;}
+fieldset.flst-tst-visual  div#tst-visual-mt{margin-bottom: 8px;}
+fieldset.flst-tst-visual  div#tst-visual-mt select#tst-od ,#tst-oe{width: 100px;}
+fieldset.flst-tst-visual  select#tst-localizacao{width: 225px;}
+fieldset.flst-tst-visual  select.tst-ava{width: 155px; margin-bottom: 3px;}
+fieldset.flst-tst-visual  input#tst-em{width: 10%; margin-left: 66%; margin-top:-20px;}
+fieldset.flst-tst-visual  label#tst-lab-em{font-size: 10px; margin-left: 80%;  margin-top:-20px;}
+fieldset.flst-tst-visual  input#tst-visual-data{width: 25%; margin-top:-22px; margin-left: 46%;}
+fieldset.flst-tst-visual  input#tst-visual-btn{width: 100%; height: 60px; margin-top:10px; }
+fieldset.flst-tst-visual  input#idade-ges , input#peso-nascer, input#apgar{width: 50%; }
+fieldset.flst-tst-visual  div#dt-tabela-visual{overflow-y:scroll;overflow-x: scroll; width: 290px; height: 283px;}
+
+/*===========================================================================*/
+/* FIM MODAL TELA TESTE VISUAL
+/*===========================================================================*/
+
+
+/*===========================================================================*/
+/* LISTA TESTE AUDITIVO
+/*===========================================================================*/
+
+div.visual-default {-moz-border-radius: 5px;-webkit-border-radius: 5px;  height: auto; padding: 1px; background-color: #fff; border: 1px solid #DDDDDD; margin-top: -3px;}
+div.visual-default-skin { overflow: auto; width: 105px; height: 70px; }
+ul.dependente-default-multiselect { padding: 0px; margin: 0px; white-space: nowrap; }
+li.dependente-default-multiselect { list-style-type: none; }
+label.visual-default-label { display: block; padding: 2px;  margin-left: -30px; }
+label.visual-default-label:hover { background: #DADCFF;}
+input.visual-default-checkbox { width: 13px; height: 13px; padding: 0; margin-left: 10px;vertical-align: bottom; position: relative; top: -1px; *overflow: hidden; }
+fieldset.tst-obs textarea { width: 98%; height: 70px; overflow: scroll; }
+fieldset.tst-qp textarea { width: 98%; height: 70px; overflow: scroll; }
+fieldset.tst-nf textarea { width: 98%; height: 70px; overflow: scroll; }
+fieldset.tst-outros textarea { width: 98%; height: 70px; overflow: scroll; }
+
+/*===========================================================================*/
+/* FIM  LISTA TESTE AUDITIVO*/

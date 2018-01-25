@@ -1,0 +1,241 @@
+/*===========================================================================*/
+/* MÓDULO DE ESTOQUE
+/*===========================================================================*/
+
+input,
+select, 
+table,
+textarea,
+fieldset
+{ width: 100%; padding-right: 0; padding-left: 0; }
+
+label {
+   font-size: 13px;
+}
+
+/*===========================================================================*/
+/* SALA DE ESPERA
+/*===========================================================================*/
+
+.titulo{margin-left: 10px; margin-bottom: 15px;}
+#botes-estoque-sala{margin-left: 180px;}
+#flst-estoque-data{height: 60px; margin-top: 3px; margin-left: 10px;}
+#flst-estoque-header-rigth{margin-left: -3px;}
+#flst-estoque{margin-left: 10px;}
+#tabela-estoque-pacientes{overflow-y:auto;overflow-x: auto; width:495px; height: 500px; margin-left: -5px; margin-top: 7px;}
+#tabela-estoque-medicos{ margin-top: 7px;}
+#header-agenda-rigth{float: right;}
+#medico{width: 400px;}
+#tabela-body{width: 550px; margin-left: 10px;}
+#agenda-rigth{margin-top: -20px;}
+#agenda-left-agendador{margin-left: 20px; margin-top: 15px;}
+#data-estoque{width: 100px;}
+
+/*===========================================================================*/
+/*  FIM SALA DE ESPERA
+/*===========================================================================*/
+
+/*===========================================================================*/
+/*  BOLETIM IMUNOBILÓGICO
+/*===========================================================================*/
+
+.modal-boletim_imunobiologico {
+  margin: -250px 0 0 -420px;
+  width: 850px;
+  top: 40%;
+  left: 50%;
+}
+
+.modal-body-boletim_imunobiologico {
+  max-height: 1800px;
+  padding: 15px;
+  width:800px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/*  FIM BOLETIM IMUNOBILÓGICO
+/*===========================================================================*/
+
+/*===========================================================================*/
+/* NOTA FISCAL
+/*===========================================================================*/
+
+.titulo{ margin-left:  1%; color: #808080;}
+.nota-fiscal [class*="span"] { margin-left: 12px; }
+ table th {color: #808080;}
+.nota-fiscal { color: #FFF;  }
+.nf-nome-text{font-size: 13px;}
+.nota-fiscal .row-fluid [class*="span"] { min-height: 0; }
+.nota-fiscal .nf-fornecedor-large {margin-top: 18px;}
+.nota-fiscal .nf-n {margin-top: 12px; height: 30px;}
+
+/*===========================================================================*/
+/* FIM NOTA FISCAL
+/*===========================================================================*/
+
+/*===========================================================================*/
+/*  MAPA CONSUMO
+/*===========================================================================*/
+.titulo{ margin-left:  1%; color: #808080;}
+.mp-consumo-nome-text{font-size: 13px;}
+
+/*===========================================================================*/
+/* FIM  MAPA DE CONSUMO
+/*===========================================================================*/
+
+/*===========================================================================*/
+/*  SALDO ESTOQUE
+/*===========================================================================*/
+#tab1-saldo{overflow-y: auto; overflow-x: auto; width: 420px; height: 520px;}
+#tab2-saldo{overflow-y: auto; overflow-x: auto; width: 420px; height: 430px;}
+#conf-btn{margin-left: 20px; margin-top: 10px;}
+
+/*===========================================================================*/
+/* FIM  SALDO ESTOQUE
+/*===========================================================================*/
+
+/*===========================================================================*/
+/*  TRASNFERENCIA DE VACINA
+/*===========================================================================*/
+#bloc-header-trans fieldset {background-color: #eee;}
+#bloc-body-trans{height: 60px;}
+#flst-color-trans{background-color: #eee;}
+#opcoes-trans{margin-top: 10px; padding-left: 15%;}
+#flst-color-trans-footer{background-color: #eee;height: 100px;}
+
+/*===========================================================================*/
+/* FIM  TRASNFERENCIA DE VACINA
+/*===========================================================================*/
+
+/*===========================================================================*/
+/*  ULTIMAS ENTRDAS
+/*===========================================================================*/
+div.m-top{
+    margin-top: 15px;
+    
+}
+ div.m-left{
+    margin-left: 15px;
+}
+/*===========================================================================*/
+/* FIM ULTIMAS ENTRADAS  
+*===========================================================================*/
+
+/*===========================================================================*/
+/*  MODAL TRANSFERENCIA CONSULTA E ENTRADA
+/*===========================================================================*/
+.modal-consulta-estoque.fade.in {
+  top: 38%;
+}
+.modal-consulta-estoque {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  z-index: 1050;
+  margin: -250px 0 0 -320px;
+ width: 360px;
+
+}
+.modal-consulta-estoque.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-consulta-estoque.fade.in {
+  top: 40%;
+}
+
+.modal-body-consulta-estoque {
+  max-height: 1800px;
+  padding: 15px;
+  width:600px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL TRANSFERENCIA CONSULTA E ENTRADA
+*===========================================================================*/
+
+/*===========================================================================*/
+/* DETALHAMENTO DO LOTE
+*===========================================================================*/
+#clientes-lote {overflow-y: auto; height: 350px; width: 520px;} 
+#historico-lote{overflow-y: auto; height: 150px; width: 250px; }
+#lotes{overflow-y: auto; height: 150px; width: 520px; }
+/*===========================================================================*/
+/* FIM DETALHAMENTO LOTE
+*===========================================================================*/
+
+
+.modal-sala-espera.fade.in {
+  top: 38%;
+}
+.modal-sala-espera {
+  position: fixed;
+  top: 38%;
+  left: 40%;
+  z-index: 1050;
+  margin: -250px 0 0 -350px;
+width:1000px; 
+
+}
+.modal-sala-espera.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+
+.modal-sala-espera.fade.in {
+  top: 38%;
+}
+
+.modal-body-sala-espera {
+  max-height: 1800px;
+  padding: 15px;
+  width:960px; 
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}

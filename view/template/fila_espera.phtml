@@ -1,0 +1,90 @@
+<link type="text/css" rel="stylesheet" href="view/template/css/fila_espera.css" />
+<script type="text/javascript" src="view/template/js/filaEspera.js"></script>
+<div class="well-fichaespera">
+	<div class="row-fluid">
+		<h3  style="border-bottom: 1px solid white; color: #828087; margin-bottom: 2px;cursor: pointer;">Fila de Espera</h3>
+	</div>
+	<div  >
+		<table id="tabela_sc" class=" table table-bordered">
+			<thead>
+				<tr>
+					<th>Ord</th>
+					<th>Paciente</th>
+					<th >Rec</th>
+					<th >Aten</th>
+					<th >Espe</th>
+					<th >Usuario</th>
+				</tr>
+			</thead>
+			<tbody style="cursor: pointer;" usuarioTipo="medico">
+				<?php 
+					if (isset($esperaVacina)) {
+						foreach ($esperaVacina as $row) {
+				?>
+							<tr class="pointer-cursor usuarioSelecionavel" clienteId="<?= $row['cliente_id']; ?>">
+								<th id="idDaFilaDeEspera"><?= $row['id'] ?></th>
+								<th <?php 
+									if ($row['passouPelaTriagem'] == 1)
+										echo 'style="color: #c67605;"';
+									if ($row['vacina_casa'] == 1)
+										echo 'style="color: red;"';
+									?>
+								>
+									<?= $row['nome'] ?>
+								</th>
+								<th><?= $row['hora_recepcao'] ?></th>
+								<th id="Atendeu">
+									<?php 
+										if ($row['hora_atendimento'] !== null)
+											echo $row['hora_atendimento'];
+									?>
+								</th>
+								<th>
+									<?php
+										$diferenca = calculaDiferençaMinutos($row['hora_atendimento'], $row['hora_recepcao']);
+										if ($row['hora_atendimento'] !== null)
+											echo (($diferenca != 0) ? $diferenca : '0') . 'min';
+									?>
+								</th>
+								<th <?php 
+									if ($row['login'] !== null) 
+										echo 'class="UsuarioQueAtendeu" rel="popover" title="Usuario que atendeu" data-content="' . $row['login'] . '"' 
+									?>
+								>
+									<?= $row['recepcao_login'] ?>
+								</th>
+							</tr>
+			<?php
+					}
+				}
+			?>
+			</tbody>
+		</table>        
+	</div>
+</div>
+
+<?php
+if (isset($esperaVacina)) {
+	foreach ($esperaVacina as $lista) {
+?>
+			<?php echo (!empty($lista['hora_atendimento']) && $lista['hora_atendimento'] != "00:00:00") ? $lista['hora_atendimento'] : '-'; ?>
+<?php 
+	}
+}
+?>
+
+<div class="tab-pane" id="filaespera2">
+	<div id="fila_espera_vacina">
+	<?php
+	if (buscaFilaDeEsperaDataMedico(date("Y-m-d"), $_SESSION['usuario']['id']) > 0) {
+		foreach (buscaFilaDeEsperaDataMedico(date("Y-m-d"), $_SESSION['usuario']['id']) as $filaDeEspera) {
+			echo (empty($filaDeEspera['hora_atendimento']) || $filaDeEspera['hora_atendimento'] != "00:00:00") ? 'JÁ' : 'At';
+			echo $filaDeEspera['id'];
+			echo $filaDeEspera['hora_recepcao'];
+			echo (empty($filaDeEspera['hora_atendimento']) || $filaDeEspera['hora_atendimento'] != "00:00:00") ? $filaDeEspera['hora_atendimento'] : '';
+			echo buscaNomeCliente($filaDeEspera['cliente_id']);
+		}
+	}
+	?>
+	</div>
+</div> 

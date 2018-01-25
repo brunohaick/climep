@@ -1,0 +1,15 @@
+<Files *.css>
+	SetOutputFilter DEFLATE
+</Files>
+<Files *.js>
+	SetOutputFilter DEFLATE
+</Files>
+<Files *.php>
+	SetOutputFilter DEFLATE
+</Files>
+<Files *.phtml>
+	SetOutputFilter DEFLATE
+</Files>
+<Files *.html>
+	SetOutputFilter DEFLATE
+</Files>

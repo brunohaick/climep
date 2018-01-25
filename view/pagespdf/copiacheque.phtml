@@ -1,0 +1,81 @@
+<html lang="pt" >
+    <head>
+        <meta charset="utf-8">
+   
+        <link href="./css/bootstrap.css" rel="stylesheet">
+        <link href="./css/pdfs.css" rel="stylesheet">
+
+    </head>
+    <body>
+
+        <div class="container-fluid" >
+            <div class="page-header">
+                <h3 align="center">Copia de Cheque</h3>
+                <div class="row-fluid" >
+                    <div class="pull-left marginleft" >
+                        <div class="input-prepend">
+                            <span class="add-on" style="font-size: 12px;">Empresa:<b><?php echo $_POST['empresa']; ?></b></span>
+                        </div>
+                    </div>
+
+
+                    <div class="pull-right" style="margin-right:20px;">
+                        <div class="input-prepend">
+                            <span class="add-on" style="font-size: 12px;">Usuário:<b><?php echo $_POST['usuario']; ?></b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="page-header">
+                    <div class="row-fluid">
+
+                        <fieldset class="table-bordered">
+                            <div class=" span5">
+                                <div class="pull-left"  >
+                                    <div class="input-prepend">
+                                        <span class="add-on" style="font-size: 12px;">Banco:<b><?php echo $_POST['banco']; ?></b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span4">
+                                <div class="pull-left"  >
+                                    <div class="input-prepend">
+                                        <span class="add-on" style="font-size: 12px;">Cheque:<b><?php echo $_POST['cheque']; ?></b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="pull-right"  >
+                                    <div class="input-prepend">
+                                        <span class="add-on" style="font-size: 12px;">R$:<b><?php echo $_POST['valor']; ?></b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <span>a quantia: <b><?php echo $_POST['valor_nominal']; ?></b></span>
+                            </div><br></br>
+                            <div class="row-fluid">
+                                <div class=" span5">
+                                    <div class="pull-left"  >
+                                        <div class="input-prepend">
+                                            <span class="add-on" style="font-size: 12px;">Nominal a:<b><?php echo $_POST['destino']; ?></b></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="table-bordered">
+                            <legend> Histórico</legend>
+                            <div class="input-prepend">
+                                <span class="add-on"style="font-size: 12px;"><b><?php echo $_POST['data']; ?></b></span>
+                            </div>
+                        </fieldset>
+                        <hr>
+                    </div>
+                </div> 
+                <span><b>Transação efetuada com sucesso por J8002027 GILMARA RODRIGUES PAMPLONA</b></span>
+                <hr>
+            </div>
+    </body>
+</html>

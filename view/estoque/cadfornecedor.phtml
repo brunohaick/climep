@@ -1,0 +1,124 @@
+<script async defer src="view/estoque/js/index.js"></script>
+<script async defer src="template/js/bootstrap-datepicker.js"></script>
+<script async defer src="view/estoque/js/cadFornecedor.js"></script>
+<link type="text/css" rel="stylesheet" href="view/estoque/css/index.css" />
+
+<h2 class="titulo">Cadastro de Fornecedores</h2>
+
+<fieldset class=" table-bordered">
+	<div class="row-fluid">
+		<div class="span6">
+			<label>
+				Nome :
+				<input class="" name="cad-for-nome"  type="text"/>
+			</label>
+		</div>
+		<div class="span5">
+			<label>
+				Cnpj nº :
+				<input class="" name="cad-for-cnpj"  type="text"/>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span11">
+			<label>
+				Descrição :
+				<textarea class="" name="cad-for-descricao"></textarea>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span11">
+			<label>
+				Endereço :
+				<input class="" name="cad-for-endereco"  type="text"/>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span5">
+			<label>
+				Cidade :
+				<input class="" name="cad-for-cidade"  type="text"/>
+			</label>
+		</div>
+		<div class="span3">
+			<label>
+				 UF :
+				<input class="" name="cad-for-estado"  type="text"/>
+			</label>
+		</div>
+		<div class="span3">
+			<label>
+				 País :
+				<input class="" name="cad-for-pais"  type="text"/>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span5">
+			<label>
+				Fone :
+				<input class="" name="cad-for-telefone"  type="text"/>
+			</label>
+		</div>
+		<div class="span2">
+			<label>
+				Fax :
+				<input class="" name="cad-for-fax"  type="text"/>
+			</label>
+		</div>
+		<div class="span4">
+			<label>
+				Contato :
+				<input class="" name="cad-for-contato"  type="text"/>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<label>
+				Email :
+				<input class="" name="cad-for-email"  type="text"/>
+			</label>
+		</div>
+		<div class="span5">
+			<label>
+				Site :
+				<input class="" name="cad-for-site"  type="text"/>
+			</label>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span1">
+			<label>Codigo:</label>
+			<input type="text" onchange="buscaPlanoContasPorCodigo();" name="cad-for-cod_plano_contas"/>
+		</div>
+		<div class="span5">
+			<label>Plano de Contas:</label>
+			<input type="text" name="cad-for-plano_contas" >
+		</div>
+	</div>
+</fieldset><br>
+<fieldset class=" table-bordered">
+	<div class="row-fluid" >
+<!--
+		<div class="span2">
+			<button class="btn btn-mini  span12" style="height: 50px;"><i class="icon-th-list">  </i> Listagem</button>
+		</div>
+		<div class="span2">
+			<button class="btn btn-mini  span12" style="height: 50px;"><i class="icon-plus-sign">  </i> Novo</button>
+		</div>
+-->
+		<div class="span2">
+			<button class="btn btn-mini  span12" onclick="inserirFornecedor();" style="height: 50px;"><i class=" icon-ok">  </i> Gravar</button>
+		</div>
+
+		<div class="span2">
+			<button class="btn btn-mini  span12" onclick="botaoFechar();" style="height: 50px;"><i class="icon-remove">  </i> Fechar</button>
+		</div>
+
+
+	</div>
+</fieldset>

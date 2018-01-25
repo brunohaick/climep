@@ -1,0 +1,514 @@
+<link type="text/css" rel="stylesheet" href="view/convenio/css/index.css" />
+<script async defer language="javascript" src="view/convenio/js/consultafatura.js"></script>
+<div id="consultafaturas" style="display: block;">
+	<div class="row-fluid">
+		<h2 class="titulo"> Consulta de Faturas </h2>
+		<hr style="margin-top: -5px;">
+		<p style="margin-left: 15px;">
+			Preencha os campos abaixo e clique em <b> 'Localizar' </b> para iniciar a pesquisa na base de dados. Clique em <b>'Novo'</b>
+		</p>
+	</div>
+	<div class="row-fluid">
+		<fieldset class="table-bordered">
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Convênio:</label>
+				</div>
+				<div class="span1">
+					<input type="text" onchange="buscaFaturaConvenioPorCodigo('convenio','consulta_fatura');" name="conv-consulta-fatura-cod_convenio" />
+				</div>
+				<div class="span5">
+					<input type="text" name="conv-consulta-fatura-convenio" />
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Empresa:</label>
+				</div>
+				<div class="span1">
+					<input type="text" onchange="buscaFaturaConvenioPorCodigo('empresa','consulta_fatura');" name="conv-consulta-fatura-cod_empresa"/>
+				</div>
+				<div class="span5">
+					<input type="text" name="conv-consulta-fatura-empresa" />
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Status:</label>
+				</div>
+				<div class="span3">
+					<select name="conv-consulta-fatura-status">
+						<option value="00" > TODOS </option>
+						<?php
+						$statusConsultaDup = buscaTodosStatusDuplicata();
+						foreach ($statusConsultaDup as $statusConsulta) {
+							?>
+							<option value="<?php echo $statusConsulta['id']; ?>"> <?php echo $statusConsulta['nome']; ?> </option>
+							<?php
+						}
+						?>
+					</select>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Selecionado Por:</label>
+				</div>
+				<div class="span3">
+					<select name="conv-consulta-fatura-selecionado">
+						<option value="1" > DATA DE LANCAMENTO </option>
+						<option value="2" > DATA DE VENCIMENTO </option>
+						<option value="3" > DATA DE BAIXA </option>
+						<option value="4" > PERIODO </option>
+					</select>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<label>De:</label>
+				</div>
+				<div class="span2">
+					<input data-mask="99/99/9999" type="text" name="conv-consulta-fatura-data_inicio"/>
+				</div>
+				<div class="span1">
+					<label>Até:</label>
+				</div>
+				<div class="span2">
+					<input data-mask="99/99/9999" type="text" name="conv-consulta-fatura-data_fim"/>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Ordenado Por:</label>
+				</div>
+				<div class="span3">
+					<select name="conv-consulta-fatura-ordenado">
+						<option value="1" > EMPRESA </option>
+						<option value="2" > DATA DE LANCAMENTO </option>
+						<option value="3" > DATA DE VENCIMENTO </option>
+						<option value="4" > DATA DE BAIXA </option>
+						<option value="5" > PERIODO </option>
+
+					</select>
+				</div>
+			</div>
+			<hr>
+			<div class="row-fluid">
+
+				<div class="offset6">
+					<a href="#" class="btn" onclick="novaConfeccaofaturas();" ><i class="icon-plus"></i> Novo </a>
+					<a href="#" class="btn" onclick="consultaFatura();" ><i class="icon-search"></i> Localizar </a>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div id="confeccaofaturas" style="display: none;">
+	<div class="row-fluid">
+		<h2 class="titulo"> Confecção de Faturas </h2>
+		<hr style="margin-top: -5px;">
+		<p style="margin-left: 15px;">
+			Preencha todos os campos correatemente e clique em <b>'Avançar'</b> para incluir um novo registro.
+		</p>
+	</div>
+	<div class="row-fluid">
+		<fieldset class="table-bordered">
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Convênio:</label>
+				</div>
+				<div class="span1">
+					<input type="text" onchange="buscaFaturaConvenioPorCodigo('convenio','insere_fatura');" name="conv-insere-fatura-cod_convenio"/>
+				</div>
+				<div class="span5">
+					<input type="text" name="conv-insere-fatura-convenio"/>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Empresa:</label>
+				</div>
+				<div class="span1">
+					<input type="text" onchange="buscaFaturaConvenioPorCodigo('empresa','insere_fatura');" name="conv-insere-fatura-cod_empresa"/>
+				</div>
+				<div class="span5">
+					<input type="text" name="conv-insere-fatura-empresa" />
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span2">
+					<label>Vencimento:</label>
+				</div>
+				<div class="span2">
+					<input data-mask="99/99/9999" type="text" name="conv-insere-fatura-data_vencimento" />
+				</div>
+
+			</div>
+
+			<div class="row-fluid">
+				<div class="span2">
+					<label>De:</label>
+				</div>
+				<div class="span2">
+					<input data-mask="99/99/9999" type="text" name="conv-insere-fatura-data_inicio"/>
+				</div>
+				<div class="span1">
+					<label>Até:</label>
+				</div>
+				<div class="span2">
+					<input data-mask="99/99/9999" type="text" name="conv-insere-fatura-data_fim"/>
+				</div>
+			</div>
+			<hr>
+			<div class="row-fluid">
+				<div class="span5">
+					<div class="row-fluid">
+						<div class="span6">
+							<label>
+								<input type="checkbox" name="" />
+								Odontologia
+							</label>
+						</div>
+						<div class="span6">
+							<label>
+								<input type="checkbox" name="" />
+								Agregado de Convênios
+							</label>
+						</div>
+					</div>
+
+					<div class="row-fluid">
+						<label>
+							<input type="checkbox" name="" />
+							Vacinas / Teste do Pezinho / P.Auditivo
+						</label>
+					</div>
+				</div>
+				<div class="offset5">
+					<a class="btn" onclick="voltaConfeccaoFatura();"><i class="icon-arrow-left"></i> Voltar </a>
+					<!--<a href="#" onclick="" class="btn" ><i class="icon-plus"></i> Consulta </a>-->
+					<a href="#" onclick="insereFatura();" class="btn"> Finalizar <i class="icon-circle-arrow-right"></i> </a>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row-fluid" id="buscaconsultafatura" style="display: none;">
+	<div class="row-fluid">
+		<h2 class="titulo"> Confecção de Faturas </h2>
+	</div>
+	<hr>
+	<fieldset class="table-bordered">
+		<div class="pull-right">
+			<button class="btn" onclick="voltaConsultaFatura();"><i class="icon-arrow-left"></i> Voltar </button>
+			<button class="btn" onclick="baixaFaturaModal();"><i class=" icon-arrow-down"></i> Baixa Fatura </button>
+			<button class="btn" onclick="imprimeCapa();"><i class="icon-print"></i> Imprime Capa </button>
+			<button class="btn" onclick="nfseModal();"><i class=" icon-file"></i> Nota Fiscal </button>
+		</div>
+		<div id="tableconsultafatura">
+			<table class="tabletable-bordered table-condensed table-striped">
+				<thead>
+					<tr>
+						<th> OPÇÃO </th>
+						<th> FATURA </th>
+						<th> NF NÚMERO </th>
+						<th> CONVÊNIO </th>
+						<th> EMPRESA </th>
+						<!-- <th> SERVIÇO </th> -->
+						<th> FATURAMENTO </th>
+						<th> D. INÍCIO </th>
+						<th> D. FIM  </th>
+						<th> (%) </th>
+						<th> FATURADO </th>
+						<th> GLOSA </th>
+						<th> A PAGAR </th>
+						<th> PAGO </th>
+						<th> DESCONTO </th>
+						<th> AJUSTE (+/-) </th>
+						<th> LÍQUIDO </th>
+						<th> VENCIMENTO </th>
+						<th> USUÁRIO </th>
+						<th> DATA BAIXA </th>
+						<th> USUÁRIO BAIXA </th>
+						<th> STATUS </th>
+						<!-- <th> PAGO </th>-->
+					</tr>
+				</thead>
+				<tbody id="conv-fatura-lista_faturas">
+<!-- 					<tr class="conv-radio" onclick="selectRadio($(this));">
+					   <th><input id="conv-radio-input" type="radio" name="option"/></th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+						<th>d</th>
+					</tr>
+-->
+				</tbody>
+			</table>
+		</div>
+	</fieldset> 
+</div>
+
+<div id="emissaonotafiscal" class="modal hide fade" >
+	<div class="modal-body" style=" background-image: url('template/img/body-bg.png');">
+		<div class="row-fluid">
+			<h4 class="titulo">Nota Fiscal</h4>
+			<a href="#" id="fechar" class="close" />Fechar X</a><br>
+		</div>
+
+		<fieldset class="table-bordered">
+			<div class="row-fluid"><br>
+				<div class="span7">
+					<label>1) Informe o valor para emissão NFSe ?</label>
+					<input type="txt" />
+				</div>
+			</div>
+			<div class="row-fluid"><br>
+				<div class="span7">
+					<label>2) Informe a descriminação do corpo da nota:</label>
+					<input type="txt" />
+				</div>
+			</div>
+			<div class="row-fluid"><br>
+				<div class="span7">
+					<label>3) Informe o Código da cidade do Tomador</label>
+					<input type="txt" />
+				</div>
+			</div>
+			<div class="row-fluid"><br>
+				<div class="span7">
+					<label>4) Informe o nome da cidade do Tomador</label>
+					<input type="txt" />
+				</div>
+			</div>
+			<div class="row-fluid"><br>
+				<div class="span7">
+					<label>5) Informe a descrição do cabeçalho da nota</label>
+					<input type="txt" />
+				</div>
+			</div>
+		</div>
+		</fieldset>
+		<div class="modal-footer">
+			<button class="btn " class="btn " onclick="emitirNotaFiscal()"><i class="icon-ok "></i> Salvar</button>
+			<button class="btn " onclick="fechar_modal('emissaonotafiscal');"><i class="icon-remove "></i> Fechar</button>
+		</div>
+	</div>
+</div>
+
+<div id="modalbaixafatura" class="modal-modalbaixafatura hide fade">
+	<div id="dialog-modalbaixafatura" class=" modal-body-modalbaixafatura" style=" background-image: url('template/img/body-bg.png');">
+		<div id="">
+			<a href="#" id="fechar" class="close"/>Fechar X</a></div>
+		<div class="row-fluid">
+			<div class="row-fluid">
+				<h2 id="modalbaixafatura-modal-titulo" class="titulo"> Baixa de Faturas</h2>
+				<hr style="margin-top: -5px;">
+				<p style="margin-left: 15px;">
+					Preencha todos campos corretamente e clique em <b>'Avançar'</b> para efetivar a baixa da fatura selecionada.
+				</p>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<fieldset class="table-bordered">
+				<div class="row-fluid">
+					<div class="span6">
+						<label>Conta Corrente:</label>
+						<input type="text" name="conv-fatura-modal-conta_corrente"/>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<label>Tipo de Operação:</label>
+					<div class="row-fluid">
+						<div class="span1">
+							<input type="text" onchange="buscaFaturaConvenioPorCodigo('tipo_operacao','consulta_fatura_modal');" name="conv-fatura-modal-cod_tipo_operacao"/>
+						</div>
+						<div class="span5">
+							<input type="text" name="conv-fatura-modal-tipo_operacao"/>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3">
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Fatura Nº:</label>
+								<input type="text" class="" name="conv-fatura-modal-numero_fatura" disabled >
+							</div>
+						</div> 
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Valor Faturado:</label>
+								<input type="text" class="" name="conv-fatura-modal-faturado">
+							</div> 
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Valor a Pagar:</label>
+								<input type="text" class="" name="conv-fatura-modal-valor_a_pagar">
+							</div> 
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Valor Pago:</label>
+								<input type="text" class="" name="conv-fatura-modal-valor_pago">
+							</div> 
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Desconto:</label>
+								<input type="text" class="" name="conv-fatura-modal-desconto">
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Ajustes(+/-):</label>
+								<input type="text" class="" name="conv-fatura-modal-ajustes">
+							</div> 
+						</div>
+
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Líquido:</label>
+								<input type="text" class="" name="conv-fatura-modal-liquido">
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span12">
+								<label>Data da Baixa:</label>
+								<input type="text" data-mask="99/99/9999" class="" name="conv-fatura-modal-data_baixa">
+							</div> 
+						</div>
+					</div>
+
+                    <div class="span9">
+                        <!-- <div class="row-fluid">
+                            <fieldset class="table-bordered">
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <label><b>Banco / Agência : CLIMEP/CLIMEP</b></label>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <label><b>Saldo Disponível/ Indisponível: 1.426.649.46 / 0,00</b></label>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <label><b>Compensação: 16/03/2013</b></label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div><br>-->
+                        <br>
+                        <div class="row-fluid">
+                            <div class="span8">
+                                <fieldset class="table-bordered">
+                                    <div class="row-fluid">
+                                        <div class="span2">
+                                            <label>CSLL:</label>
+                                        </div>
+                                        <div class="span4">
+                                            <input type="text" name="conv-fatura-modal-csll" />
+                                        </div>
+
+                                        <div class="span1 ">
+                                            <input type="text" name="conv-fatura-modal-csll2" />
+                                        </div>
+                                        <div class="span1 ">
+                                            <input  type="text" name="" value="%" disabled>
+                                        </div>
+
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span2">
+                                            <label>COFNS:</label>
+                                        </div>
+                                        <div class="span4">
+                                            <input type="text" name="conv-fatura-modal-cofins" />
+                                        </div>
+                                        <div class="span1">
+                                            <input type="text" name="conv-fatura-modal-cofins2" />
+                                        </div>
+                                        <div class="span1 ">
+                                            <input  type="text" name="" value="%" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span2">
+                                            <label>PIS:</label>
+                                        </div>
+                                        <div class="span4">
+                                            <input type="text" name="conv-fatura-modal-pis" />
+                                        </div>
+                                        <div class="span1">
+                                            <input type="text" name="conv-fatura-modal-pis2" />
+                                        </div>
+                                        <div class="span1 ">
+                                            <input  type="text" name="" value="%" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span2">
+                                            <label>IR:</label>
+                                        </div>
+                                        <div class="span4">
+                                            <input type="text" name="conv-fatura-modal-ir" />
+                                        </div>
+                                        <div class="span1">
+                                            <input type="text" name="conv-fatura-modal-ir2" />
+                                        </div>
+                                        <div class="span1 ">
+                                            <input  type="text" name="" value="%" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span2">
+                                            <label>ISS:</label>
+                                        </div>
+                                        <div class="span4">
+                                            <input type="text" name="conv-fatura-modal-iss" />
+                                        </div>
+                                        <div class="span1">
+                                            <input type="text" name="conv-fatura-modal-iss2" />
+                                        </div>
+                                        <div class="span1 ">
+                                            <input  type="text" name="" value="%" disabled>
+                                        </div> 
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <hr>
+            <div class="row-fluid">
+                <div class="offset7">
+                    <a href="#" onclick="fechar_modal('modalbaixafatura');" class="btn span5"><i class="icon-remove"></i> Fechar</a>
+                    <a href="#" onclick="baixaFaturaConvenio();" class="btn span5" > Avançar <i class="icon-circle-arrow-right"></i></a>
+                </div>
+            </div >
+        </div><br>
+    </div>
+</div>

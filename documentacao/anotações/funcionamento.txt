@@ -1,0 +1,50 @@
+Area da recepção
+  vacinas:
+  imunoterapias: (tratamentos)
+  consultas:
+    otorrino
+    dermatologista
+    alergista, infectologista e imunologista
+    alergista pediatrico
+    clinica geral
+    ginecologista
+    
+
+BOTOES DO MENU PRINCIPAL
+
+************************************************ CLIENTES
+
+  Cadastro (antes precisa verificar se o cliente ja está cadastrado - pesquisa pode ser feita pelo nome ou data de nascimento, telefone, cpf, email)
+   - Para cadastro, se cadastra uma nova família (com nome, sobrenome e cpf)
+   - depois se cadastra uma nova pessoa na familia  (dados do cadastro da familia aparecem pré carregados)
+   - dependendo do procedimento, a pessoa entrega as guias
+   - SEMPRE a titular é a mãe
+   - existe um cadastro de dependentes
+  - os dependentes nao sao considerados "clientes", e tudo oque fazem vao com os dados do titular
+
+  na tela aparece a fila de vacinas
+  para encaminhar para fila de vacina tem que ter um médico
+  
+  
+
+
+OBS: Área Odontológica tem um sistema a parte do usado na recepção
+FEITO
+  Entendi a fica de clientes e seus dependentes
+
+FAZER:
+  - entender a ficha de vacina
+  - ENTEDER OS PROCEDIMENTOS -teste do pesinho, olinho, orelinha, consultas ( entender as guias )
+  
+    
+
+
+
+
+NO SISTEMA:	
+  ter uma interface admin para cadastrar coisas no select do cadastro do clientes
+  existem categorias temporárias.
+- Cadastrar uma pessoa com CPF errado, e uma pessoa com cpf de outra pessoa (inteção de verificar se tem validados ou web service)
+      o CPF é apenas verificado
+  
+    

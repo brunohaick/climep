@@ -1,0 +1,202 @@
+
+input,fieldset,select{width: 100%;}
+textarea{width: 98%;}
+.abas-consulta{color: #0088CC; font-size: 12px;}
+textarea.medidatexta{height: 130px; max-height: 130px; width: 99%; max-width: 99%;}
+.btn-iniciar, .btn-resumo, .btn-fechar{width: 75px;}
+a.caixalink {color: #0088CC; font-size: 13px;}
+/*===========================================================================*/
+/*  MODAL EMISSAO NSF-e
+/*===========================================================================*/
+.modal-emissaonfs.fade.in {
+  top: 38%;
+}
+.modal-emissaonfs {
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  z-index: 1050;
+  margin: -250px 0 0 -500px;
+  width:1300px;
+}
+.modal-emissaonfs.fade {
+  top: -25%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+.modal-emissaonfs.fade.in {
+  top: 35%;
+}
+.modal-body-emissaonfs {
+  padding: 15px;
+  height: 650px;
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL  EMISSAO NSF-e
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL RESUMO CAIXA
+/*===========================================================================*/
+.modal-resumocaixa.fade.in {
+  top: 38%;
+}
+.modal-resumocaixa {
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  z-index: 1050;
+  margin: -250px 0 0 -500px;
+  width:1300px;
+}
+.modal-resumocaixa.fade {
+  top: -30%;
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+.modal-resumocaixa.fade.in {
+  top: 35%;
+}
+.modal-body-resumocaixa {
+  padding: 15px;
+  height: 700px;
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL RESUMO CAIXA
+*===========================================================================*/
+/*===========================================================================*/
+/*  MODAL EDITANF
+/*===========================================================================*/
+.modal-editanfs.fade.in {
+  top: 40%;
+}
+.modal-editanfs {
+  position: fixed;
+  top: 40%;
+  left: 55%;
+  z-index: 1050;
+  margin: -250px 0 0 -500px;
+  width:900px;
+}
+.modal-editanfs.fade {
+  /*top: -20%;*/
+  -webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+      -ms-transition: opacity 0.3s linear, top 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, top 0.3s ease-out;
+          transition: opacity 0.3s linear, top 0.3s ease-out;
+}
+.modal-editanfs.fade.in {
+  top: 40%;
+}
+.modal-body-editanfs {
+  padding: 15px;
+  height: 700px;
+  border:none 4px #000000;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright:3px;
+  -moz-border-radius-bottomleft:3px;
+  -moz-border-radius-bottomright:3px;
+  -webkit-border-top-left-radius:4px;
+  -webkit-border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  border-top-left-radius:4px;
+  border-top-right-radius:3px;
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+}
+
+/*===========================================================================*/
+/* FIM MODAL EDITANF
+*===========================================================================*/
+.abas-consulta{color: #0088CC; font-size: 12px;}
+div.btn-modalnotafiscal{margin-bottom: 5px; float: right;}
+label.btn-txt{float: left;}
+#tabele-modal-ntf{max-height: 500px;}
+div#table-resumocaixa{overflow: auto; width: 100%; height: 520px;}
+div#table-servicosrealizados{overflow: auto; width: 100%; height: 200px;}
+div#table-quitacaodebitos{overflow: auto; width: 840px; height: 220px; margin-top: 10px;}
+div#table-detalhamentocartao{overflow: auto; width: 500px; height: 160px; }
+div#table-controlependentes{overflow: auto; height: 175px; }
+div#table-vacinasmodulos{overflow: auto; height: 165px; }
+input#autoriz-cartao,#valor-cartao,#autoriz-cartao,#valor-cartao, #autoriz-cartao, #valor-cartao {
+width: 150px; height: 13px;
+}
+
+/*===========================================================================*/
+/* DADOS PAGAMENTO
+*===========================================================================*/
+/*FORMA*/
+#chequedia{margin-top: 22px;}
+#outros{margin-top: 45px;}
+#chequepre{margin-top: 70px;}
+#cartao{margin-top: 90px;}
+#convenio{margin-top: 132px;}
+#cortesia{margin-top: 138px;}
+#debitopend{ margin-top: 170px;}
+#desconto{margin-top: 192px;}
+
+/*PREVISTO*/
+#previstodinheiro{ margin-top: 2px;}
+#previstochequedia{margin-top: 3px;}
+#previstooutros{margin-top: 3px;}
+#previstochequepre{margin-top: 7px;}
+#previstocartao{margin-top: 3px;}
+#previstoconvenio{margin-top: 3px;}
+#previstocortesia{margin-top: 3px;}
+#previstodebitopend{margin-top: 1px;}
+#previstodesconto{margin-top: 3px;}
+
+/*RECIBO*/
+#caixa-forma-dinheiro{ height: 10px; font-size: 8px;}
+#caixa-forma-chequedia{height: 10px; font-size: 8px;}
+#caixa-forma-outros{height: 10px;}
+#caixa-forma-chequepre{ height: 10px;}
+#caixa-forma-cartao{height: 10px;}
+#caixa-forma-convenio{height: 10px;}
+#caixa-forma-cortesia{height: 10px;}
+#caixa-forma-debitopend{height: 10px;}
+#caixa-forma-desconto{ height: 10px;}
+
+div.caixa-forma-chequedia{margin-top: -6px;}
+div.caixa-forma-outros{margin-top: -5px;}
+div.caixa-forma-chequepre{margin-top: -5px;}
+div.caixa-forma-cartao{margin-top: -8px;}
+div.caixa-forma-convenio{margin-top: -8px;}
+div.caixa-forma-cortesia{margin-top: -7px;}
+div.caixa-forma-debitopend{margin-top: -7px;}
+div.caixa-forma-desconto{ margin-top: -7px;}

@@ -1,0 +1,200 @@
+<script src="view/ag_medica/js/agendamento.js"></script>
+<script src="view/ag_medica/js/filtroSelects.js"></script>
+<div id="boxes-acr-horario" class="modal-acr-horario hide fade">
+    <div id="dialog-acr-horario" class=" modal-body-acr-horario well" >
+        <div id="acr-horario"><a href="#" id="fechar" class="close"> Fechar X</a>
+            <h2 class="titulo">Agendamento</h2>
+            <hr style="margin-top: -4px;"/>
+            <div id="ag-result"></div>
+            <div id="form-busca-usuario"></div>
+            <fieldset  class="table-bordered" >
+                <legend>Dados agendamento</legend>
+                <div class="row-fluid" >
+                    <div class="span10" >
+                        <fieldset  class="table-bordered" ><input id="TipoDeIncersao" type="hidden" value="SalvaHorario"><input id="IdDoHorario" type="hidden">
+                            <legend>Dados do Paciente</legend>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <input id="arc-horario-id" type="hidden" value="<?php echo $idAgendamento; ?>" />
+                                    <label class="arc-nome-text" for="arc-horario-nome">Nome :</label>
+                                    <input id="arc-horario-nome" name="arc-horario-nome" type="text" placeholder="" value="<?php echo $clienteAgendamento['nome_ag']; ?>"/>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid" >
+                                <div class="span8">
+                                    <label class="arc-nome-text" for="arc-horario-resp"> Responsável :</label>
+                                    <input id="arc-horario-resp" name="arc-horario-resp" type="text" placeholder="" value="<?php echo $clienteAgendamento['resp_ag']; ?>"/>
+                                </div>
+                                <div class="span4">
+                                    <label class="arc-nome-text" for="arc-horario-celular"> Celular :</label>
+                                    <input id="arc-horario-celular" name="arc-horario-celular" type="text" placeholder="" value="<?php echo $clienteAgendamento['celular_ag']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="row-fluid" >
+                                <div class="span4">
+                                    <label class="arc-nome-text" for="arc-horario-contato"> Contato :</label>
+                                    <input id="arc-horario-contato" name="arc-horario-contato" type="text" placeholder="" value="<?php echo $clienteAgendamento['contato_ag']; ?>" />
+                                </div>
+                                <div class="span4">
+                                    <label class="arc-nome-text" for="arc-horario-tabela"> Tabela :</label>
+                                    <div id ="tabela" class="span12">
+                                        <select id="arc-horario-tabela" name="arc-horario-tabela" onchange="filtraConvenio();" >
+                                            <option></option>
+                                            <?php
+                                            foreach (buscaTabela() as $tabela) {
+                                                $selectTabela = '';
+                                                if ($tabela['id'] == $clienteAgendamento['convenio_has_procedimento_has_tabela_tabela_id']) {
+                                                    $selectTabela = 'SELECTED';
+                                                }
+                                                ?>
+                                                <option value="<?php echo $tabela['id']; ?>" <?php echo $selectTabela ?>  >
+                                                    <?php echo $tabela['nome']; ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="span4">
+
+                                    <label class="arc-nome-text" for="arc-horario-tabela"> Convênio :</label>
+                                    <div id ="convenio" class="span12">
+                                        <select id="arc-horario-convenio" name="arc-horario-convenio" onchange="filtraTabela();" >
+                                            <option></option>
+                                            <?php
+                                            foreach (buscaConvenio() as $convenio) {
+                                                $selectConvenio = '';
+                                                if ($convenio['id'] == $clienteAgendamento['convenio_has_procedimento_has_tabela_convenio_id']) {
+                                                    $selectConvenio = 'SELECTED';
+                                                }
+                                                ?>
+                                                <option value="<?php echo $convenio['id']; ?>" <?php echo $selectConvenio ?>  >
+                                                    <?php echo $convenio['nome']; ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                        </fieldset>
+
+						<fieldset class="table-bordered" >
+							<legend>Dados Procedimentos</legend>
+							<div class="row-fluid" >
+								<div class="span2">
+									<label class="arc-nome-text" for="arc-horario-servicos"> Serviços :</label>
+								</div>
+								<div class="span7">
+									<select id="arc-horario-servicos" name="arc-horario-servicos" >
+										<option></option>
+									<?php
+										foreach (buscaProcedimento() as $procedimento) {
+											$selectProcedimento = '';
+											if ($procedimento['id'] == $clienteAgendamento['convenio_has_procedimento_has_tabela_procedimento_id']) {
+												$selectProcedimento = 'SELECTED';
+											}
+									?>
+											<option  value="<?php echo $procedimento['id']; ?>" <?php echo $selectProcedimento ?>  >
+												<?php echo $procedimento['descricao']; ?>
+											</option>
+									<?php
+										}
+									?>
+									</select>
+								</div>
+							</div>
+						</fieldset>
+
+                        <fieldset class="table-bordered" >
+                            <legend>Status do agendamento</legend>
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <label class="arc-nome-text" for="arc-horario-status"> Status :</label>
+                                    <select id="arc-horario-status" name="arc-horario-status" >
+                                        <?php
+                                        foreach (buscaStatus('agendamento') as $statusAgendamento) {
+                                            if ($statusAgendamento['nome'] == "Bloqueado") {
+                                                continue;
+                                            }
+                                            $selectStatus = '';
+                                            if ($statusAgendamento['id'] == $clienteAgendamento['status_id']) {
+                                                $selectStatus = 'SELECTED';
+                                            }
+                                            ?>
+                                            <option  value="<?php echo $statusAgendamento['id']; ?>" <?php echo $selectStatus; ?> >
+                                                <?php echo $statusAgendamento['nome']; ?>
+                                            </option>
+                                            <?php
+                                        }
+                                        ?>
+
+                                    </select>
+                                </div>
+                                <div class="span4">
+                                    <label class="arc-nome-text" for="arc-horario-chegada"> Hora:</label>
+                                    <select id="arc-horario-chegada" name="arc-horario-chegada" >
+                                        <?php/*
+                                        for ($j = 0;; $j++) {
+                                            $selectHoraChegada = '';
+                                            if (date("H:i:s", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")) == $clienteAgendamento['hora_chegada']) {
+                                                $selectHoraChegada = 'SELECTED';
+                                            }
+                                            if (strtotime($hora_inicio_cal . " + " . ($intervalo_hora_data * $j) . "minutes") > strtotime($hora_fim_cal)) {
+                                                break;
+                                            }
+                                            ?>
+                                            <option value="<?php echo date("H:i:s", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")); ?>" <?php echo $selectHoraChegada; ?>>
+                                                <?php echo date("H:i", strtotime($hora_data . " + " . ($intervalo_hora_data * $j) . "minutes")); ?>
+                                            </option>
+                                            <?php
+                                        }*/
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="span3">
+                                    <label class="arc-nome-text" for="arc-horario-chegada"> Data:</label>
+                                    <input type="text" data-mask="99/99/9999" id="arc-data" name="arc-data" disabled="disabled">
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset  class="table-bordered" >
+                            <legend>Observações</legend>
+                            <div class="row-fluid" >
+                                <div class="span12">
+                                    <textarea id="arc-horario-obs" name="arc-horario-obs"><?php echo $clienteAgendamento['observacao']; ?></textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="span2">
+                        <fieldset class="flst-acr-horario">
+                            <br>
+                            <!-- <li class="span12 botao">
+                                <button class="btn btn-mini span12" name="novo"><i class="icon-plus"></i> Novo</button>
+                            </li>-->
+                            <li class="span12 botao" style="padding-top: 10px;">
+                                <button class="btn btn-mini span12" name="buscar"><i class="icon-search"></i> Buscar</button>
+                            </li>
+                            <!-- <li class="span12 botao" style="padding-top: 80px;">
+                                <button class="btn btn-mini span12" name="sessoes"><i class="icon-tags"></i> Sessões</button>
+                            </li> -->
+                            <li class="span12 botao" style="padding-top: 150px;">
+                                <button class="btn btn-mini span12" name="gravar" id="ag-gravar"><i class=" icon-thumbs-up"></i> Gravar</button>
+                            </li>
+                            <li class="span12 botao" style="padding-top: 10px;">
+                                <button data-dismiss="modal" class="btn btn-mini span12" name="fechar" onClick="fechar_modal('boxes-acr-horario')"><i class=" icon-remove"></i> Fechar</button>
+                            </li>
+
+                        </fieldset>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>   
+</div>
+<!--================================  ACRESCENTAR HORÁRIO ====================================================
+==============================================================================================================--> 

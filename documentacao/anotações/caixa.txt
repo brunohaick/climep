@@ -1,0 +1,47 @@
+Caixa:
+  - Tela inicial
+      lista dos controles pendentes
+	PS: existem pagamentos pendentes de um dia para o outro
+      Lista de créditos e módulos pagos
+	
+  botao: resumo do caixa
+	  fechar
+	
+
+ao clicar em um controle pendente:
+    mostra um quadro com os dados do cliente
+    mosta outro quadro:
+      abas:
+	serviços a serem realizados agora
+	  as doses que ela tomou, ou imunoterapia, ou outros
+
+	programação de vacinas
+	  
+
+	quitação de debitos
+	  mostra os débitos e créditos que um usuario tem
+
+	dados do pagamento
+	  soma de todos os serviços realizados
+	  define a forma de pagamento
+	  e confirma (ao confirmar, vao pra aba de recibo)
+
+	recibo
+	  gera recibo
+	  gerar nota
+
+  impressão do recibo detalhando
+
+lembrar:	
+  tem o novo lançamento ( caso )
+
+
+
+VER UM PROGRAMA DE VACINAÇÃO NO CAIXA
+
+PROCESSAR NOTA FISCAL
+IMPORTAR CADASTRO
+
+
+NOTA FISCAL - outro programação
+  a gilmara apenas envia uma nota fiscal pra prefeitura

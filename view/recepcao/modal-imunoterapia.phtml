@@ -1,0 +1,85 @@
+<div id="boxes-imunoterapia" class="modal modal-imunoterapia hide fade" style="width: 1100px">
+    <div id="dialog-imunoterapia" class=" modal-body-imunoterapia"  style="width: 1070px">
+        <div id="imunoterapia"><a href="#" id="fechar" class="close" />Fechar X</a>
+            <h2 class="titulo">Imunoterapia - <span id="modal-imunoterapia-nome"></span> </h2>
+            <hr style="margin-top: -4px;"/>
+
+            <fieldset  class="table-bordered" >
+                <legend>Grade de Programação</legend>
+                <div class="row-fluid" >
+                    <div class="span9">
+                            <div class="span12" style="height:300px; overflow: auto;">
+
+                                    <table  cellspacing='10'  border='1px'  align="center" class="table table-bordered" id="" >
+                                        <thead>
+                                            <tr class="white">
+                                                <th class="titulo" align="center"> Status </th>
+                                                <th class="titulo" align="center"> Data </th>
+                                                <th class="titulo" align="center"> Imunoterapia </th>
+                                                <th class="titulo" align="center"> Dose </th>
+                                                <th class="titulo" align="center"> BTN </th>
+                                            </tr>
+                                        </thead>
+										<tbody id="tbody-listaimunoterapia-cliente" >
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </div>
+                    <div class="span3">
+                        <fieldset  class="table-bordered" id="imunoterapia-rigth" >
+                            <legend class="">Imunoterapia</legend>
+							<div class="row-fluid" id="imunoterapia-rigth-bloc" style="height:300px; overflow: auto;">
+								<?php foreach(listar('material','*','tipo_material_id=2') as $imunoterapia ) { ?>
+								<div class="imunoterapia-lista" id="imunoterapia-lista-nome-<?php echo $imunoterapia['id']; ?>" onClick="pintamodalimunoterapia('imunoterapia-lista-nome-<?php echo $imunoterapia['id']; ?>','<?php echo $imunoterapia['id']; ?>')">
+										<a href="#"><?php echo $imunoterapia['nome'] ?></a>
+									</div>
+								<?php } ?>
+							<input type="hidden" id="id-lista-selecionado" value="" />
+							<input type="hidden" id="imunoterapia-lista-selecionado" value="" />
+							<input type="hidden" id="servico-imunoterapia-lista-selecionado" value="" />
+                            </div>
+                        </fieldset>
+                        <div class="row-fluid" id="btn-bloc1" >
+                            <div class="span6">   
+                               <a class="btn btn-mini span10" onclick="appendImuno();">  <i class="icon-plus"></i> Adicionar</a>
+                            </div>
+                            <div class="span6">   
+                              <!-- <a class="btn btn-mini span10">  <i class="icon-print"></i> Imprimir</a> -->
+                                <!--<input class="btn btn-mini span10" type="button" name="imprimir" value="Imprimir" />-->
+                            </div>
+                        </div>
+                        <div class="row-fluid" id="btn-bloc2" >
+                            <div class="span6">   
+                              <!-- <a class="btn btn-mini span10">  <i class="icon-wrench"></i> Controle</a> -->
+                                <!--<input class="btn btn-mini span10" type="button" name="controle" value="Controle" />-->
+                            </div>
+
+                            <div class="span6">
+                              <!-- <a class="btn btn-mini span10">  <i class="icon-remove"></i> Cancelar</a> -->
+                                <!--<input class="btn btn-mini span10" type="button" name="cancelar" value="Cancelar" />-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="table-bordered" style="margin-top: 5px;">
+                <div class="row-fluid" >
+                    <div class="span6">
+                        <fieldset  class="table-bordered">
+                            <legend>Observações</legend>
+                            <textarea></textarea>
+                        </fieldset>
+                    </div>
+
+                    <div class="span6">
+                        <fieldset  class="table-bordered">
+                            <legend>Anotações</legend>
+                            <textarea></textarea>
+						 </fieldset>
+                    </div>
+			   </div>
+			</fieldset>
+        </div>
+    </div>
+</div>
